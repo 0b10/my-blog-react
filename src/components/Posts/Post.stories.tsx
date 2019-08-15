@@ -1,6 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import Post from "./Post";
+import PostsContainer from "./PostsContainer";
 
 const postProps = Object.freeze({
   title: "an example title",
@@ -8,4 +9,8 @@ const postProps = Object.freeze({
   imgAltText: "Example image alt text"
 });
 
-storiesOf("Post", module).add("default", () => <Post {...postProps} />);
+storiesOf("Post", module).add("default", () => (
+  <PostsContainer>
+    <Post {...postProps} />
+  </PostsContainer>
+));

@@ -29,7 +29,7 @@ describe("#unit tests: Post", () => {
       expect(result!.getByTestId("post-img-url")).toBeVisible();
     });
 
-    it("should contain image alt text", () => {
+    it("should contain image #alt-text", () => {
       let result: RenderResult;
       act(() => {
         result = render(<Post {...dummyProps} imgAltText="image-alt-text" />);
