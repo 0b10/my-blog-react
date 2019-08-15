@@ -3,7 +3,10 @@
  * @example <Post {...dummyProps} testThisProp="foo" />
  */
 export const dummyProps = Object.freeze({
-  title: "Dummy Title",
+  imgAltText: "dummy-image-alt-text",
   imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
-  imgAltText: "dummy-image-alt-text"
+  postUrl: "#",
+  routeHandler: () => null,
+  title: "Dummy Title",
+  tldr: "dummy tldr"
 });
