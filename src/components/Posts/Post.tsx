@@ -53,6 +53,7 @@ const postClosure = () => {
           onMouseEnter={() => setShowTldr(true)}
           onClick={() => setShowTldr(true)}
           onMouseLeave={() => setShowTldr(false)}
+          raised
         >
           <div
             style={{ position: "relative" }}
