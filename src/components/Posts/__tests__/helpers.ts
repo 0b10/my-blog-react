@@ -4,7 +4,8 @@
  */
 export const dummyProps = Object.freeze({
   imgAltText: "dummy-image-alt-text",
-  imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
+  imgUrl: "dummy-url",
+  loading: false,
   postUrl: "#",
   routeHandler: () => null,
   title: "Dummy Title",

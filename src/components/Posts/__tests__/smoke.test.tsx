@@ -5,7 +5,7 @@ import Post from "../Post";
 import PostsContainer from "../PostsContainer";
 import { dummyProps } from "./helpers";
 
-describe("#smoke tests: Post", () => {
+describe("Smoke Tests: Post", () => {
   it("should render", () => {
     let result: RenderResult;
 

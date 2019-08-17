@@ -1,10 +1,10 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import Post from "../../Post";
-import { act, render, RenderResult } from "@testing-library/react";
+import { act, fireEvent, render, RenderResult } from "@testing-library/react";
 import { dummyProps } from "../helpers";
 
-describe("#unit tests: Post", () => {
+describe("Unit Tests: Post", () => {
   describe("title", () => {
     it("should display correct text", () => {
       let result: RenderResult;
@@ -14,6 +14,17 @@ describe("#unit tests: Post", () => {
       });
 
       expect(result!.getByText("Test Title")).toBeVisible();
+    });
+
+    it("should not be visible after TL;DR is clicked", () => {
+      let result: RenderResult;
+
+      act(() => {
+        result = render(<Post {...dummyProps} title="Test Title" />);
+        fireEvent.mouseEnter(result.getByTestId("post"));
+      });
+
+      expect(result!.queryByText("Test Title")).toBeNull();
     });
   });
 });

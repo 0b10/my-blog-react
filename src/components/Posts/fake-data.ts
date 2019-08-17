@@ -1,6 +1,7 @@
-export const postProps = Object.freeze({
+export const fakePostProps = Object.freeze({
   imgAltText: "Example image alt text",
   imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
+  loading: false,
   postUrl: "#",
   routeHandler: () => null,
   title: "an example title",

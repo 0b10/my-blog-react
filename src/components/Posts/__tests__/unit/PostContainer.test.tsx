@@ -6,7 +6,7 @@ import PostContainer from "../../PostsContainer";
 import { act, render, RenderResult } from "@testing-library/react";
 import { dummyProps } from "../helpers";
 
-describe("#unit test: PostContainer", () => {
+describe("Unit Tests: PostContainer", () => {
   [1, 2, 5, 100].forEach((num: number) => {
     it(`should render ${num} posts`, () => {
       let result: RenderResult;

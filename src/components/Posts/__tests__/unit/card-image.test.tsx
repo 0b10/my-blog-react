@@ -4,7 +4,7 @@ import Post from "../../Post";
 import { act, render, RenderResult } from "@testing-library/react";
 import { dummyProps } from "../helpers";
 
-describe("#unit tests: Post", () => {
+describe("Unit Tests: Post", () => {
   describe("card image", () => {
     it("should be visible", () => {
       let result: RenderResult;
