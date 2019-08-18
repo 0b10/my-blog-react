@@ -161,7 +161,7 @@ const TLDRButtonsWrapperStyles: CSSProperties = {
 interface IPostProps {
   imgAltText: string;
   imgUrl: string;
-  loading: boolean;
+  loading?: boolean;
   postUrl: string;
   routeHandler: (postUrl: string) => void;
   title: string;

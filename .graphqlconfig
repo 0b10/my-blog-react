@@ -1,0 +1,12 @@
+{
+  "projects": {
+    "blog": {
+      "schemaPath": "schema.graphql",
+      "extensions": {
+        "endpoints": {
+          "dev": "https://fakeql.com/graphql/9dc33d49c3272c8598c7224749f9bea8"
+        }
+      }
+    }
+  }
+}

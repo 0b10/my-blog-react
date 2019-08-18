@@ -1,0 +1,130 @@
+# source: https://fakeql.com/graphql/9dc33d49c3272c8598c7224749f9bea8
+# timestamp: Sun Aug 18 2019 06:24:24 GMT+0100 (British Summer Time)
+
+directive @external on FIELD_DEFINITION
+
+directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
+
+directive @provides(fields: _FieldSet!) on FIELD_DEFINITION
+
+directive @key(fields: _FieldSet!) on OBJECT | INTERFACE
+
+directive @extends on OBJECT | INTERFACE
+
+scalar _Any
+
+union _Entity = Post
+
+scalar _FieldSet
+
+type _Service {
+  sdl: String
+}
+
+input CreatePostInput {
+  title: String!
+  imgAltText: String!
+  imgUrl: String!
+  postUrl: String!
+  tldr: String!
+}
+
+enum MathOptions {
+  ROUND
+  FLOOR
+  CEIL
+}
+
+type Mutation {
+  createPost(input: CreatePostInput!): Post!
+  updatePost(id: ID!, input: UpdatePostInput!): Post!
+  deletePost(id: ID!): ID!
+  _createSnapshot(key: String!): Boolean!
+}
+
+type Post {
+  id: ID!
+  _nest: Post!
+  _int(min: Int, max: Int): Int!
+  _float(min: Float, max: Float, fixed: Int): Float!
+  _boolean: Boolean!
+  _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
+  title(length: Int): String!
+  imgAltText(length: Int): String!
+  imgUrl(length: Int): String!
+  postUrl(length: Int): String!
+  tldr(length: Int): String!
+}
+
+input PostsWhere {
+  and: [PostsWhere!]
+  or: [PostsWhere!]
+  not: [PostsWhere!]
+  id_gt: Float
+  id_ge: Float
+  id_lt: Float
+  id_le: Float
+  id_eq: Float
+  id_neq: Float
+  id_in: [ID!]
+  id_nin: [ID!]
+  title_contains: String
+  title_startswith: String
+  title_endswith: String
+  title_eq: String
+  title_neq: String
+  title_in: [String!]
+  title_nin: [String!]
+  title_exists: Boolean
+  imgAltText_contains: String
+  imgAltText_startswith: String
+  imgAltText_endswith: String
+  imgAltText_eq: String
+  imgAltText_neq: String
+  imgAltText_in: [String!]
+  imgAltText_nin: [String!]
+  imgAltText_exists: Boolean
+  imgUrl_contains: String
+  imgUrl_startswith: String
+  imgUrl_endswith: String
+  imgUrl_eq: String
+  imgUrl_neq: String
+  imgUrl_in: [String!]
+  imgUrl_nin: [String!]
+  imgUrl_exists: Boolean
+  postUrl_contains: String
+  postUrl_startswith: String
+  postUrl_endswith: String
+  postUrl_eq: String
+  postUrl_neq: String
+  postUrl_in: [String!]
+  postUrl_nin: [String!]
+  postUrl_exists: Boolean
+  tldr_contains: String
+  tldr_startswith: String
+  tldr_endswith: String
+  tldr_eq: String
+  tldr_neq: String
+  tldr_in: [String!]
+  tldr_nin: [String!]
+  tldr_exists: Boolean
+  search: String
+  like: String
+}
+
+type Query {
+  posts(page: Int, limit: Int, sort: String, dir: String, where: PostsWhere, ref: String): [Post]
+  post(id: ID!): Post
+  _typeDefs: String!
+  _entities(representations: [_Any!]!): [_Entity]!
+  _service: _Service!
+  _aggregation(type: String, field: String, stat: String!, ref: String): Float!
+}
+
+input UpdatePostInput {
+  title: String
+  imgAltText: String
+  imgUrl: String
+  postUrl: String
+  tldr: String
+}
