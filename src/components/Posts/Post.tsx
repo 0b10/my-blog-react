@@ -114,21 +114,25 @@ const ContentWrapperStyles: CSSProperties = {
   position: "relative"
 };
 
-const useCardHeaderStyles = makeStyles(theme => ({
-  root: {
-    position: "absolute",
-    bottom: "0px",
-    left: "0px",
-    boxSizing: "border-box",
-    width: "100%",
-    backgroundColor: toRGBA(theme.palette.background.paper, 0.9),
-    color: "#FFF",
-    padding: theme.spacing(2)
-  },
-  title: {
-    textTransform: "capitalize"
-  }
-}));
+const useCardHeaderStyles = makeStyles(theme => {
+  const { paper } = theme.palette.background;
+  const { palette } = theme;
+  return {
+    root: {
+      position: "absolute",
+      bottom: "0px",
+      left: "0px",
+      boxSizing: "border-box",
+      width: "100%",
+      backgroundColor: toRGBA(paper, 0.9),
+      color: palette.getContrastText(paper),
+      padding: theme.spacing(2)
+    },
+    title: {
+      textTransform: "capitalize"
+    }
+  };
+});
 
 // ~~~ TLDR ~~~
 // +++ collapsable +++
