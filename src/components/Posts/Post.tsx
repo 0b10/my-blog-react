@@ -22,6 +22,7 @@ export default (() => (props: IPostProps) => {
   const cardHeaderClasses = useCardHeaderStyles();
   const collapseClasses = useCollapseStyles();
   const tldrClasses = useTLDRStyles();
+  const tldrPaddingClasses = useTLDRPaddingStyles();
   const [showTldr, setShowTldr] = useState(false);
 
   return (
@@ -39,9 +40,11 @@ export default (() => (props: IPostProps) => {
         >
           <Collapse classes={collapseClasses} in={showTldr} timeout={150}>
             <div style={TLDRWrapperStyles}>
-              <Typography classes={tldrClasses} align="justify">
-                {props.tldr}
-              </Typography>
+              <div className={tldrPaddingClasses.root}>
+                <Typography classes={tldrClasses} align="justify">
+                  {props.tldr}
+                </Typography>
+              </div>
               <TLDRButtons
                 postUrl={props.postUrl}
                 routeHandler={props.routeHandler}
@@ -51,7 +54,7 @@ export default (() => (props: IPostProps) => {
           </Collapse>
           <CardMedia
             component="img"
-            height="320"
+            height={POST_HEIGHT}
             image={props.imgUrl}
             data-testid="post-img-url"
             alt={props.imgAltText}
@@ -101,7 +104,16 @@ const TLDRButtons = (props: ITLDRButtonsProps) => {
 };
 
 // >>> STYLES >>>
-// FIXME: #theme, set and use some kind of custom overlay type background colour, with alpha
+// ! There's an odd 1px discrepancy. The TLDR_HEIGHT is off by 1px in some situations. No visual issues.
+const POST_HEIGHT = 320; // px
+const ACTION_BUTTONS_HEIGHT = 66;
+const TLDR_HEIGHT = POST_HEIGHT - ACTION_BUTTONS_HEIGHT; // make room for action buttons in TLDR
+
+// ~~~ Card ~~~
+const ContentWrapperStyles: CSSProperties = {
+  position: "relative"
+};
+
 const useCardHeaderStyles = makeStyles(theme => ({
   root: {
     position: "absolute",
@@ -118,7 +130,8 @@ const useCardHeaderStyles = makeStyles(theme => ({
   }
 }));
 
-// FIXME: #theme, set and use main colour, with 0.85 alpha
+// ~~~ TLDR ~~~
+// +++ collapsable +++
 const useCollapseStyles = makeStyles(theme => ({
   container: {
     width: "100%",
@@ -129,42 +142,53 @@ const useCollapseStyles = makeStyles(theme => ({
     backgroundColor: toRGBA(theme.palette.background.paper, 0.85)
   },
   wrapperInner: {
-    height: "320px",
+    height: `${POST_HEIGHT}px`,
     textAlign: "justify",
     overflow: "hidden"
   }
 }));
 
+// +++ typography +++
 const useTLDRStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(2),
-    maxHeight: "254px",
-    overflow: "hidden"
+    overflow: "hidden",
+    maxHeight: `${TLDR_HEIGHT - theme.spacing(2) * 2}px` // Aligns nicely with bottom padding
   }
 }));
 
+// +++ action buttons +++
+// for positioning
+const TLDRButtonsWrapperStyles: CSSProperties = {
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  width: "100%",
+  height: `${ACTION_BUTTONS_HEIGHT}px`,
+  boxSizing: "border-box"
+};
+
+// colour and height
 const useCardActionsStyles = makeStyles(theme => ({
   root: {
     backgroundColor: toRGBA(theme.palette.background.paper, 1)
   }
 }));
 
-const ContentWrapperStyles: CSSProperties = {
-  position: "relative"
-};
-
+// +++ wrappers +++
+// for positioning, wraps buttons too
 const TLDRWrapperStyles: CSSProperties = {
   position: "relative",
   height: "100%"
 };
 
-// FIXME: #theme, set and use main colour, with no alpha
-const TLDRButtonsWrapperStyles: CSSProperties = {
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  width: "100%"
-};
+// for padding
+const useTLDRPaddingStyles = makeStyles(theme => ({
+  root: {
+    padding: theme.spacing(2),
+    boxSizing: "border-box",
+    maxHeight: `${TLDR_HEIGHT}px`
+  }
+}));
 
 // >>> INTERFACES >>>
 interface IPostProps {
