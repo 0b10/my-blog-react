@@ -6,8 +6,8 @@ import { ThemeProvider } from "@material-ui/styles";
 import faker from "faker";
 import lodash from "lodash";
 
-import { light } from "../../mui-theme";
 import { fakePostProps } from "./fake-data";
+import { light } from "../../mui-themes";
 import Post from "./Post";
 import PostsContainer from "./PostsContainer";
 

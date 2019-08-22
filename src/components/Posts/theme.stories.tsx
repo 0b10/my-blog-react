@@ -6,7 +6,7 @@ import Post from "./Post";
 import PostsContainer from "./PostsContainer";
 import { fakePostProps } from "./fake-data";
 import { ThemeProvider } from "@material-ui/styles";
-import { dark, light } from "../../mui-theme";
+import { dark, light } from "../../mui-themes";
 import { CssBaseline } from "@material-ui/core";
 const randomStr = () =>
   Math.random()
