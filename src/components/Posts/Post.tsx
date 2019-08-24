@@ -124,7 +124,7 @@ const useCardHeaderStyles = makeStyles(theme => {
       left: "0px",
       boxSizing: "border-box",
       width: "100%",
-      backgroundColor: toRGBA(paper, 0.9),
+      backgroundColor: toRGBA(paper, 0.9, true),
       color: palette.getContrastText(paper),
       padding: theme.spacing(2)
     },
@@ -136,21 +136,27 @@ const useCardHeaderStyles = makeStyles(theme => {
 
 // ~~~ TLDR ~~~
 // +++ collapsable +++
-const useCollapseStyles = makeStyles(theme => ({
-  container: {
-    width: "100%",
-    position: "absolute",
-    top: "0",
-    left: "0",
-    "z-index": "10",
-    backgroundColor: toRGBA(theme.palette.background.paper, 0.85)
-  },
-  wrapperInner: {
-    height: `${POST_HEIGHT}px`,
-    textAlign: "justify",
-    overflow: "hidden"
-  }
-}));
+const useCollapseStyles = makeStyles(theme => {
+  console.log({
+    paperBackground: theme.palette.background.paper,
+    contrast: toRGBA(theme.palette.background.paper, undefined, true)
+  });
+  return {
+    container: {
+      width: "100%",
+      position: "absolute",
+      top: "0",
+      left: "0",
+      "z-index": "10",
+      backgroundColor: toRGBA(theme.palette.background.paper, 0.85, true)
+    },
+    wrapperInner: {
+      height: `${POST_HEIGHT}px`,
+      textAlign: "justify",
+      overflow: "hidden"
+    }
+  };
+});
 
 // +++ typography +++
 const useTLDRStyles = makeStyles(theme => ({
@@ -174,7 +180,7 @@ const TLDRButtonsWrapperStyles: CSSProperties = {
 // colour and height
 const useCardActionsStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: toRGBA(theme.palette.background.paper, 1)
+    backgroundColor: toRGBA(theme.palette.background.paper, 1, true)
   }
 }));
 
