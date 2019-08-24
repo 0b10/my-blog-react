@@ -6,6 +6,7 @@ import {
   CardMedia,
   Collapse,
   Divider,
+  Fade,
   Grid,
   IconButton,
   LinearProgress,
@@ -59,7 +60,9 @@ export default (() => (props: IPostProps) => {
             data-testid="post-img-url"
             alt={props.imgAltText}
           />
-          {showTldr ? null : <CardHeader classes={cardHeaderClasses} title={props.title} />}
+          <Fade in={!showTldr} timeout={500}>
+            <CardHeader classes={cardHeaderClasses} title={props.title} />
+          </Fade>
         </div>
         {props.loading ? <LinearProgress data-testid="progress-bar" /> : null}
       </Card>
@@ -151,7 +154,7 @@ const useCollapseStyles = makeStyles(theme => {
       backgroundColor: toRGBA(theme.palette.background.paper, 0.85, true)
     },
     wrapperInner: {
-      height: `${POST_HEIGHT}px`,
+      height: `${POST_HEIGHT + 1}px`, // 1px discrepancy at the base of the wrapper
       textAlign: "justify",
       overflow: "hidden"
     }
