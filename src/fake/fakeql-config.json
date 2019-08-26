@@ -1,0 +1,40 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "__typename": "Post",
+      "title": "A fake title",
+      "imgAltText": "fake image alt text",
+      "imgUrl": "https://fakeql.com/placeholder/320/320/{{fake.finance.bitcoinAddress|lower}}.svg",
+      "postUrl": "a-fake-post-url",
+      "tldr": "Fake TLDR data"
+    },
+    {
+      "id": 20,
+      "__typename": "Post",
+      "title": "A fake title 20",
+      "imgAltText": "fake image alt text 20",
+      "imgUrl": "https://fakeql.com/placeholder/320/320/{{fake.finance.bitcoinAddress|lower}}.svg",
+      "postUrl": "a-fake-post-url-20",
+      "tldr": "Fake TLDR data 20"
+    }
+  ],
+  "postContents": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "__typename": "PostContent",
+      "content": "# A Post\nThis post contains markdown.\n## Code\nSyntax highlighting is broken here because everything is written on a single line, with line breaks, so that it's accepted by the FakeQL JSON parser - this, in turn, breaks the parsing of the markdown.\n```javascript \ncode();\n```",
+      "createdAt": "2003-01-01",
+      "modifiedAt": "2003-02-02"
+    },
+    {
+      "id": 20,
+      "post_id": 20,
+      "__typename": "PostContent",
+      "content": "Post data",
+      "createdAt": "2018-01-01",
+      "modifiedAt": "2018-02-02"
+    }
+  ]
+}

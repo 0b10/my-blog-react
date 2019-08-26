@@ -1,13 +1,13 @@
 import React from "react";
-import { ApolloProvider } from "@apollo/react-hooks";
 import { storiesOf } from "@storybook/react";
-import PostsContainer from "./PostsContainer";
-import Posts from "./Posts";
-import apolloClientFactory from "../../apollo";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-const apolloClient = apolloClientFactory(
-  "https://fakeql.com/graphql/5d28c96cd57a84df7a820059ab82a6c8"
-);
+import * as fakeQl from "../../fake/fakeql-endpoints";
+import apolloClientFactory from "../../apollo";
+import Posts from "./Posts";
+import PostsContainer from "./PostsContainer";
+
+const apolloClient = apolloClientFactory(fakeQl.normalApiEndpoint);
 
 storiesOf("GraphQL", module).add("Default", () => (
   <ApolloProvider client={apolloClient}>

@@ -12,8 +12,10 @@ import {
 } from "@material-ui/core";
 import { Code as CodeIcon, FormatQuote as ParenthesesIcon } from "@material-ui/icons";
 // @ts-ignore
-import { xt256 as syntaxTheme } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import Markdown from "react-markdown";
+import { xt256 as syntaxTheme } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+// @ts-ignore
+import breaks from "remark-breaks";
+import ReactMarkdown from "react-markdown";
 import SyntaxHiglighter from "react-syntax-highlighter";
 
 // >>> MD RENDERERS >>>
@@ -27,7 +29,11 @@ function HeadingRenderer(props: IHeadingRendererProps) {
   const headerClasses = useHeaderStyles();
   // assume props.level is 1-6, and type it as h1 because it is constrained
   return (
-    <Typography classes={headerClasses} gutterBottom variant={`h${props.level}` as "h1"}>
+    <Typography
+      classes={headerClasses}
+      variant={`h${props.level}` as "h1"}
+      data-testid="markdown-header"
+    >
       {props.children}
     </Typography>
   );
@@ -173,13 +179,16 @@ export default (() => {
   };
 
   return (props: IPostContentProps) => {
-    return (
-      <Paper>
-        <Markdown renderers={markdownRenderers} escapeHtml={true} data-testid="post-content">
-          {props.children}
-        </Markdown>
-      </Paper>
-    );
+    return props.children ? (
+      <ReactMarkdown
+        renderers={markdownRenderers}
+        escapeHtml={true}
+        plugins={[breaks]}
+        data-testid="post-markdown"
+      >
+        {props.children}
+      </ReactMarkdown>
+    ) : null;
   };
 })();
 
@@ -273,7 +282,9 @@ const useTableHeaderStyles = makeStyles(theme => ({
 // ~~~ Header ~~~
 const useHeaderStyles = makeStyles(theme => ({
   root: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   }
 }));
 
@@ -293,7 +304,7 @@ interface ILinkRendererProps {
 }
 
 interface IPostContentProps {
-  children: string;
+  children?: string;
 }
 
 interface IImgRendererProps {

@@ -4,7 +4,7 @@
       "schemaPath": "schema.graphql",
       "extensions": {
         "endpoints": {
-          "dev": "https://fakeql.com/graphql/9dc33d49c3272c8598c7224749f9bea8"
+          "dev": "https://fakeql.com/graphql/5d7ac21e94b771f391bc2bb75deab602"
         }
       }
     }

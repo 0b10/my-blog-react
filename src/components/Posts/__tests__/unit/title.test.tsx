@@ -19,12 +19,10 @@ describe("Unit Tests: Post", () => {
     it("should not be visible after TL;DR is clicked", () => {
       let result: RenderResult;
 
-      act(() => {
-        result = render(<Post {...dummyProps} title="Test Title" />);
-        fireEvent.mouseEnter(result.getByTestId("post"));
-      });
+      result = render(<Post {...dummyProps} title="Test Title" />);
+      fireEvent.mouseEnter(result.getByTestId("post"));
 
-      expect(result!.queryByText("Test Title")).toBeNull();
+      expect(result!.queryByText("Test Title")).not.toBeVisible();
     });
   });
 });

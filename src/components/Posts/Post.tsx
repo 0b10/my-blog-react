@@ -140,10 +140,6 @@ const useCardHeaderStyles = makeStyles(theme => {
 // ~~~ TLDR ~~~
 // +++ collapsable +++
 const useCollapseStyles = makeStyles(theme => {
-  console.log({
-    paperBackground: theme.palette.background.paper,
-    contrast: toRGBA(theme.palette.background.paper, undefined, true)
-  });
   return {
     container: {
       width: "100%",
@@ -219,6 +215,3 @@ interface ITLDRButtonsProps {
   routeHandler: (postUrl: string) => void;
   setShowTldr: (show: boolean) => void;
 }
-
-// >>> EXPORT >>>
-// export default postClosure();

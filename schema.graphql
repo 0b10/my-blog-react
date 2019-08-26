@@ -1,5 +1,5 @@
-# source: https://fakeql.com/graphql/9dc33d49c3272c8598c7224749f9bea8
-# timestamp: Sun Aug 18 2019 06:24:24 GMT+0100 (British Summer Time)
+# source: https://fakeql.com/graphql/e8dc4f610e594c1b219321328b0b6cbe
+# timestamp: Sat Aug 24 2019 14:02:41 GMT+0100 (British Summer Time)
 
 directive @external on FIELD_DEFINITION
 
@@ -13,12 +13,19 @@ directive @extends on OBJECT | INTERFACE
 
 scalar _Any
 
-union _Entity = Post
+union _Entity = Post | PostContent
 
 scalar _FieldSet
 
 type _Service {
   sdl: String
+}
+
+input CreatePostContentInput {
+  post_id: ID!
+  content: String!
+  createdAt: String!
+  modifiedAt: String!
 }
 
 input CreatePostInput {
@@ -39,6 +46,9 @@ type Mutation {
   createPost(input: CreatePostInput!): Post!
   updatePost(id: ID!, input: UpdatePostInput!): Post!
   deletePost(id: ID!): ID!
+  createPostContent(input: CreatePostContentInput!): PostContent!
+  updatePostContent(id: ID!, input: UpdatePostContentInput!): PostContent!
+  deletePostContent(id: ID!): ID!
   _createSnapshot(key: String!): Boolean!
 }
 
@@ -49,11 +59,119 @@ type Post {
   _float(min: Float, max: Float, fixed: Int): Float!
   _boolean: Boolean!
   _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
+  postContents(page: Int, limit: Int, sort: String, dir: String, where: PostContentsWhere, ref: String): [PostContent]
   title(length: Int): String!
   imgAltText(length: Int): String!
   imgUrl(length: Int): String!
   postUrl(length: Int): String!
   tldr(length: Int): String!
+}
+
+type PostContent {
+  id: ID!
+  _nest: PostContent!
+  _int(min: Int, max: Int): Int!
+  _float(min: Float, max: Float, fixed: Int): Float!
+  _boolean: Boolean!
+  _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
+  post: Post!
+  content(length: Int): String!
+  createdAt(length: Int): String!
+  modifiedAt(length: Int): String!
+}
+
+input PostContentsWhere {
+  and: [PostContentsWhere!]
+  or: [PostContentsWhere!]
+  not: [PostContentsWhere!]
+  id_gt: Float
+  id_ge: Float
+  id_lt: Float
+  id_le: Float
+  id_eq: Float
+  id_neq: Float
+  id_in: [ID!]
+  id_nin: [ID!]
+  post_id_exists: Boolean
+  content_contains: String
+  content_startswith: String
+  content_endswith: String
+  content_eq: String
+  content_neq: String
+  content_in: [String!]
+  content_nin: [String!]
+  content_exists: Boolean
+  createdAt_contains: String
+  createdAt_startswith: String
+  createdAt_endswith: String
+  createdAt_eq: String
+  createdAt_neq: String
+  createdAt_in: [String!]
+  createdAt_nin: [String!]
+  createdAt_exists: Boolean
+  modifiedAt_contains: String
+  modifiedAt_startswith: String
+  modifiedAt_endswith: String
+  modifiedAt_eq: String
+  modifiedAt_neq: String
+  modifiedAt_in: [String!]
+  modifiedAt_nin: [String!]
+  modifiedAt_exists: Boolean
+  search: String
+  like: String
+  post_and: [PostsWhere!]
+  post_or: [PostsWhere!]
+  post_not: [PostsWhere!]
+  post_id_gt: Float
+  post_id_ge: Float
+  post_id_lt: Float
+  post_id_le: Float
+  post_id_eq: Float
+  post_id_neq: Float
+  post_id_in: [ID!]
+  post_id_nin: [ID!]
+  post_title_contains: String
+  post_title_startswith: String
+  post_title_endswith: String
+  post_title_eq: String
+  post_title_neq: String
+  post_title_in: [String!]
+  post_title_nin: [String!]
+  post_title_exists: Boolean
+  post_imgAltText_contains: String
+  post_imgAltText_startswith: String
+  post_imgAltText_endswith: String
+  post_imgAltText_eq: String
+  post_imgAltText_neq: String
+  post_imgAltText_in: [String!]
+  post_imgAltText_nin: [String!]
+  post_imgAltText_exists: Boolean
+  post_imgUrl_contains: String
+  post_imgUrl_startswith: String
+  post_imgUrl_endswith: String
+  post_imgUrl_eq: String
+  post_imgUrl_neq: String
+  post_imgUrl_in: [String!]
+  post_imgUrl_nin: [String!]
+  post_imgUrl_exists: Boolean
+  post_postUrl_contains: String
+  post_postUrl_startswith: String
+  post_postUrl_endswith: String
+  post_postUrl_eq: String
+  post_postUrl_neq: String
+  post_postUrl_in: [String!]
+  post_postUrl_nin: [String!]
+  post_postUrl_exists: Boolean
+  post_tldr_contains: String
+  post_tldr_startswith: String
+  post_tldr_endswith: String
+  post_tldr_eq: String
+  post_tldr_neq: String
+  post_tldr_in: [String!]
+  post_tldr_nin: [String!]
+  post_tldr_exists: Boolean
+  post_search: String
+  post_like: String
 }
 
 input PostsWhere {
@@ -115,10 +233,19 @@ input PostsWhere {
 type Query {
   posts(page: Int, limit: Int, sort: String, dir: String, where: PostsWhere, ref: String): [Post]
   post(id: ID!): Post
+  postContents(page: Int, limit: Int, sort: String, dir: String, where: PostContentsWhere, ref: String): [PostContent]
+  postContent(id: ID!): PostContent
   _typeDefs: String!
   _entities(representations: [_Any!]!): [_Entity]!
   _service: _Service!
   _aggregation(type: String, field: String, stat: String!, ref: String): Float!
+}
+
+input UpdatePostContentInput {
+  post_id: ID
+  content: String
+  createdAt: String
+  modifiedAt: String
 }
 
 input UpdatePostInput {
