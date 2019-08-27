@@ -14,7 +14,7 @@ const makeShadows = (alpha: number) =>
   ["none", ..._.range(0, 24).map(blur => `0px 8px ${blur}px -1px rgba(0,0,0,${alpha})`)] as Shadows;
 
 // >>> THEMES >>>
-const darkTheme: ThemeOptions = {
+const dark: ThemeOptions = {
   palette: {
     type: "dark",
     common: { black: "rgba(0, 0, 0, 1)", white: "#fff" },
@@ -47,7 +47,7 @@ const darkTheme: ThemeOptions = {
   shadows: makeShadows(0.85)
 };
 
-const lightTheme: ThemeOptions = {
+const light: ThemeOptions = {
   palette: {
     type: "light",
     common: { black: "rgba(0, 0, 0, 1)", white: "#fff" },
@@ -80,6 +80,11 @@ const lightTheme: ThemeOptions = {
   shadows: makeShadows(0.65)
 };
 
+// ! Don't forget to update me when adding a theme
+const theme = { dark, light };
+
 // >>> EXPORTS >>>
-export const dark = responsiveFontSizes(createMuiTheme(darkTheme));
-export const light = responsiveFontSizes(createMuiTheme(lightTheme));
+export const getTheme = (name: TThemeName) => responsiveFontSizes(createMuiTheme(theme[name]));
+
+// >>> TYPES >>>
+export type TThemeName = "dark" | "light";
