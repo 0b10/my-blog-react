@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { Background, Dates, Markdown } from "../../components/PostContent";
+import { Background, Dates, Markdown } from "../../views/PostContent";
 import { IPostContentQueryVariables } from "../../graphql/gql-strings";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 import { withPostContentQuery } from "graphql/components/withPostContentQuery";
