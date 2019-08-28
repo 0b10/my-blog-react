@@ -5,9 +5,13 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render, RenderResult } from "@testing-library/react";
 
-import { IPostsData } from "../../PostsQuery";
+import { IPostsData } from "../../withPostsQuery";
 import { mockApolloClient } from "../helpers";
-import Posts from "../../PostsQuery";
+import {
+  withPostsQuery,
+  IPostComponentProps,
+  IContainerComponentProps
+} from "../../withPostsQuery";
 
 // >>> FIXTURES >>>
 const resolvers = {
@@ -44,11 +48,11 @@ const resolvers = {
   }
 };
 
-// TODO: #refactor - use fakes, not Posts
-
 export const postsDummyProps = Object.freeze({
   routeHandler: () => null
 });
+
+// TODO: test routeHandler
 
 // >>> TESTS >>>
 describe("Unit Tests: GraphQL #unit", () => {
@@ -56,13 +60,27 @@ describe("Unit Tests: GraphQL #unit", () => {
     const numPosts = resolvers.Query.posts().length;
     const posts = resolvers.Query.posts;
 
+    describe("Container", () => {
+      it("should be rendered", async () => {
+        let result: RenderResult;
+
+        result = render(
+          <ApolloProvider client={mockApolloClient(resolvers)}>
+            <PostsQuery {...postsDummyProps} />
+          </ApolloProvider>
+        );
+
+        expect(await result!.findByTestId("fake-container")).toBeVisible();
+      });
+    });
+
     // +++ test num posts +++
     it(`should render ${numPosts} posts - equal to the number of posts returned by the query`, async () => {
       let result: RenderResult;
 
       result = render(
         <ApolloProvider client={mockApolloClient(resolvers)}>
-          <Posts {...postsDummyProps} />
+          <PostsQuery {...postsDummyProps} />
         </ApolloProvider>
       );
 
@@ -75,12 +93,12 @@ describe("Unit Tests: GraphQL #unit", () => {
         posts()
           .map((post: IPostsData) => post[field])
           .forEach((fieldValue: string) => {
-            it(`should display the correct value: "${fieldValue}"`, async () => {
+            it(`should be received and injected with the value: "${fieldValue}"`, async () => {
               let result: RenderResult;
 
               result = render(
                 <ApolloProvider client={mockApolloClient(resolvers)}>
-                  <Posts {...postsDummyProps} />
+                  <PostsQuery {...postsDummyProps} />
                 </ApolloProvider>
               );
 
@@ -94,16 +112,16 @@ describe("Unit Tests: GraphQL #unit", () => {
       posts()
         .map((post: IPostsData) => post.imgAltText)
         .forEach((imgAltText: string) => {
-          it(`should be applied to a post with the value: "${imgAltText}"`, async () => {
+          it(`should be received and injected with the value: "${imgAltText}"`, async () => {
             let result: RenderResult;
 
             result = render(
               <ApolloProvider client={mockApolloClient(resolvers)}>
-                <Posts {...postsDummyProps} />
+                <PostsQuery {...postsDummyProps} />
               </ApolloProvider>
             );
 
-            expect(await result!.findByAltText(imgAltText)).toBeDefined();
+            expect(await result!.findByText(imgAltText)).toBeDefined();
           });
         });
     });
@@ -111,20 +129,54 @@ describe("Unit Tests: GraphQL #unit", () => {
     describe(`each imgUrl`, () => {
       posts()
         .map((post: IPostsData) => post.imgUrl)
-        .forEach((imgUrl: string, index: number) => {
-          it(`should applied to a post with the value: "${imgUrl}"`, async () => {
+        .forEach((imgUrl: string) => {
+          it(`should be received and injected with the value: "${imgUrl}"`, async () => {
             let result: RenderResult;
 
             result = render(
               <ApolloProvider client={mockApolloClient(resolvers)}>
-                <Posts {...postsDummyProps} />
+                <PostsQuery {...postsDummyProps} />
               </ApolloProvider>
             );
 
-            const elements = await result!.findAllByTestId("post-img-url");
-            expect(elements[index]).toHaveAttribute("src", imgUrl);
+            expect(await result!.findByText(imgUrl)).toBeDefined();
+          });
+        });
+    });
+
+    describe(`each postUrl`, () => {
+      posts()
+        .map((post: IPostsData) => post.postUrl)
+        .forEach((postUrl: string) => {
+          it(`should be received and injected with the value: "${postUrl}"`, async () => {
+            let result: RenderResult;
+
+            result = render(
+              <ApolloProvider client={mockApolloClient(resolvers)}>
+                <PostsQuery {...postsDummyProps} />
+              </ApolloProvider>
+            );
+
+            expect(await result!.findByText(postUrl)).toBeDefined();
           });
         });
     });
   });
 });
+
+// >>> FAKES >>>
+const FakePost = (props: IPostComponentProps) => (
+  <div data-testid="post">
+    <div>{props.imgAltText}</div>
+    <div>{props.imgUrl}</div>
+    <div>{props.postUrl}</div>
+    <div>{props.title}</div>
+    <div>{props.tldr}</div>
+  </div>
+);
+
+const FakeContainer = (props: IContainerComponentProps) => (
+  <div data-testid="fake-container">{props.children}</div>
+);
+
+const PostsQuery = withPostsQuery(FakePost, FakeContainer);
