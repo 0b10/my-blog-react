@@ -6,9 +6,9 @@ import { storiesOf } from "@storybook/react";
 import { Container, Post } from "../components/Post"; // ! Fix coupling
 import { POST_CONTENT_QUERY } from "./gql-strings";
 import { withPostsQuery } from "./components/withPostsQuery";
-import * as fakeQl from "../fake/fakeql-endpoints";
+import * as fakeQl from "./fakeql/fakeql-endpoints";
 import apolloClientFactory from "./apollo";
-import postContentFactory from "../components/PostContent/index";
+import postContentFactory from "../components/PostContent";
 
 const apolloClient = apolloClientFactory(fakeQl.normalApiEndpoint);
 const PostsQuery = withPostsQuery(Post, Container);
