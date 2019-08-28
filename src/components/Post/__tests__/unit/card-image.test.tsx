@@ -1,8 +1,10 @@
 import React from "react";
+
 import "@testing-library/jest-dom/extend-expect";
-import Post from "../../Post";
 import { act, render, RenderResult } from "@testing-library/react";
+
 import { dummyProps } from "../helpers";
+import Post from "../../Post";
 
 describe("Unit Tests: Post", () => {
   describe("card image", () => {

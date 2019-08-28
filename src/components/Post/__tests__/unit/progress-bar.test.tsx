@@ -1,7 +1,9 @@
 import React from "react";
+
 import "@testing-library/jest-dom/extend-expect";
-import Post from "../../Post";
 import { act, render, RenderResult } from "@testing-library/react";
+
+import Post from "../../Post";
 import { dummyProps } from "../helpers";
 
 describe("Unit Tests: Post", () => {

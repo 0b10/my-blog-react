@@ -58,8 +58,29 @@ type Post {
   _int(min: Int, max: Int): Int!
   _float(min: Float, max: Float, fixed: Int): Float!
   _boolean: Boolean!
-  _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
-  postContents(page: Int, limit: Int, sort: String, dir: String, where: PostContentsWhere, ref: String): [PostContent]
+  _string(
+    type: String
+    locale: String
+    template: String
+    length: Int
+    syllables: Int
+    casing: String
+    min: Int
+    max: Int
+    pool: String
+    sentences: Int
+    words: Int
+    nationality: String
+    full: Boolean
+  ): String!
+  postContents(
+    page: Int
+    limit: Int
+    sort: String
+    dir: String
+    where: PostContentsWhere
+    ref: String
+  ): [PostContent]
   title(length: Int): String!
   imgAltText(length: Int): String!
   imgUrl(length: Int): String!
@@ -73,7 +94,21 @@ type PostContent {
   _int(min: Int, max: Int): Int!
   _float(min: Float, max: Float, fixed: Int): Float!
   _boolean: Boolean!
-  _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
+  _string(
+    type: String
+    locale: String
+    template: String
+    length: Int
+    syllables: Int
+    casing: String
+    min: Int
+    max: Int
+    pool: String
+    sentences: Int
+    words: Int
+    nationality: String
+    full: Boolean
+  ): String!
   post: Post!
   content(length: Int): String!
   createdAt(length: Int): String!
@@ -233,7 +268,14 @@ input PostsWhere {
 type Query {
   posts(page: Int, limit: Int, sort: String, dir: String, where: PostsWhere, ref: String): [Post]
   post(id: ID!): Post
-  postContents(page: Int, limit: Int, sort: String, dir: String, where: PostContentsWhere, ref: String): [PostContent]
+  postContents(
+    page: Int
+    limit: Int
+    sort: String
+    dir: String
+    where: PostContentsWhere
+    ref: String
+  ): [PostContent]
   postContent(id: ID!): PostContent
   _typeDefs: String!
   _entities(representations: [_Any!]!): [_Entity]!

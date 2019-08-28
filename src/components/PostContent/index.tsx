@@ -1,9 +1,11 @@
 import React from "react";
 import { DocumentNode } from "graphql";
-import ApolloQuery from "./ApolloQuery";
+import ApolloQuery from "../../graphql/components/PostContentQuery";
 import Background from "./Background";
 import Dates from "./Dates";
 import Markdown from "./Markdown";
+
+// TODO: #refactor - remove factory
 
 const withApolloClient = (query: DocumentNode) => {
   return (props: IApolloClientProps) => {

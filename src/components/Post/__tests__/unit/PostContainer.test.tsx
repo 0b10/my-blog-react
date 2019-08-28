@@ -1,10 +1,12 @@
 import React from "react";
-import "@testing-library/jest-dom/extend-expect";
+
 import _ from "lodash";
-import Post from "../../Post";
-import PostContainer from "../../PostsContainer";
+import "@testing-library/jest-dom/extend-expect";
 import { act, render, RenderResult } from "@testing-library/react";
+
 import { dummyProps } from "../helpers";
+import Post from "../../Post";
+import PostContainer from "../../Container";
 
 describe("Unit Tests: PostContainer", () => {
   [1, 2, 5, 100].forEach((num: number) => {

@@ -3,21 +3,21 @@ import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { storiesOf } from "@storybook/react";
 
-import { POST_CONTENT_QUERY } from "../components/graphql";
+import { POST_CONTENT_QUERY } from "./gql-strings";
 import * as fakeQl from "../fake/fakeql-endpoints";
 import apolloClientFactory from "../apollo";
 import postContentFactory from "../components/PostContent/index";
-import Posts from "../components/Posts/Posts";
-import PostsContainer from "../components/Posts/PostsContainer";
+import Posts from "./components/PostsQuery";
+import Container from "../components/Post/Container";
 
 const apolloClient = apolloClientFactory(fakeQl.normalApiEndpoint);
 
 // ~~~ Posts ~~~
 storiesOf("GraphQL", module).add("Posts", () => (
   <ApolloProvider client={apolloClient}>
-    <PostsContainer>
+    <Container>
       <Posts routeHandler={() => null} />
-    </PostsContainer>
+    </Container>
   </ApolloProvider>
 ));
 

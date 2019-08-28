@@ -1,11 +1,12 @@
 import React from "react";
+
 import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { mockApolloClient } from "../../../test-helpers";
-import { IPostContentQueryVariables, POST_CONTENT_QUERY } from "../../../graphql";
-import postContentFactory from "../../";
+import { IPostContentQueryVariables, POST_CONTENT_QUERY } from "../../graphql/gql-strings";
+import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
+import postContentFactory from "../../components/PostContent";
 
 const PostContentApollo = postContentFactory({ apiClient: "Apollo", query: POST_CONTENT_QUERY });
 

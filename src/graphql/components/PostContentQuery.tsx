@@ -34,7 +34,7 @@ export default (props: IPostContentApolloProps) => {
   );
 };
 
-interface IPostContentApolloProps {
+export interface IPostContentApolloProps {
   query: DocumentNode;
   children: JSX.Element | JSX.Element[];
   postId: string;

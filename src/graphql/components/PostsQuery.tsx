@@ -1,21 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import Post from "./Post";
 
-const POSTS_QUERY = gql`
-  {
-    posts {
-      __typename
-      id
-      imgAltText
-      imgUrl
-      postUrl
-      title
-      tldr
-    }
-  }
-`;
+import { Post, Container } from "../../components/Post/index";
+import { POSTS_QUERY } from "../gql-strings";
 
 export default (props: IPostsProps) => {
   const { error, loading, data } = useQuery(POSTS_QUERY);
@@ -29,7 +16,7 @@ export default (props: IPostsProps) => {
   }
 
   return (
-    <React.Fragment>
+    <Container>
       {data.posts.map((post: IPostsData, index: number) => (
         <Post
           imgAltText={post.imgAltText}
@@ -41,7 +28,7 @@ export default (props: IPostsProps) => {
           tldr={post.tldr}
         />
       ))}
-    </React.Fragment>
+    </Container>
   );
 };
 

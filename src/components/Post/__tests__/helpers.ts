@@ -11,7 +11,3 @@ export const dummyProps = Object.freeze({
   title: "Dummy Title",
   tldr: "dummy tldr"
 });
-
-export const postsDummyProps = Object.freeze({
-  routeHandler: () => null
-});

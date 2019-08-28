@@ -6,40 +6,40 @@ import faker from "faker";
 import lodash from "lodash";
 
 import Post from "./Post";
-import PostsContainer from "./PostsContainer";
+import Container from "./Container";
 
 storiesOf("Post", module)
   .add("default", () => (
-    <PostsContainer>
+    <Container>
       <Post {...fakePostProps} />
-    </PostsContainer>
+    </Container>
   ))
   .add("Small TL;DR", () => (
-    <PostsContainer>
+    <Container>
       <Post {...fakePostProps} tldr="very little tl;dr" />
-    </PostsContainer>
+    </Container>
   ))
   .add("Click event", () => (
-    <PostsContainer>
+    <Container>
       <Post {...fakePostProps} routeHandler={action("Changing route")} postUrl="/example/url" />
-    </PostsContainer>
+    </Container>
   ))
   .add("Long title", () => (
-    <PostsContainer>
+    <Container>
       <Post
         {...fakePostProps}
         title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun"
       />
-    </PostsContainer>
+    </Container>
   ))
   .add("While loading...", () => (
-    <PostsContainer>
+    <Container>
       <Post {...fakePostProps} loading={true} />
-    </PostsContainer>
+    </Container>
   ));
 
-storiesOf("PostsContainer", module).add("Multiple Posts", () => (
-  <PostsContainer>
+storiesOf("Container", module).add("Multiple Posts", () => (
+  <Container>
     <React.Fragment>
       {lodash.range(1, 20).map((_, index) => (
         <Post
@@ -52,7 +52,7 @@ storiesOf("PostsContainer", module).add("Multiple Posts", () => (
         />
       ))}
     </React.Fragment>
-  </PostsContainer>
+  </Container>
 ));
 
 // >>> HELPERS >>>

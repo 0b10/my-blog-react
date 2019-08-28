@@ -2,10 +2,10 @@ import assert from "assert";
 import fs from "fs";
 import { SchemaLink } from "apollo-link-schema";
 import { makeExecutableSchema, IResolvers } from "graphql-tools";
-import apolloClientFactory from "../apollo";
+import apolloClientFactory from "../../../apollo";
 
-// >>> GRAPHQL >>>
-const schema_ = fs.readFileSync("schema.graphql", { encoding: "UTF-8", flag: "r" });
+// >>> MOCK APOLLO CLIENT >>>
+const schema_ = fs.readFileSync("src/graphql/schema.graphql", { encoding: "UTF-8", flag: "r" });
 
 export const schema = `${schema_}`;
 assert(

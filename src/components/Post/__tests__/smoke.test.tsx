@@ -1,9 +1,11 @@
 import React from "react";
+
 import "@testing-library/jest-dom/extend-expect";
 import { act, render, RenderResult } from "@testing-library/react";
-import Post from "../Post";
-import PostsContainer from "../PostsContainer";
+
 import { dummyProps } from "./helpers";
+import Post from "../Post";
+import Container from "../Container";
 
 describe("Smoke Tests: Post", () => {
   it("should render", () => {
@@ -31,15 +33,15 @@ describe("Smoke Tests: Post", () => {
   });
 });
 
-describe("#smoke tests: PostsContainer", () => {
+describe("#smoke tests: Container", () => {
   it("should render", () => {
     let result: RenderResult;
 
     act(() => {
       result = render(
-        <PostsContainer>
+        <Container>
           <Post {...dummyProps} />
-        </PostsContainer>
+        </Container>
       );
     });
 

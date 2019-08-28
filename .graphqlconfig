@@ -1,7 +1,7 @@
 {
   "projects": {
     "blog": {
-      "schemaPath": "schema.graphql",
+      "schemaPath": "src/graphql/schema.graphql",
       "extensions": {
         "endpoints": {
           "dev": "https://fakeql.com/graphql/5d7ac21e94b771f391bc2bb75deab602"

@@ -1,5 +1,19 @@
 import gql from "graphql-tag";
 
+export const POSTS_QUERY = gql`
+  {
+    posts {
+      __typename
+      id
+      imgAltText
+      imgUrl
+      postUrl
+      title
+      tldr
+    }
+  }
+`;
+
 export const POST_CONTENT_QUERY = gql`
   query getPostContent($id: ID!) {
     postContent(id: $id) {
@@ -21,6 +35,7 @@ export const POST_CONTENT_QUERY = gql`
   }
 `;
 
+// >>> INTERFACES >>>
 export interface IPostContentQueryVariables {
   id: string;
 }

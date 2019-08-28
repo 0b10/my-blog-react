@@ -6,8 +6,8 @@ import lodash from "lodash";
 import Theme from "./index";
 
 import Markdown from "../PostContent/Markdown";
-import Post from "../Posts/Post";
-import PostsContainer from "../Posts/PostsContainer";
+import Post from "../Post/Post";
+import Container from "../Post/Container";
 
 // >>> STORIES >>>
 storiesOf("Theme/Light", module)
@@ -38,7 +38,7 @@ storiesOf("Theme", module);
 
 // >>> TEMP COMPONENTS >>>
 const TempPosts = () => (
-  <PostsContainer>
+  <Container>
     <React.Fragment>
       {lodash.range(1, 20).map((_, index) => (
         <Post
@@ -51,7 +51,7 @@ const TempPosts = () => (
         />
       ))}
     </React.Fragment>
-  </PostsContainer>
+  </Container>
 );
 
 // >>> HELPERS >>>
