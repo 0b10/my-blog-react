@@ -7,18 +7,23 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { IPostContentQueryVariables, POST_CONTENT_QUERY } from "../../../gql-strings";
+import { IPostContentQueryVariables } from "../../../gql-strings";
 import { mockApolloClient } from "../helpers";
-import PostContentQuery from "../../PostContentQuery";
+import {
+  IBackgroundProps,
+  IContentComponentProps,
+  IDateComponentProps,
+  withPostContentQuery
+} from "../../withPostContentQuery";
 
 // >>> TESTS >>>
 describe("Unit Tests: GraphQL #unit #graphql", () => {
   describe("PostContentQuery", () => {
     // ~~~ Content ~~~
     describe("content", () => {
-      it("should be displayed once injected", async () => {
+      it("should be received and injected by the ContentComponent", async () => {
         const result = renderPostContent("1");
-        expect(await result.findByText(/^fake post content$/)).toBeVisible();
+        expect(await result.findByTestId("fake-content")).toHaveTextContent(/^fake post content$/);
       });
     });
 
@@ -26,11 +31,11 @@ describe("Unit Tests: GraphQL #unit #graphql", () => {
     describe("Dates", () => {
       it("should display the createdAt date once injected", async () => {
         const result = renderPostContent("2");
-        expect(await result.findByText(/^2000-01-01$/)).not.toBeNull();
+        expect(await result.findByTestId("fake-created-at")).toHaveTextContent(/^2000-01-01$/);
       });
       it("should display the modifiedAt date once injected", async () => {
         const result = renderPostContent("2");
-        expect(await result.findByText(/^2000-01-02$/)).not.toBeNull();
+        expect(await result.findByTestId("fake-modified-at")).toHaveTextContent(/^2000-01-02$/);
       });
     });
   });
@@ -40,22 +45,25 @@ describe("Unit Tests: GraphQL #unit #graphql", () => {
 const renderPostContent = (postId: string) =>
   render(
     <ApolloProvider client={mockApolloClient(resolvers)}>
-      <PostContentQuery postId={postId} query={POST_CONTENT_QUERY}>
-        <MockDate key="mock-date"></MockDate>
-        <MockContent key="mock-content"></MockContent>
-      </PostContentQuery>
+      <PostContentQuery postId={postId}></PostContentQuery>
     </ApolloProvider>
   );
 
 // >>> FAKES >>>
-const MockDate = (props: IMockDateProps) => (
-  <React.Fragment>
-    <div>{props.createdAt}</div>
-    <div>{props.modifiedAt}</div>
-  </React.Fragment>
+const FakeDate = (props: IDateComponentProps) => (
+  <div>
+    <div data-testid="fake-modified-at">{props.modifiedAt}</div>
+    <div data-testid="fake-created-at">{props.createdAt}</div>
+  </div>
 );
 
-const MockContent = (props: IMockContentProps) => <div>{props.children}</div>;
+const FakeContent = (props: IContentComponentProps) => (
+  <div data-testid="fake-content">{props.children}</div>
+);
+
+const FakeBackground = (props: IBackgroundProps) => (
+  <div data-testid="fake-background">{props.children}</div>
+);
 
 const resolvers = {
   Query: {
@@ -102,12 +110,5 @@ const resolvers = {
   }
 };
 
-// >>> INTERFACES >>>
-interface IMockDateProps {
-  createdAt?: string;
-  modifiedAt?: string;
-}
-
-interface IMockContentProps {
-  children?: string;
-}
+// >>> INIT >>>
+const PostContentQuery = withPostContentQuery(FakeContent, FakeDate, FakeBackground);

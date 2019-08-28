@@ -4,12 +4,66 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { IPostContentQueryVariables, POST_CONTENT_QUERY } from "../../graphql/gql-strings";
+import { Background, Dates, Markdown } from "../../components/PostContent";
+import { IPostContentQueryVariables } from "../../graphql/gql-strings";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
-import postContentFactory from "../../components/PostContent";
+import { withPostContentQuery } from "graphql/components/withPostContentQuery";
 
-const PostContentApollo = postContentFactory({ apiClient: "Apollo", query: POST_CONTENT_QUERY });
+// >>> TESTS >>>
+describe("Integration Tests: PostContent #integration", () => {
+  // ~~~ Background ~~~
+  it("should render a post background", async () => {
+    const result = renderPostContent("1");
+    expect(await result.findByTestId("post-content-background")).toBeVisible();
+  });
 
+  // ~~~ Content ~~~
+  it("should display main content text", async () => {
+    const result = renderPostContent("1");
+    expect(await result.findByText(/^fake article content$/)).toBeVisible();
+  });
+
+  // ~~~ Dates ~~~
+  describe("Dates", () => {
+    it("should display the createdAt date, and only the createdAt date (for dates field)", async () => {
+      const result = renderPostContent("1");
+      expect(await result.findByText(/^Created at: 2000-01-01$/)).toBeVisible();
+    });
+
+    it("shouldn't display the createdAt date and modifiedAt date if they are the same", async () => {
+      const result = renderPostContent("1");
+      expect(await result.findByTestId("article-dates")).not.toHaveTextContent("Modified at");
+    });
+
+    it("should display both the createdAt and modifiedAt date if they are different", async () => {
+      const result = renderPostContent("2");
+      expect(await result.findByTestId("article-dates")).toHaveTextContent(
+        /^Created at: 2000-01-01; Modified at: 2000-01-02$/
+      );
+    });
+  });
+
+  // ~~~ Markdown ~~~
+  describe("Markdown", () => {
+    it("should render markdown", async () => {
+      const result = renderPostContent("2");
+      expect(await result.findByTestId("markdown-header")).toBeVisible();
+    });
+  });
+});
+
+// >>> HELPERS >>>
+const renderPostContent = (postId: string) =>
+  render(
+    <ApolloProvider client={mockApolloClient(resolvers)}>
+      <PostContentQuery postId={postId} />
+    </ApolloProvider>
+  );
+
+// >>> INIT >>>
+const PostContentQuery = withPostContentQuery(Markdown, Dates, Background);
+
+// >>> FIXTURES >>>
 const resolvers = {
   Query: {
     postContent: (_: any, { id }: IPostContentQueryVariables) => {
@@ -54,49 +108,3 @@ const resolvers = {
     }
   }
 };
-
-describe("Integration Tests: PostContent #integration", () => {
-  it("should render a post background", async () => {
-    const result = renderPostContent("1");
-    expect(await result.findByTestId("post-content-background")).toBeVisible();
-  });
-
-  it("should display main content text", async () => {
-    const result = renderPostContent("1");
-    expect(await result.findByText(/^fake article content$/)).toBeVisible();
-  });
-
-  // >>> DATES >>>
-  describe("Dates", () => {
-    it("should display the createdAt date, and only the createdAt date (for dates field)", async () => {
-      const result = renderPostContent("1");
-      expect(await result.findByText(/^Created at: 2000-01-01$/)).toBeVisible();
-    });
-
-    it("shouldn't display the createdAt date and modifiedAt date if they are the same", async () => {
-      const result = renderPostContent("1");
-      expect(await result.findByTestId("article-dates")).not.toHaveTextContent("Modified at");
-    });
-
-    it("should display both the createdAt and modifiedAt date if they are different", async () => {
-      const result = renderPostContent("2");
-      expect(await result.findByTestId("article-dates")).toHaveTextContent(
-        /^Created at: 2000-01-01; Modified at: 2000-01-02$/
-      );
-    });
-  });
-
-  describe("Markdown", () => {
-    it("should render markdown", async () => {
-      const result = renderPostContent("2");
-      expect(await result.findByTestId("markdown-header")).toBeVisible();
-    });
-  });
-});
-
-const renderPostContent = (postId: string) =>
-  render(
-    <ApolloProvider client={mockApolloClient(resolvers)}>
-      <PostContentApollo postId={postId} />
-    </ApolloProvider>
-  );
