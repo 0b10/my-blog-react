@@ -25,6 +25,6 @@ export default React.memo((props: IPostContentDatesProps) => {
 });
 
 export interface IPostContentDatesProps {
-  createdAt?: string;
-  modifiedAt?: string;
+  createdAt: string;
+  modifiedAt: string;
 }

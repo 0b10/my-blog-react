@@ -290,7 +290,7 @@ const useHeaderStyles = makeStyles(theme => ({
 
 // >>> INTERFACES >>>
 interface IContentComponentProps {
-  children?: string;
+  children: string;
 }
 
 interface IRendererProps {

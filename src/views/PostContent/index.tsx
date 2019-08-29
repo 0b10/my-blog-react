@@ -14,5 +14,5 @@ export const PostContent = (props: IPostContentProps) => (
 type IPostContentProps = IContentComponentProps & IPostContentDatesProps;
 
 export interface IContentComponentProps {
-  children?: string;
+  children: string;
 }
