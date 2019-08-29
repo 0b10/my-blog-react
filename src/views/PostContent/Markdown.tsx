@@ -21,7 +21,11 @@ import SyntaxHiglighter from "react-syntax-highlighter";
 // >>> MD RENDERERS >>>
 // ~~~ Paragraph ~~
 const ParagraphRenderer = (props: IRendererProps) => {
-  return <Typography variant="body1">{props.children}</Typography>;
+  return (
+    <Typography variant="body1" data-testid="markdown-paragraph">
+      {props.children}
+    </Typography>
+  );
 };
 
 // ~~~ Headers ~~~
@@ -32,7 +36,7 @@ function HeadingRenderer(props: IHeadingRendererProps) {
     <Typography
       classes={headerClasses}
       variant={`h${props.level}` as "h1"}
-      data-testid="markdown-header"
+      data-testid={`markdown-header-h${props.level}`}
     >
       {props.children}
     </Typography>
@@ -45,7 +49,9 @@ function HorizontalRuleRenderer(props: IRendererProps) {
   return (
     <Grid container direction="row" justify="center">
       <Grid item xs={7} sm={6} md={4}>
-        <Divider classes={dividerClasses}>{props.children}</Divider>
+        <Divider classes={dividerClasses} data-testid="markdown-divider">
+          {props.children}
+        </Divider>
       </Grid>
     </Grid>
   );
@@ -55,7 +61,9 @@ function HorizontalRuleRenderer(props: IRendererProps) {
 function LinkRenderer(props: ILinkRendererProps) {
   return (
     <strong>
-      <Link href={props.href}>{props.children}</Link>
+      <Link href={props.href} data-testid="markdown-link">
+        {props.children}
+      </Link>
     </strong>
   );
 }
@@ -68,7 +76,9 @@ function BlockQuoteRenderer(props: IRendererProps) {
     <Paper classes={blockQuoteClasses} elevation={elevationDepth}>
       <ParenthesesIcon style={{ opacity: 0.8 }} />
       <Box pl={2} pr={2}>
-        <div className={blockQuoteTextClass.root}>{props.children}</div>
+        <div className={blockQuoteTextClass.root} data-testid="markdown-blockquote">
+          {props.children}
+        </div>
       </Box>
       <Grid container direction="row" justify="flex-end">
         <Grid item>
@@ -89,7 +99,12 @@ function ImageRenderer(props: IImgRendererProps) {
     <Grid component="span" container direction="row" justify="center">
       <Grid classes={imgWrapperClasses} component="span" item>
         <Box component="span" display="block" boxShadow={elevationDepth}>
-          <img className={imgClasses.root} src={props.src} alt={props.alt} />
+          <img
+            className={imgClasses.root}
+            src={props.src}
+            alt={props.alt}
+            data-testid="markdown-img"
+          />
         </Box>
       </Grid>
     </Grid>
@@ -99,12 +114,20 @@ function ImageRenderer(props: IImgRendererProps) {
 // ~~~ Table ~~~
 function TableHeadRenderer(props: IRendererProps) {
   const tableHeaderClasses = useTableHeaderStyles();
-  return <thead className={tableHeaderClasses.root}>{props.children}</thead>;
+  return (
+    <thead className={tableHeaderClasses.root} data-testid="markdown-thead">
+      {props.children}
+    </thead>
+  );
 }
 
 function TableCellRenderer(props: IRendererProps) {
   const tableCellClasses = useTableCellStyles();
-  return <td className={tableCellClasses.root}>{props.children}</td>;
+  return (
+    <td className={tableCellClasses.root} data-testid="markdown-td">
+      {props.children}
+    </td>
+  );
 }
 
 function TableRenderer(props: IRendererProps) {
@@ -113,7 +136,9 @@ function TableRenderer(props: IRendererProps) {
     <Grid container direction="row" justify="center">
       <Grid item>
         <Box boxShadow={elevationDepth}>
-          <table className={tableClasses.table}>{props.children}</table>
+          <table className={tableClasses.table} data-testid="markdown-table">
+            {props.children}
+          </table>
         </Box>
       </Grid>
     </Grid>
@@ -137,6 +162,7 @@ function CodeRenderer(props: ICodeRendererProps) {
             borderRadius: theme.shape.borderRadius
           }}
           showLineNumbers
+          data-testid="markdown-code"
         >
           {props.value}
         </SyntaxHiglighter>
@@ -147,14 +173,22 @@ function CodeRenderer(props: ICodeRendererProps) {
 
 function InlineCodeRenderer(props: IRendererProps) {
   const styleClasses = useInlineCodeStyles();
-  return <span className={styleClasses.text}>{props.children}</span>;
+  return (
+    <span className={styleClasses.text} data-testid="markdown-inline-code">
+      {props.children}
+    </span>
+  );
 }
 
 // ~~~ Lists ~~~
 function ListRenderer(props: IListRendererProps) {
   return (
     <Typography component="div" variant="body1">
-      {props.ordered ? <ol>{props.children}</ol> : <ul>{props.children}</ul>}
+      {props.ordered ? (
+        <ol data-testid="markdown-ordered-list">{props.children}</ol>
+      ) : (
+        <ul data-testid="markdown-unordered-list">{props.children}</ul>
+      )}
     </Typography>
   );
 }
@@ -178,14 +212,9 @@ export default (() => {
     thematicBreak: HorizontalRuleRenderer
   };
 
-  return (props: IContentComponentProps) => {
+  return (props: IMarkdownProps) => {
     return props.children ? (
-      <ReactMarkdown
-        renderers={markdownRenderers}
-        escapeHtml={true}
-        plugins={[breaks]}
-        data-testid="post-markdown"
-      >
+      <ReactMarkdown renderers={markdownRenderers} escapeHtml={true} plugins={[breaks]}>
         {props.children}
       </ReactMarkdown>
     ) : null;
@@ -289,7 +318,7 @@ const useHeaderStyles = makeStyles(theme => ({
 }));
 
 // >>> INTERFACES >>>
-interface IContentComponentProps {
+interface IMarkdownProps {
   children: string;
 }
 

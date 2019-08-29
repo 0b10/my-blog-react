@@ -47,7 +47,7 @@ describe("Integration Tests: PostContent #integration", () => {
   describe("Markdown", () => {
     it("should render markdown", async () => {
       const result = renderPostContent("2");
-      expect(await result.findByTestId("markdown-header")).toBeVisible();
+      expect(await result.findByTestId("markdown-header-h1")).toBeVisible();
     });
   });
 });
