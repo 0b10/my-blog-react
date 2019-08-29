@@ -9,6 +9,18 @@ import Markdown from "../Markdown";
 describe("Unit Tests: Markdown", () => {
   // * Test that the expected component/element is rendered. These component/elements are marked with a test id
 
+  it("should parse implicit line breaks", async () => {
+    const contentText = `
+    one
+    two
+    three
+    `;
+
+    const result = render(<Markdown>{contentText}</Markdown>);
+
+    expect(await result.findAllByText(/^(one|two|three)$/)).toHaveLength(3); // Three separate elements
+  });
+
   [
     { elementName: "<p />", markdown: "test paragraph", testid: "markdown-paragraph" },
     { elementName: "<h1 />", markdown: "# header", testid: "markdown-header-h1" },
