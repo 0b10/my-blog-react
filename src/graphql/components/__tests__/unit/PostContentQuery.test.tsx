@@ -9,31 +9,28 @@ import { render } from "@testing-library/react";
 
 import { IPostContentQueryVariables } from "../../../gql-strings";
 import { mockApolloClient } from "../helpers";
-import {
-  IBackgroundProps,
-  IContentComponentProps,
-  IDateComponentProps,
-  withPostContentQuery
-} from "../../withPostContentQuery";
+import { IPostContentComponentProps, withPostContentQuery } from "../../withPostContentQuery";
 
 // >>> TESTS >>>
 describe("Unit Tests: GraphQL #unit #graphql", () => {
   describe("PostContentQuery", () => {
     // ~~~ Content ~~~
     describe("content", () => {
-      it("should be received and injected by the ContentComponent", async () => {
+      it("should be injected to and received by the PostContentComponent", async () => {
         const result = renderPostContent("1");
         expect(await result.findByTestId("fake-content")).toHaveTextContent(/^fake post content$/);
       });
     });
 
     // ~~~ Dates ~~~
-    describe("Dates", () => {
-      it("should display the createdAt date once injected", async () => {
+    describe("createdAt prop", () => {
+      it("should be injected to and received by the PostContentComponent", async () => {
         const result = renderPostContent("2");
         expect(await result.findByTestId("fake-created-at")).toHaveTextContent(/^2000-01-01$/);
       });
-      it("should display the modifiedAt date once injected", async () => {
+    });
+    describe("modifiedAt prop", () => {
+      it("should be injected to and received by the PostContentComponent", async () => {
         const result = renderPostContent("2");
         expect(await result.findByTestId("fake-modified-at")).toHaveTextContent(/^2000-01-02$/);
       });
@@ -50,19 +47,12 @@ const renderPostContent = (postId: string) =>
   );
 
 // >>> FAKES >>>
-const FakeDate = (props: IDateComponentProps) => (
+const FakePostContent = (props: IPostContentComponentProps) => (
   <div>
     <div data-testid="fake-modified-at">{props.modifiedAt}</div>
     <div data-testid="fake-created-at">{props.createdAt}</div>
+    <div data-testid="fake-content">{props.children}</div>
   </div>
-);
-
-const FakeContent = (props: IContentComponentProps) => (
-  <div data-testid="fake-content">{props.children}</div>
-);
-
-const FakeBackground = (props: IBackgroundProps) => (
-  <div data-testid="fake-background">{props.children}</div>
 );
 
 const resolvers = {
@@ -111,4 +101,4 @@ const resolvers = {
 };
 
 // >>> INIT >>>
-const PostContentQuery = withPostContentQuery(FakeContent, FakeDate, FakeBackground);
+const PostContentQuery = withPostContentQuery(FakePostContent);

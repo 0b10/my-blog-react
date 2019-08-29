@@ -3,8 +3,8 @@ import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { storiesOf } from "@storybook/react";
 
-import { Background, Dates, Markdown } from "../views/PostContent"; // ! Fix coupling
 import { Container, Post } from "../views/Post"; // ! Fix coupling
+import { PostContent } from "../views/PostContent"; // ! Fix coupling
 import { withPostContentQuery } from "./components/withPostContentQuery";
 import { withPostsQuery } from "./components/withPostsQuery";
 import * as fakeQl from "./fakeql/fakeql-endpoints";
@@ -13,8 +13,8 @@ import apolloClientFactory from "./apollo";
 // FIXME: #coupling - find a way to not depend on Post and Container, probably fakes - but not good enough.
 
 const apolloClient = apolloClientFactory(fakeQl.normalApiEndpoint);
+const PostContentQuery = withPostContentQuery(PostContent);
 const PostsQuery = withPostsQuery(Post, Container);
-const PostContentQuery = withPostContentQuery(Markdown, Dates, Background);
 
 // ~~~ Posts ~~~
 storiesOf("GraphQL", module).add("PostsQuery", () => (

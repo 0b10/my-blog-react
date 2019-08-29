@@ -16,6 +16,6 @@ const useBackgroundStyles = makeStyles(theme => ({
   }
 }));
 
-interface IPostContentBackgroundProps {
+export interface IPostContentBackgroundProps {
   children: JSX.Element | JSX.Element[];
 }

@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { Background, Dates, Markdown } from "../../views/PostContent";
+import { PostContent } from "../../views/PostContent";
 import { IPostContentQueryVariables } from "../../graphql/gql-strings";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 import { withPostContentQuery } from "graphql/components/withPostContentQuery";
@@ -61,7 +61,7 @@ const renderPostContent = (postId: string) =>
   );
 
 // >>> INIT >>>
-const PostContentQuery = withPostContentQuery(Markdown, Dates, Background);
+const PostContentQuery = withPostContentQuery(PostContent);
 
 // >>> FIXTURES >>>
 const resolvers = {

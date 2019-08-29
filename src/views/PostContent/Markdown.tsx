@@ -178,7 +178,7 @@ export default (() => {
     thematicBreak: HorizontalRuleRenderer
   };
 
-  return (props: IPostContentProps) => {
+  return (props: IContentComponentProps) => {
     return props.children ? (
       <ReactMarkdown
         renderers={markdownRenderers}
@@ -289,6 +289,10 @@ const useHeaderStyles = makeStyles(theme => ({
 }));
 
 // >>> INTERFACES >>>
+interface IContentComponentProps {
+  children?: string;
+}
+
 interface IRendererProps {
   children: string;
 }
@@ -301,10 +305,6 @@ interface IHeadingRendererProps {
 interface ILinkRendererProps {
   children: string;
   href: string;
-}
-
-interface IPostContentProps {
-  children?: string;
 }
 
 interface IImgRendererProps {
