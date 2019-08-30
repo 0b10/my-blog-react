@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import faker from "faker";
 import lodash from "lodash";
-import Theme from "./index";
+import { Theme } from "./";
 
 import Markdown from "../PostContent/Markdown";
 import Post from "../Post/Post";

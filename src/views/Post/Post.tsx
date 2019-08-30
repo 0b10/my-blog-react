@@ -42,7 +42,7 @@ export default (() => (props: IPostProps) => {
           <Collapse classes={collapseClasses} in={showTldr} timeout={150}>
             <div style={TLDRWrapperStyles}>
               <div className={tldrPaddingClasses.root}>
-                <Typography classes={tldrClasses} align="justify">
+                <Typography classes={tldrClasses} align="justify" data-testid="post-tldr">
                   {props.tldr}
                 </Typography>
               </div>
@@ -61,7 +61,7 @@ export default (() => (props: IPostProps) => {
             alt={props.imgAltText}
           />
           <Fade in={!showTldr} timeout={500}>
-            <CardHeader classes={cardHeaderClasses} title={props.title} />
+            <CardHeader classes={cardHeaderClasses} title={props.title} data-testid="post-title" />
           </Fade>
         </div>
         {props.loading ? <LinearProgress data-testid="progress-bar" /> : null}
@@ -200,7 +200,7 @@ const useTLDRPaddingStyles = makeStyles(theme => ({
 }));
 
 // >>> INTERFACES >>>
-interface IPostProps {
+export interface IPostProps {
   imgAltText: string;
   imgUrl: string;
   loading?: boolean;

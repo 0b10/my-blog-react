@@ -4,7 +4,7 @@ import { ThemeProvider } from "@material-ui/styles";
 
 import { getTheme, TThemeName } from "./themes";
 
-export default (props: IThemeProps) => (
+export const Theme = (props: IThemeProps) => (
   <ThemeProvider theme={getTheme(props.theme)}>
     <CssBaseline />
     {props.children}

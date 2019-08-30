@@ -10,7 +10,7 @@ import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 import { withPostContentQuery } from "graphql/components/withPostContentQuery";
 
 // >>> TESTS >>>
-describe("Integration Tests: PostContent #integration", () => {
+describe("Integration Tests: PostContentQuery #integration", () => {
   // ~~~ Background ~~~
   it("should render a post background", async () => {
     const result = renderPostContent("1");
@@ -90,11 +90,11 @@ const resolvers = {
             __typename: "PostContent",
             content: "# fake markdown header",
             createdAt: "2000-01-01",
-            id: "1",
+            id: "2",
             modifiedAt: "2000-01-02",
             post: {
               __typename: "Post",
-              id: "1",
+              id: "2",
               imgAltText: "fake image alt text",
               imgUrl: "fake-image-url",
               postUrl: "fake-post-url",
