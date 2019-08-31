@@ -6,8 +6,8 @@ import lodash from "lodash";
 import { Theme } from "./";
 
 import Markdown from "../PostContent/Markdown";
-import Post from "../Post/Post";
-import Container from "../Post/Container";
+import Post from "../Posts/Post";
+import Container from "../Posts/Container";
 
 // >>> STORIES >>>
 storiesOf("Theme/Light", module)

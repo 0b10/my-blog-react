@@ -4,10 +4,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render, fireEvent } from "@testing-library/react";
 
-import { Container, Post } from "../../views";
+import { Posts } from "../../views";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 import { withPostsQuery } from "../../graphql";
-import { IPostsData } from "../../graphql/components/withPostsQuery";
+import { IPostData } from "../../graphql/components/withPostsQuery";
 
 // >>> FIXTURES >>>
 const resolvers = {
@@ -54,7 +54,7 @@ describe("Integration Tests: PostsQuery", () => {
   });
 
   resolvers.Query.posts().forEach(
-    ({ id, imgAltText, imgUrl, postUrl, title, tldr }: IPostsData, index) => {
+    ({ id, imgAltText, imgUrl, postUrl, title, tldr }: IPostData, index) => {
       describe(`the post with id === ${id}`, () => {
         // +++ imgAltText +++
         it(`should have the correct imgAltText value: ${imgUrl}`, async () => {
@@ -114,4 +114,4 @@ const renderPostsQuery = (routeHandler = () => null) =>
   );
 
 // >>> INIT >>>
-const PostsQuery = withPostsQuery(Post, Container);
+const PostsQuery = withPostsQuery(Posts);

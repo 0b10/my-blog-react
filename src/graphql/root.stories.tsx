@@ -3,7 +3,7 @@ import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { storiesOf } from "@storybook/react";
 
-import { Container, Post } from "../views/Post"; // ! Fix coupling
+import { Posts } from "../views/Posts/index"; // ! Fix coupling
 import { PostContent } from "../views/PostContent"; // ! Fix coupling
 import { withPostContentQuery } from "./components/withPostContentQuery";
 import { withPostsQuery } from "./components/withPostsQuery";
@@ -14,14 +14,12 @@ import apolloClientFactory from "./apollo";
 
 const apolloClient = apolloClientFactory(fakeQl.normalApiEndpoint);
 const PostContentQuery = withPostContentQuery(PostContent);
-const PostsQuery = withPostsQuery(Post, Container);
+const PostsQuery = withPostsQuery(Posts);
 
 // ~~~ Posts ~~~
 storiesOf("GraphQL", module).add("PostsQuery", () => (
   <ApolloProvider client={apolloClient}>
-    <Container>
-      <PostsQuery routeHandler={() => null} />
-    </Container>
+    <PostsQuery routeHandler={() => null} />
   </ApolloProvider>
 ));
 

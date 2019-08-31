@@ -1,3 +1,8 @@
+/**
+ * Test that the queried data is injected.
+ */
+// ! Don't test the order in which the posts are arranged - this should be tested within the
+// !  Posts component
 import React from "react";
 
 import _ from "lodash";
@@ -5,13 +10,9 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render, RenderResult } from "@testing-library/react";
 
-import { IPostsData } from "../../withPostsQuery";
+import { IPostData } from "../../withPostsQuery";
 import { mockApolloClient } from "../helpers";
-import {
-  withPostsQuery,
-  IPostComponentProps,
-  IContainerComponentProps
-} from "../../withPostsQuery";
+import { IPostsComponentProps, withPostsQuery } from "../../withPostsQuery";
 
 // >>> FIXTURES >>>
 const resolvers = {
@@ -52,27 +53,13 @@ export const postsDummyProps = Object.freeze({
   routeHandler: () => null
 });
 
-// TODO: test routeHandler
+// TODO: test routeHandler.
 
 // >>> TESTS >>>
 describe("Unit Tests: GraphQL #unit", () => {
   describe("PostsQuery", () => {
     const numPosts = resolvers.Query.posts().length;
     const posts = resolvers.Query.posts;
-
-    describe("Container", () => {
-      it("should be rendered", async () => {
-        let result: RenderResult;
-
-        result = render(
-          <ApolloProvider client={mockApolloClient(resolvers)}>
-            <PostsQuery {...postsDummyProps} />
-          </ApolloProvider>
-        );
-
-        expect(await result!.findByTestId("fake-container")).toBeVisible();
-      });
-    });
 
     // +++ test num posts +++
     it(`should render ${numPosts} posts - equal to the number of posts returned by the query`, async () => {
@@ -91,7 +78,7 @@ describe("Unit Tests: GraphQL #unit", () => {
     ["tldr", "title"].forEach((field: string) => {
       describe(`each ${field}`, () => {
         posts()
-          .map((post: IPostsData) => post[field])
+          .map((post: IPostData) => post[field])
           .forEach((fieldValue: string) => {
             it(`should be received and injected with the value: "${fieldValue}"`, async () => {
               let result: RenderResult;
@@ -102,7 +89,7 @@ describe("Unit Tests: GraphQL #unit", () => {
                 </ApolloProvider>
               );
 
-              expect(await result!.findByText(fieldValue)).toHaveTextContent(fieldValue);
+              expect(await result!.findByText(fieldValue)).toBeDefined();
             });
           });
       });
@@ -110,7 +97,7 @@ describe("Unit Tests: GraphQL #unit", () => {
 
     describe(`each imgAltText`, () => {
       posts()
-        .map((post: IPostsData) => post.imgAltText)
+        .map((post: IPostData) => post.imgAltText)
         .forEach((imgAltText: string) => {
           it(`should be received and injected with the value: "${imgAltText}"`, async () => {
             let result: RenderResult;
@@ -128,7 +115,7 @@ describe("Unit Tests: GraphQL #unit", () => {
 
     describe(`each imgUrl`, () => {
       posts()
-        .map((post: IPostsData) => post.imgUrl)
+        .map((post: IPostData) => post.imgUrl)
         .forEach((imgUrl: string) => {
           it(`should be received and injected with the value: "${imgUrl}"`, async () => {
             let result: RenderResult;
@@ -146,7 +133,7 @@ describe("Unit Tests: GraphQL #unit", () => {
 
     describe(`each postUrl`, () => {
       posts()
-        .map((post: IPostsData) => post.postUrl)
+        .map((post: IPostData) => post.postUrl)
         .forEach((postUrl: string) => {
           it(`should be received and injected with the value: "${postUrl}"`, async () => {
             let result: RenderResult;
@@ -165,18 +152,18 @@ describe("Unit Tests: GraphQL #unit", () => {
 });
 
 // >>> FAKES >>>
-const FakePost = (props: IPostComponentProps) => (
-  <div data-testid="post">
-    <div>{props.imgAltText}</div>
-    <div>{props.imgUrl}</div>
-    <div>{props.postUrl}</div>
-    <div>{props.title}</div>
-    <div>{props.tldr}</div>
+const FakePosts = (props: IPostsComponentProps) => (
+  <div>
+    {props.posts.map((post, index) => (
+      <div data-testid="post" key={index}>
+        <div>{post.imgAltText}</div>
+        <div>{post.imgUrl}</div>
+        <div>{post.postUrl}</div>
+        <div>{post.title}</div>
+        <div>{post.tldr}</div>
+      </div>
+    ))}
   </div>
 );
 
-const FakeContainer = (props: IContainerComponentProps) => (
-  <div data-testid="fake-container">{props.children}</div>
-);
-
-const PostsQuery = withPostsQuery(FakePost, FakeContainer);
+const PostsQuery = withPostsQuery(FakePosts);

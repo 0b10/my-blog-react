@@ -200,15 +200,20 @@ const useTLDRPaddingStyles = makeStyles(theme => ({
 }));
 
 // >>> INTERFACES >>>
-export interface IPostProps {
+export interface IPostData {
   imgAltText: string;
   imgUrl: string;
   loading?: boolean;
   postUrl: string;
-  routeHandler: (postUrl: string) => void;
   title: string;
   tldr: string;
 }
+
+export interface IPostExtraProps {
+  routeHandler: (postUrl: string) => void;
+}
+
+type IPostProps = IPostExtraProps & IPostData;
 
 interface ITLDRButtonsProps {
   postUrl: string;

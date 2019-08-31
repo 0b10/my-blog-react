@@ -1,5 +1,5 @@
-import { Container, Post } from "./Post";
 import { PostContent } from "./PostContent";
+import { Posts } from "./Posts/index";
 import { Theme } from "./Theme";
 
-export { Container, Post, PostContent, Theme };
+export { Posts, PostContent, Theme };
