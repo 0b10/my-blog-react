@@ -27,5 +27,9 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true
   },
+  "awesomeTypescriptLoaderOptions": {
+    "useCache": true,
+    "forceIsolatedModules": true
+  },
   "include": ["src"]
 }
