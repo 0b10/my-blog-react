@@ -22,6 +22,14 @@ describe("Unit Tests: GraphQL #unit #graphql", () => {
       });
     });
 
+    // ~~~ Heading ~~~
+    describe("heading", () => {
+      it("should be injected to and received by the PostContentComponent", async () => {
+        const result = renderPostContent("1");
+        expect(await result.findByTestId("fake-heading")).toHaveTextContent(/^A fake title$/);
+      });
+    });
+
     // ~~~ Dates ~~~
     describe("createdAt prop", () => {
       it("should be injected to and received by the PostContentComponent", async () => {
@@ -29,6 +37,7 @@ describe("Unit Tests: GraphQL #unit #graphql", () => {
         expect(await result.findByTestId("fake-created-at")).toHaveTextContent(/^2000-01-01$/);
       });
     });
+
     describe("modifiedAt prop", () => {
       it("should be injected to and received by the PostContentComponent", async () => {
         const result = renderPostContent("2");
@@ -52,6 +61,7 @@ const FakePostContent = (props: IPostContentComponentProps) => (
     <div data-testid="fake-modified-at">{props.modifiedAt}</div>
     <div data-testid="fake-created-at">{props.createdAt}</div>
     <div data-testid="fake-content">{props.children}</div>
+    <div data-testid="fake-heading">{props.heading}</div>
   </div>
 );
 

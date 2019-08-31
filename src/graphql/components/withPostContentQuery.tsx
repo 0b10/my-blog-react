@@ -25,10 +25,10 @@ export const withPostContentQuery = (
       );
     }
 
-    const { content, createdAt, modifiedAt } = data.postContent;
+    const { content, createdAt, modifiedAt, post } = data.postContent;
 
     return (
-      <PostContentComponent createdAt={createdAt} modifiedAt={modifiedAt}>
+      <PostContentComponent createdAt={createdAt} modifiedAt={modifiedAt} heading={post.title}>
         {content}
       </PostContentComponent>
     );
@@ -38,6 +38,7 @@ export const withPostContentQuery = (
 export interface IPostContentComponentProps {
   children: string;
   createdAt: string;
+  heading: string;
   modifiedAt: string;
 }
 

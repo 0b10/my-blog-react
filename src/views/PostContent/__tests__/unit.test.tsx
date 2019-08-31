@@ -4,10 +4,11 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
 import Background from "../Background";
+import Heading from "../Heading";
 import Markdown from "../Markdown";
 
 describe("Unit Tests: Markdown", () => {
-  // * Test that the expected component/element is rendered. These component/elements are marked with a test id
+  // *  Test that the expected component/element is rendered. These component/elements are marked with a test id
 
   it("should parse implicit line breaks", async () => {
     const contentText = `
@@ -23,15 +24,15 @@ describe("Unit Tests: Markdown", () => {
 
   [
     { elementName: "<p />", markdown: "test paragraph", testid: "markdown-paragraph" },
-    { elementName: "<h1 />", markdown: "# header", testid: "markdown-header-h1" },
-    { elementName: "<h2 />", markdown: "## header", testid: "markdown-header-h2" },
-    { elementName: "<h3 />", markdown: "### header", testid: "markdown-header-h3" },
-    { elementName: "<h4 />", markdown: "#### header", testid: "markdown-header-h4" },
-    { elementName: "<h5 />", markdown: "##### header", testid: "markdown-header-h5" },
-    { elementName: "<h6 />", markdown: "###### header", testid: "markdown-header-h6" },
-    { elementName: "<hr />", markdown: "---", testid: "markdown-divider" },
-    { elementName: "<a />", markdown: "[text](https://example.com)", testid: "markdown-link" },
-    { elementName: "Blockquote", markdown: "> quote", testid: "markdown-blockquote" },
+    { elementName: "heading 1", markdown: "# header", testid: "markdown-header-level-1" },
+    { elementName: "heading 2", markdown: "## header", testid: "markdown-header-level-2" },
+    { elementName: "heading 3", markdown: "### header", testid: "markdown-header-level-3" },
+    { elementName: "heading 4", markdown: "#### header", testid: "markdown-header-level-4" },
+    { elementName: "heading 5", markdown: "##### header", testid: "markdown-header-level-5" },
+    { elementName: "heading 6", markdown: "###### header", testid: "markdown-header-level-6" },
+    { elementName: "divider", markdown: "---", testid: "markdown-divider" },
+    { elementName: "link", markdown: "[text](https://example.com)", testid: "markdown-link" },
+    { elementName: "blockquote", markdown: "> quote", testid: "markdown-blockquote" },
     {
       elementName: "<img />",
       markdown: "![alt](https://example.com/img.jpg)",
@@ -97,6 +98,14 @@ describe("Unit Test: Background", () => {
     );
 
     expect(await result.findByText(/^fake text$/)).toBeVisible();
+  });
+});
+
+describe("Unit Test: Heading", () => {
+  it("should render and be visible [#unit,#Heading]", async () => {
+    const result = render(<Heading>fake heading</Heading>);
+
+    expect(await result.findByTestId("post-heading-h1")).toBeVisible();
   });
 });
 

@@ -3,7 +3,7 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
-import { dummyDatesProps } from "./helpers";
+import { dummyDatesProps, dummyPostContentProps } from "./helpers";
 import { PostContent } from "..";
 import Background from "../Background";
 import Dates from "../Dates";
@@ -40,11 +40,14 @@ describe("Smoke Tests: PostContent", () => {
 
   describe("index (PostContent wrapper)", () => {
     it("should render all expected child components [#smoke,#PostContent,#integration]", async () => {
-      const result = render(<PostContent {...dummyDatesProps}>Test content text</PostContent>);
+      const result = render(
+        <PostContent {...dummyPostContentProps}>Test content text</PostContent>
+      );
 
       expect(await result.findByTestId("markdown-paragraph")).toBeVisible();
       expect(await result.findByTestId("article-dates")).toBeVisible();
       expect(await result.findByTestId("post-content-background")).toBeVisible();
+      expect(await result.findByTestId("post-heading-h1")).toBeVisible();
     });
   });
 });

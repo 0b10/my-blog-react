@@ -31,19 +31,28 @@ const ParagraphRenderer = (props: IRendererProps) => {
 // ~~~ Headers ~~~
 function HeadingRenderer(props: IHeadingRendererProps) {
   const headerClasses = useHeaderStyles();
-  // assume props.level is 1-6, and type it as h1 because it is constrained
-  return (
+  const level = props.level + 1; // h1 is for post title
+  const headerTestId = `markdown-header-level-${props.level}`;
+
+  return props.level < 6 ? ( // will render only h2-h6
+    <Typography classes={headerClasses} variant={`h${level}` as "h1"} data-testid={headerTestId}>
+      {props.children}
+    </Typography>
+  ) : (
+    // will render span for level 6
     <Typography
       classes={headerClasses}
-      variant={`h${props.level}` as "h1"}
-      data-testid={`markdown-header-h${props.level}`}
+      variant="subtitle1"
+      component="span"
+      data-testid={headerTestId}
+      display="block"
     >
       {props.children}
     </Typography>
   );
 }
 
-// ~~~ <hr />
+// ~~~ <hr /> ~~~
 function HorizontalRuleRenderer(props: IRendererProps) {
   const dividerClasses = useDividerStyles();
   return (

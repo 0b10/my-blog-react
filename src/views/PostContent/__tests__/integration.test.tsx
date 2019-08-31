@@ -45,7 +45,7 @@ describe("Integration Tests: PostContent", () => {
     it("should display formatted markdown", async () => {
       const result = render(<PostContent {...dummyPostContentProps}>{"# header"}</PostContent>);
 
-      expect(await result.findByTestId("markdown-header-h1")).toBeVisible();
+      expect(await result.findByTestId("markdown-header-level-1")).toBeVisible();
     });
   });
 });

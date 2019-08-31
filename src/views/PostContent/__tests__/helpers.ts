@@ -9,5 +9,6 @@ export const dummyContentProps = {
 
 export const dummyPostContentProps = {
   ...dummyContentProps,
-  ...dummyDatesProps
+  ...dummyDatesProps,
+  heading: "dummy heading"
 };

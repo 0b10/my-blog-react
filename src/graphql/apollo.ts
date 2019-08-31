@@ -50,6 +50,7 @@ export default (uri?: string, enableCache = true, mockSchemaLink: false | Schema
       cacheRedirects: {
         Query: {
           post: (_, args, { getCacheKey }) => getCacheKey({ __typename: "Post", id: args.id }),
+          // BUG: args is null when going from postContentQuery to postQuery
           posts: (_, args, { getCacheKey }) => {
             return args.ids.map((id: string) => getCacheKey({ __typename: "Post", id }));
           }
