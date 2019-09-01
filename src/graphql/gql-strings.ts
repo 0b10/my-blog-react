@@ -7,7 +7,6 @@ export const POSTS_QUERY = gql`
       id
       imgAltText
       imgUrl
-      postUrl
       title
       tldr
     }
@@ -27,7 +26,6 @@ export const POST_CONTENT_QUERY = gql`
         id
         imgAltText
         imgUrl
-        postUrl
         title
         tldr
       }
@@ -38,4 +36,22 @@ export const POST_CONTENT_QUERY = gql`
 // >>> INTERFACES >>>
 export interface IPostContentQueryVariables {
   id: string;
+}
+
+export interface IPostContentQueryResults {
+  __typename: "PostContent";
+  content: string;
+  createdAt: string;
+  id: string;
+  modifiedAt: string;
+  post: IPostQueryResults;
+}
+
+export interface IPostQueryResults {
+  __typename: "Post";
+  id: string;
+  imgAltText: string;
+  imgUrl: string;
+  title: string;
+  tldr: string;
 }

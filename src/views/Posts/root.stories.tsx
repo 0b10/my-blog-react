@@ -21,7 +21,7 @@ storiesOf("Post", module)
   ))
   .add("Click event", () => (
     <Container>
-      <Post {...fakePostProps} routeHandler={action("Changing route")} postUrl="/example/url" />
+      <Post {...fakePostProps} routeHandler={action("Changing route")} id="1" />
     </Container>
   ))
   .add("Long title", () => (
@@ -62,10 +62,10 @@ const randomStr = () =>
     .substring(2);
 
 const fakePostProps = Object.freeze({
+  id: "1",
   imgAltText: "Example image alt text",
   imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
   loading: false,
-  postUrl: "#",
   routeHandler: () => null,
   title: "an example title",
   tldr:

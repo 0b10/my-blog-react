@@ -1,5 +1,5 @@
-# source: https://fakeql.com/graphql/e8dc4f610e594c1b219321328b0b6cbe
-# timestamp: Sat Aug 24 2019 14:02:41 GMT+0100 (British Summer Time)
+# source: https://fakeql.com/graphql/cd6f412dedaffc7f109693768b8b39d6
+# timestamp: Sun Sep 01 2019 19:35:14 GMT+0100 (British Summer Time)
 
 directive @external on FIELD_DEFINITION
 
@@ -32,7 +32,6 @@ input CreatePostInput {
   title: String!
   imgAltText: String!
   imgUrl: String!
-  postUrl: String!
   tldr: String!
 }
 
@@ -58,33 +57,11 @@ type Post {
   _int(min: Int, max: Int): Int!
   _float(min: Float, max: Float, fixed: Int): Float!
   _boolean: Boolean!
-  _string(
-    type: String
-    locale: String
-    template: String
-    length: Int
-    syllables: Int
-    casing: String
-    min: Int
-    max: Int
-    pool: String
-    sentences: Int
-    words: Int
-    nationality: String
-    full: Boolean
-  ): String!
-  postContents(
-    page: Int
-    limit: Int
-    sort: String
-    dir: String
-    where: PostContentsWhere
-    ref: String
-  ): [PostContent]
+  _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
+  postContents(page: Int, limit: Int, sort: String, dir: String, where: PostContentsWhere, ref: String): [PostContent]
   title(length: Int): String!
   imgAltText(length: Int): String!
   imgUrl(length: Int): String!
-  postUrl(length: Int): String!
   tldr(length: Int): String!
 }
 
@@ -94,21 +71,7 @@ type PostContent {
   _int(min: Int, max: Int): Int!
   _float(min: Float, max: Float, fixed: Int): Float!
   _boolean: Boolean!
-  _string(
-    type: String
-    locale: String
-    template: String
-    length: Int
-    syllables: Int
-    casing: String
-    min: Int
-    max: Int
-    pool: String
-    sentences: Int
-    words: Int
-    nationality: String
-    full: Boolean
-  ): String!
+  _string(type: String, locale: String, template: String, length: Int, syllables: Int, casing: String, min: Int, max: Int, pool: String, sentences: Int, words: Int, nationality: String, full: Boolean): String!
   post: Post!
   content(length: Int): String!
   createdAt(length: Int): String!
@@ -189,14 +152,6 @@ input PostContentsWhere {
   post_imgUrl_in: [String!]
   post_imgUrl_nin: [String!]
   post_imgUrl_exists: Boolean
-  post_postUrl_contains: String
-  post_postUrl_startswith: String
-  post_postUrl_endswith: String
-  post_postUrl_eq: String
-  post_postUrl_neq: String
-  post_postUrl_in: [String!]
-  post_postUrl_nin: [String!]
-  post_postUrl_exists: Boolean
   post_tldr_contains: String
   post_tldr_startswith: String
   post_tldr_endswith: String
@@ -245,14 +200,6 @@ input PostsWhere {
   imgUrl_in: [String!]
   imgUrl_nin: [String!]
   imgUrl_exists: Boolean
-  postUrl_contains: String
-  postUrl_startswith: String
-  postUrl_endswith: String
-  postUrl_eq: String
-  postUrl_neq: String
-  postUrl_in: [String!]
-  postUrl_nin: [String!]
-  postUrl_exists: Boolean
   tldr_contains: String
   tldr_startswith: String
   tldr_endswith: String
@@ -268,14 +215,7 @@ input PostsWhere {
 type Query {
   posts(page: Int, limit: Int, sort: String, dir: String, where: PostsWhere, ref: String): [Post]
   post(id: ID!): Post
-  postContents(
-    page: Int
-    limit: Int
-    sort: String
-    dir: String
-    where: PostContentsWhere
-    ref: String
-  ): [PostContent]
+  postContents(page: Int, limit: Int, sort: String, dir: String, where: PostContentsWhere, ref: String): [PostContent]
   postContent(id: ID!): PostContent
   _typeDefs: String!
   _entities(representations: [_Any!]!): [_Entity]!
@@ -294,6 +234,5 @@ input UpdatePostInput {
   title: String
   imgAltText: String
   imgUrl: String
-  postUrl: String
   tldr: String
 }

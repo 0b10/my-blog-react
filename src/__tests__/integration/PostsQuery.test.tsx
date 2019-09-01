@@ -18,7 +18,6 @@ const resolvers = {
         id: "1",
         imgAltText: "fake image alt text 1",
         imgUrl: "fake-image-url-1",
-        postUrl: "fake-post-url-1",
         title: "A fake title 1",
         tldr: "Fake TLDR data 1"
       },
@@ -27,7 +26,6 @@ const resolvers = {
         id: "2",
         imgAltText: "fake image alt text 2",
         imgUrl: "fake-image-url-2",
-        postUrl: "fake-post-url-2",
         title: "A fake title 2",
         tldr: "Fake TLDR data 2"
       },
@@ -36,7 +34,6 @@ const resolvers = {
         id: "3",
         imgAltText: "fake image alt text 3",
         imgUrl: "fake-image-url-3",
-        postUrl: "fake-post-url-3",
         title: "A fake title 3",
         tldr: "Fake TLDR data 3"
       }
@@ -53,56 +50,54 @@ describe("Integration Tests: PostsQuery", () => {
     expect(await result.findAllByTestId("post")).toHaveLength(numPosts);
   });
 
-  resolvers.Query.posts().forEach(
-    ({ id, imgAltText, imgUrl, postUrl, title, tldr }: IPostData, index) => {
-      describe(`the post with id === ${id}`, () => {
-        // +++ imgAltText +++
-        it(`should have the correct imgAltText value: ${imgUrl}`, async () => {
-          const result = renderPostsQuery();
-          const post = Object.values(await result.findAllByTestId("post-img-url"))[index];
+  resolvers.Query.posts().forEach(({ id, imgAltText, imgUrl, title, tldr }: IPostData, index) => {
+    describe(`the post with id === ${id}`, () => {
+      // +++ imgAltText +++
+      it(`should have the correct imgAltText value: ${imgUrl}`, async () => {
+        const result = renderPostsQuery();
+        const post = Object.values(await result.findAllByTestId("post-img-url"))[index];
 
-          expect(post).toHaveAttribute("alt", imgAltText);
-        });
-
-        // +++ title +++
-        it(`should have the title: ${title}`, async () => {
-          const result = renderPostsQuery();
-          const post = Object.values(await result.findAllByTestId("post-title"))[index];
-
-          expect(post).toHaveTextContent(title);
-        });
-
-        // +++ tldr +++
-        it(`should have the tldr: ${tldr}`, async () => {
-          const result = renderPostsQuery();
-          const post = Object.values(await result.findAllByTestId("post-tldr"))[index];
-
-          expect(post).toHaveTextContent(tldr);
-        });
-
-        // +++ routeHandler +++
-        it(`should provide the value: ${id}, to the routeHandler, when clicked`, async () => {
-          const routeHandlerSpy = jest.fn();
-
-          const result = renderPostsQuery(routeHandlerSpy);
-          const post = Object.values(await result.findAllByTestId("post"))[index];
-          fireEvent.click(post);
-          fireEvent.click(await result.getByText(`Fake TLDR data ${id}`));
-
-          expect(routeHandlerSpy.mock.calls.length).toBe(1);
-          expect(routeHandlerSpy.mock.calls[0][0]).toBe(postUrl);
-        });
-
-        // +++ imgUrl +++
-        it(`should have the correct imgUrl: ${imgUrl}`, async () => {
-          const result = renderPostsQuery();
-          const post = Object.values(await result.findAllByTestId("post-img-url"))[index];
-
-          expect(post).toHaveAttribute("src", imgUrl);
-        });
+        expect(post).toHaveAttribute("alt", imgAltText);
       });
-    }
-  );
+
+      // +++ title +++
+      it(`should have the title: ${title}`, async () => {
+        const result = renderPostsQuery();
+        const post = Object.values(await result.findAllByTestId("post-title"))[index];
+
+        expect(post).toHaveTextContent(title);
+      });
+
+      // +++ tldr +++
+      it(`should have the tldr: ${tldr}`, async () => {
+        const result = renderPostsQuery();
+        const post = Object.values(await result.findAllByTestId("post-tldr"))[index];
+
+        expect(post).toHaveTextContent(tldr);
+      });
+
+      // +++ routeHandler +++
+      it(`should provide the value: ${id}, to the routeHandler, when clicked`, async () => {
+        const routeHandlerSpy = jest.fn();
+
+        const result = renderPostsQuery(routeHandlerSpy);
+        const post = Object.values(await result.findAllByTestId("post"))[index];
+        fireEvent.click(post);
+        fireEvent.click(await result.getByText(`Fake TLDR data ${id}`));
+
+        expect(routeHandlerSpy.mock.calls.length).toBe(1);
+        expect(routeHandlerSpy.mock.calls[0][0]).toBe(id);
+      });
+
+      // +++ imgUrl +++
+      it(`should have the correct imgUrl: ${imgUrl}`, async () => {
+        const result = renderPostsQuery();
+        const post = Object.values(await result.findAllByTestId("post-img-url"))[index];
+
+        expect(post).toHaveAttribute("src", imgUrl);
+      });
+    });
+  });
 });
 
 // >>> HELPERS >>>

@@ -35,10 +35,7 @@ export default (() => (props: IPostProps) => {
         onMouseLeave={() => setShowTldr(false)}
         raised
       >
-        <div
-          style={ContentWrapperStyles}
-          onClick={() => showTldr && props.routeHandler(props.postUrl)}
-        >
+        <div style={ContentWrapperStyles} onClick={() => showTldr && props.routeHandler(props.id)}>
           <Collapse classes={collapseClasses} in={showTldr} timeout={150}>
             <div style={TLDRWrapperStyles}>
               <div className={tldrPaddingClasses.root}>
@@ -47,7 +44,7 @@ export default (() => (props: IPostProps) => {
                 </Typography>
               </div>
               <TLDRButtons
-                postUrl={props.postUrl}
+                id={props.id}
                 routeHandler={props.routeHandler}
                 setShowTldr={setShowTldr}
               />
@@ -92,10 +89,7 @@ const TLDRButtons = (props: ITLDRButtonsProps) => {
           </Grid>
           <Grid>
             <Grid container item direction="row" justify="flex-end" alignItems="center" xs={6}>
-              <IconButton
-                data-testid="read-post-icon"
-                onClick={() => props.routeHandler(props.postUrl)}
-              >
+              <IconButton data-testid="read-post-icon" onClick={() => props.routeHandler(props.id)}>
                 <ReadIcon />
               </IconButton>
             </Grid>
@@ -204,19 +198,19 @@ export interface IPostData {
   imgAltText: string;
   imgUrl: string;
   loading?: boolean;
-  postUrl: string;
+  id: string;
   title: string;
   tldr: string;
 }
 
 export interface IPostExtraProps {
-  routeHandler: (postUrl: string) => void;
+  routeHandler: (id: string) => void;
 }
 
 type IPostProps = IPostExtraProps & IPostData;
 
 interface ITLDRButtonsProps {
-  postUrl: string;
-  routeHandler: (postUrl: string) => void;
+  id: string;
+  routeHandler: (id: string) => void;
   setShowTldr: (show: boolean) => void;
 }

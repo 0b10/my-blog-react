@@ -6,7 +6,7 @@ import Heading from "./Heading";
 import Markdown from "./Markdown";
 
 export const PostContent = (props: IPostContentProps) => (
-  <Background>
+  <Background data-testid="post-content-background">
     <Dates createdAt={props.createdAt} modifiedAt={props.modifiedAt} />
     <Heading>{props.heading}</Heading>
     <Markdown>{props.children}</Markdown>

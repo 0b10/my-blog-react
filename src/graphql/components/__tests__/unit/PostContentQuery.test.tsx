@@ -81,7 +81,6 @@ const resolvers = {
               id: "1",
               imgAltText: "fake image alt text",
               imgUrl: "fake-image-url",
-              postUrl: "fake-post-url",
               title: "A fake title",
               tldr: "Fake TLDR data"
             }
@@ -98,7 +97,6 @@ const resolvers = {
               id: "1",
               imgAltText: "fake image alt text",
               imgUrl: "fake-image-url",
-              postUrl: "fake-post-url",
               title: "A fake title",
               tldr: "Fake TLDR data"
             }

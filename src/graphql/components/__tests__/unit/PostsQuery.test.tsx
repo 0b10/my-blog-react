@@ -23,7 +23,6 @@ const resolvers = {
         id: "1",
         imgAltText: "fake-image-alt-text-0",
         imgUrl: "a-fake-image-url-0",
-        postUrl: "a-fake-post-url-0",
         title: "A fake title 0",
         tldr: "Fake TLDR data 0"
       },
@@ -32,7 +31,6 @@ const resolvers = {
         id: "2",
         imgAltText: "fake-image-alt-text-1",
         imgUrl: "a-fake-image-url-1",
-        postUrl: "a-fake-post-url-1",
         title: "A fake title 1",
         tldr: "Fake TLDR data 1"
       },
@@ -41,7 +39,6 @@ const resolvers = {
         id: "3",
         imgAltText: "fake-image-alt-text-2",
         imgUrl: "a-fake-image-url-2",
-        postUrl: "a-fake-post-url-2",
         title: "A fake title 2",
         tldr: "Fake TLDR data 2"
       }
@@ -131,12 +128,13 @@ describe("Unit Tests: GraphQL #unit", () => {
         });
     });
 
-    describe(`each postUrl`, () => {
+    describe(`each post id`, () => {
       posts()
-        .map((post: IPostData) => post.postUrl)
-        .forEach((postUrl: string) => {
-          it(`should be received and injected with the value: "${postUrl}"`, async () => {
+        .map((post: IPostData) => post.id)
+        .forEach(id => {
+          it(`should be received and injected with the value: "${id}"`, async () => {
             let result: RenderResult;
+            const reId = RegExp(`^${id}$`);
 
             result = render(
               <ApolloProvider client={mockApolloClient(resolvers)}>
@@ -144,7 +142,7 @@ describe("Unit Tests: GraphQL #unit", () => {
               </ApolloProvider>
             );
 
-            expect(await result!.findByText(postUrl)).toBeDefined();
+            expect(await result!.findByText(reId)).toBeDefined();
           });
         });
     });
@@ -158,7 +156,7 @@ const FakePosts = (props: IPostsComponentProps) => (
       <div data-testid="post" key={index}>
         <div>{post.imgAltText}</div>
         <div>{post.imgUrl}</div>
-        <div>{post.postUrl}</div>
+        <div>{post.id}</div>
         <div>{post.title}</div>
         <div>{post.tldr}</div>
       </div>

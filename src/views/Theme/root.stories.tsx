@@ -43,6 +43,7 @@ const TempPosts = () => (
       {lodash.range(1, 20).map((_, index) => (
         <Post
           {...fakePostProps}
+          id={`${index + 1}`}
           key={index}
           imgUrl={`https://fakeql.com/placeholder/320/320/${randomStr()}.svg`}
           imgAltText={faker.lorem.words(lodash.random(2, 5))}
@@ -64,7 +65,6 @@ const fakePostProps = Object.freeze({
   imgAltText: "Example image alt text",
   imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
   loading: false,
-  postUrl: "#",
   routeHandler: () => null,
   title: "an example title",
   tldr:

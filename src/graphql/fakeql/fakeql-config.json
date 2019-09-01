@@ -6,7 +6,6 @@
       "title": "A fake title",
       "imgAltText": "fake image alt text",
       "imgUrl": "https://fakeql.com/placeholder/320/320/{{fake.finance.bitcoinAddress|lower}}.svg",
-      "postUrl": "a-fake-post-url",
       "tldr": "Fake TLDR data"
     },
     {
@@ -15,7 +14,6 @@
       "title": "A fake title 20",
       "imgAltText": "fake image alt text 20",
       "imgUrl": "https://fakeql.com/placeholder/320/320/{{fake.finance.bitcoinAddress|lower}}.svg",
-      "postUrl": "a-fake-post-url-20",
       "tldr": "Fake TLDR data 20"
     }
   ],

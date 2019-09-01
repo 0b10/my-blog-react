@@ -21,11 +21,11 @@ export const withPostsQuery = (PostsComponent: React.FC<IPostsComponentProps>) =
 
 export interface IPostsComponentProps {
   posts: IPostData[];
-  routeHandler: (postUrl: string) => void;
+  routeHandler: (id: string) => void;
 }
 
 interface IPostsQueryProps {
-  routeHandler: (postUrl: string) => void;
+  routeHandler: (id: string) => void;
 }
 
 export interface IPostData {
@@ -33,7 +33,6 @@ export interface IPostData {
   id: string;
   imgAltText: string;
   imgUrl: string;
-  postUrl: string;
   title: string;
   tldr: string;
 }
