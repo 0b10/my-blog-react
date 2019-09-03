@@ -17,31 +17,30 @@ const makeShadows = (alpha: number) =>
 const dark: ThemeOptions = {
   palette: {
     type: "dark",
-    common: { black: "rgba(0, 0, 0, 1)", white: "#fff" },
-    background: { paper: "rgba(22, 22, 22, 1)", default: "rgba(15, 15, 15, 1)" },
+    background: { paper: "rgba(34, 34, 34, 1)", default: "rgba(17, 17, 17, 1)" },
     primary: {
-      light: "rgba(92, 153, 195, 1)",
-      main: "rgba(36, 128, 194, 1)",
-      dark: "rgba(22, 84, 127, 1)",
+      light: "#7986cb",
+      main: "rgba(28, 63, 255, 1)",
+      dark: "#303f9f",
       contrastText: "#fff"
     },
     secondary: {
-      light: "rgba(159, 105, 188, 1)",
-      main: "rgba(140, 59, 177, 1)",
-      dark: "rgba(93, 23, 130, 1)",
+      light: "rgba(196, 57, 223, 1)",
+      main: "rgba(189, 16, 224, 1)",
+      dark: "rgba(147, 14, 174, 1)",
       contrastText: "#fff"
     },
     error: {
-      light: "rgba(255, 108, 108, 1)",
-      main: "rgba(255, 50, 50, 1)",
-      dark: "rgba(212, 19, 19, 1)",
+      light: "rgba(255, 68, 68, 1)",
+      main: "rgba(255, 0, 0, 1)",
+      dark: "rgba(197, 0, 0, 1)",
       contrastText: "#fff"
     },
     text: {
-      primary: "rgba(255, 255, 255, 0.87)",
-      secondary: "rgba(3, 126, 214, 1)",
-      disabled: "rgba(3, 126, 214, 0.69)",
-      hint: "rgba(92, 175, 236, 1)"
+      primary: "rgba(255, 255, 255, 0.92)",
+      secondary: "rgba(255, 255, 255, 0.35)",
+      disabled: "rgba(109, 109, 109, 0.47)",
+      hint: "rgba(0, 0, 0, 0.38)"
     }
   },
   shadows: makeShadows(0.85)

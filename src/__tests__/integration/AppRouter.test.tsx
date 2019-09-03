@@ -144,4 +144,31 @@ describe("Integration Tests: AppRouter", () => {
       expect(await result.findAllByTestId("post")).toHaveLength(posts().length);
     });
   });
+
+  describe("NavBar", () => {
+    const testCases = [
+      { itemText: "home", numElements: posts().length, startAt: "/post/1", testid: "post" }
+    ];
+    testCases.forEach(({ itemText, numElements, testid, startAt }) => {
+      describe(`when "${itemText}" is clicked`, () => {
+        it(`should display ${numElements} x ${testid}`, async () => {
+          const result = renderAppRouter(startAt);
+          try {
+            // Start elsewhere
+            const posts = await result.findAllByTestId(testid); // Check it's actually elsewhere
+
+            expect(`to not find any elements with data-testid=${testid}`).toBe(
+              `found ${posts.length} elements`
+            );
+          } catch {
+            // Click the item
+            fireEvent.click(await result.findByText(itemText));
+            const posts = await result.findAllByTestId(testid);
+
+            expect(posts).toHaveLength(numElements);
+          }
+        });
+      });
+    });
+  });
 });

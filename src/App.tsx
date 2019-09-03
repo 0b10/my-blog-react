@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Route, RouteComponentProps, Switch } from "react-router-dom";
+import { Route, RouteComponentProps } from "react-router-dom";
 import { StaticContext } from "react-router";
 
-import { Posts, PostContent } from "./views";
+import { NavBar, Posts, PostContent } from "./views";
 import { withPostContentQuery, withPostsQuery } from "./graphql";
 
 // >>> INIT >>>
@@ -19,12 +19,17 @@ const PostContentQueryRenderer = ({ match }: RouteComponentProps<any, StaticCont
   <PostContentQuery postId={match.params.id} />
 );
 
+const NavBarRenderer = ({ history }: RouteComponentProps<any, StaticContext, any>) => (
+  <NavBar items={[{ path: "/", text: "home" }]} routeHandler={history.push} />
+);
+
 // >>> COMPONENTS >>>
 export const AppRouter: React.FC = () => (
-  <Switch>
-    <Route path="/" exact render={PostsQueryRenderer} />} />
+  <React.Fragment>
+    <Route path="/" render={NavBarRenderer} />
+    <Route path="/" exact render={PostsQueryRenderer} />
     <Route path="/post/:id" exact render={PostContentQueryRenderer} />
-  </Switch>
+  </React.Fragment>
 );
 
 export const App: React.FC = () => {

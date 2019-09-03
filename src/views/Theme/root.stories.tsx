@@ -1,13 +1,15 @@
 import React from "react";
 
+import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import faker from "faker";
 import lodash from "lodash";
-import { Theme } from "./";
 
+import { NavBar } from "../NavBar";
+import { Theme } from "./";
+import Container from "../Posts/Container";
 import Markdown from "../PostContent/Markdown";
 import Post from "../Posts/Post";
-import Container from "../Posts/Container";
 
 // >>> STORIES >>>
 storiesOf("Theme/Light", module)
@@ -20,6 +22,18 @@ storiesOf("Theme/Light", module)
     <Theme theme="light">
       <TempPosts />
     </Theme>
+  ))
+  .add("NavBar", () => (
+    <Theme theme="light">
+      <NavBar
+        items={[
+          { path: "#", text: "one" },
+          { path: "#", text: "two" },
+          { path: "#", text: "three" }
+        ]}
+        routeHandler={action("Tab clicked")}
+      />
+    </Theme>
   ));
 
 storiesOf("Theme/Dark", module)
@@ -31,6 +45,18 @@ storiesOf("Theme/Dark", module)
   .add("Posts", () => (
     <Theme theme="dark">
       <TempPosts />
+    </Theme>
+  ))
+  .add("NavBar", () => (
+    <Theme theme="dark">
+      <NavBar
+        items={[
+          { path: "#", text: "one" },
+          { path: "#", text: "two" },
+          { path: "#", text: "three" }
+        ]}
+        routeHandler={action("Tab clicked")}
+      />
     </Theme>
   ));
 
