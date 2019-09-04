@@ -6,15 +6,18 @@ import { BrowserRouter } from "react-router-dom";
 
 import { apolloClientFactory, fakeQl } from "./graphql";
 import { App } from "./App";
+import { Theme } from "./views";
 
 const apolloClient = apolloClientFactory(fakeQl.normalApiEndpoint);
 
 ReactDOM.render(
-  <ApolloProvider client={apolloClient}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ApolloProvider>,
+  <Theme theme="dark">
+    <ApolloProvider client={apolloClient}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ApolloProvider>
+  </Theme>,
   document.getElementById("root")
 );
 
