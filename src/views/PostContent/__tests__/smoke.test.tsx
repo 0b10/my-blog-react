@@ -47,7 +47,7 @@ describe("Smoke Tests: PostContent", () => {
       expect(await result.findByTestId("markdown-paragraph")).toBeVisible();
       expect(await result.findByTestId("article-dates")).toBeVisible();
       expect(await result.findByTestId("post-content-background")).toBeVisible();
-      expect(await result.findByTestId("post-heading-h1")).toBeVisible();
+      expect(await result.findByTestId("post-title")).toBeVisible();
     });
   });
 });

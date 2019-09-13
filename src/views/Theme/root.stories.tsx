@@ -1,66 +1,76 @@
 import React from "react";
 
 import { action } from "@storybook/addon-actions";
+import { object, string } from "yup";
 import { storiesOf } from "@storybook/react";
 import faker from "faker";
 import lodash from "lodash";
 
 import { NavBar } from "../NavBar";
+import { PostContent } from "../PostContent";
 import { Theme } from "./";
+import { TThemeName } from "./themes";
+import { withPostPreview } from "../SubmitPost";
 import Container from "../Posts/Container";
 import Markdown from "../PostContent/Markdown";
 import Post from "../Posts/Post";
 
+const SubmitPost = withPostPreview(PostContent);
+
+const dummyProps = {
+  onSubmit: () => null,
+  validationSchema: object().shape({
+    title: string()
+      .min(3, "Must be 3 or more chars")
+      .max(5, "Must be 5 or less chars")
+      .required("Required"),
+    body: string()
+      .min(4, "Must be 4 or more chars")
+      .max(6, "Must be 6 or less chars")
+      .required("Required"),
+    tldr: string()
+      .min(5, "Must be 5 or more chars")
+      .max(7, "Must be 7 or less chars")
+      .required("Required")
+  })
+};
+
 // >>> STORIES >>>
-storiesOf("Theme/Light", module)
-  .add("Markdown", () => (
-    <Theme theme="light">
-      <Markdown>{exampleMarkdown}</Markdown>
-    </Theme>
-  ))
-  .add("Posts", () => (
-    <Theme theme="light">
-      <TempPosts />
-    </Theme>
-  ))
-  .add("NavBar", () => (
-    <Theme theme="light">
-      <NavBar
-        items={[
-          { path: "#", text: "one" },
-          { path: "#", text: "two" },
-          { path: "#", text: "three" }
-        ]}
-        routeHandler={action("Tab clicked")}
-      />
-    </Theme>
-  ));
-
-storiesOf("Theme/Dark", module)
-  .add("Markdown", () => (
-    <Theme theme="dark">
-      <Markdown>{exampleMarkdown}</Markdown>
-    </Theme>
-  ))
-  .add("Posts", () => (
-    <Theme theme="dark">
-      <TempPosts />
-    </Theme>
-  ))
-  .add("NavBar", () => (
-    <Theme theme="dark">
-      <NavBar
-        items={[
-          { path: "#", text: "one" },
-          { path: "#", text: "two" },
-          { path: "#", text: "three" }
-        ]}
-        routeHandler={action("Tab clicked")}
-      />
-    </Theme>
-  ));
-
-storiesOf("Theme", module);
+const themes: TThemeName[] = ["light", "dark"];
+themes.forEach(theme => {
+  storiesOf(`Theme/${theme}`, module)
+    .add("Markdown", () => (
+      <Theme theme={theme}>
+        <Markdown>{exampleMarkdown}</Markdown>
+      </Theme>
+    ))
+    .add("Posts", () => (
+      <Theme theme={theme}>
+        <TempPosts />
+      </Theme>
+    ))
+    .add("NavBar", () => (
+      <Theme theme={theme}>
+        <NavBar
+          items={[
+            { path: "#", text: "one" },
+            { path: "#", text: "two" },
+            { path: "#", text: "three" }
+          ]}
+          routeHandler={action("Tab clicked")}
+        />
+      </Theme>
+    ))
+    .add("SubmitPost", () => {
+      return (
+        <Theme theme={theme}>
+          <div style={{ padding: "20px" }}>
+            <SubmitPost {...dummyProps} />
+          </div>
+        </Theme>
+      );
+    });
+});
 
 // >>> TEMP COMPONENTS >>>
 const TempPosts = () => (

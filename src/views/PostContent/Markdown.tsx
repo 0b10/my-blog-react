@@ -158,7 +158,7 @@ function TableRenderer(props: IRendererProps) {
 function CodeRenderer(props: ICodeRendererProps) {
   const codeMountClasses = useCodeMountStyles();
   const theme = useTheme();
-  return (
+  return props.value ? ( // value can be undefined, when activated with ``` and no value.
     <Paper classes={codeMountClasses} elevation={elevationDepth}>
       <React.Fragment>
         <CodeIcon />
@@ -177,7 +177,7 @@ function CodeRenderer(props: ICodeRendererProps) {
         </SyntaxHiglighter>
       </React.Fragment>
     </Paper>
-  );
+  ) : null;
 }
 
 function InlineCodeRenderer(props: IRendererProps) {

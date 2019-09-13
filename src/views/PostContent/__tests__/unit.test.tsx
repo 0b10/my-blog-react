@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
 import Background from "../Background";
-import Heading from "../Heading";
+import Title from "../Title";
 import Markdown from "../Markdown";
 
 describe("Unit Tests: Markdown", () => {
@@ -101,11 +101,11 @@ describe("Unit Test: Background", () => {
   });
 });
 
-describe("Unit Test: Heading", () => {
-  it("should render and be visible [#unit,#Heading]", async () => {
-    const result = render(<Heading>fake heading</Heading>);
+describe("Unit Test: Title", () => {
+  it("should render and be visible [#unit,#Title]", async () => {
+    const result = render(<Title>fake title</Title>);
 
-    expect(await result.findByTestId("post-heading-h1")).toBeVisible();
+    expect(await result.findByTestId("post-title")).toBeVisible();
   });
 });
 

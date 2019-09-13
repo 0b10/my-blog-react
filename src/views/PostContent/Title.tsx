@@ -1,22 +1,22 @@
 import React from "react";
 import { Typography, makeStyles } from "@material-ui/core";
 
-export default (props: IHeadingProps) => {
-  const headingClasses = withHeadingStyles();
+export default (props: ITitleProps) => {
+  const titleClasses = withTitleStyles();
   return (
-    <Typography classes={headingClasses} variant="h1" data-testid="post-heading-h1">
+    <Typography classes={titleClasses} variant="h1" data-testid="post-title">
       {props.children}
     </Typography>
   );
 };
 
-const withHeadingStyles = makeStyles(theme => ({
+const withTitleStyles = makeStyles(theme => ({
   root: {
     textAlign: "center",
     marginBottom: theme.spacing(4)
   }
 }));
 
-interface IHeadingProps {
+interface ITitleProps {
   children: string;
 }

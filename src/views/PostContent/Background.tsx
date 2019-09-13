@@ -12,10 +12,11 @@ export default (props: IPostContentBackgroundProps) => {
 
 const useBackgroundStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(6)
+    padding: theme.spacing(6),
+    height: "100%"
   }
 }));
 
 export interface IPostContentBackgroundProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | Array<JSX.Element | null> | null;
 }
