@@ -26,9 +26,9 @@ const NavBarAdapter = ({ history }: RouteComponentProps<any, StaticContext, any>
 // >>> COMPONENTS >>>
 export const AppRouter: React.FC = () => (
   <React.Fragment>
-    <Route path="/" render={NavBarAdapter} />
-    <Route path="/" exact render={PostsQueryAdapter} />
-    <Route path="/post/:id" exact render={PostContentQueryAdapter} />
+    <Route path="/" component={NavBarAdapter} />
+    <Route path="/" exact component={PostsQueryAdapter} />
+    <Route path="/post/:id" exact component={PostContentQueryAdapter} />
   </React.Fragment>
 );
 
