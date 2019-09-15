@@ -10,7 +10,7 @@ export const PostContent = ({
   createdAt,
   modifiedAt,
   title,
-  tldr
+  tldr,
 }: IPostContentProps) => (
   <Background data-testid="post-content-background">
     {createdAt && modifiedAt ? <Dates createdAt={createdAt} modifiedAt={modifiedAt} /> : null}

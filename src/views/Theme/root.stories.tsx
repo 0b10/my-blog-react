@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 
 import { action } from "@storybook/addon-actions";
@@ -15,7 +16,23 @@ import Container from "../Posts/Container";
 import Markdown from "../PostContent/Markdown";
 import Post from "../Posts/Post";
 
+// >>> HELPERS >>>
 const SubmitPost = withPostPreview(PostContent);
+
+const randomStr = () =>
+  Math.random()
+    .toString(36)
+    .substring(2);
+
+const fakePostProps = Object.freeze({
+  imgAltText: "Example image alt text",
+  imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
+  loading: false,
+  routeHandler: () => null,
+  title: "an example title",
+  tldr:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+});
 
 const dummyProps = {
   onSubmit: () => null,
@@ -31,81 +48,9 @@ const dummyProps = {
     tldr: string()
       .min(5, "Must be 5 or more chars")
       .max(7, "Must be 7 or less chars")
-      .required("Required")
-  })
+      .required("Required"),
+  }),
 };
-
-// >>> STORIES >>>
-const themes: TThemeName[] = ["light", "dark"];
-themes.forEach(theme => {
-  storiesOf(`Theme/${theme}`, module)
-    .add("Markdown", () => (
-      <Theme theme={theme}>
-        <Markdown>{exampleMarkdown}</Markdown>
-      </Theme>
-    ))
-    .add("Posts", () => (
-      <Theme theme={theme}>
-        <TempPosts />
-      </Theme>
-    ))
-    .add("NavBar", () => (
-      <Theme theme={theme}>
-        <NavBar
-          items={[
-            { path: "#", text: "one" },
-            { path: "#", text: "two" },
-            { path: "#", text: "three" }
-          ]}
-          routeHandler={action("Tab clicked")}
-        />
-      </Theme>
-    ))
-    .add("SubmitPost", () => {
-      return (
-        <Theme theme={theme}>
-          <div style={{ padding: "20px" }}>
-            <SubmitPost {...dummyProps} />
-          </div>
-        </Theme>
-      );
-    });
-});
-
-// >>> TEMP COMPONENTS >>>
-const TempPosts = () => (
-  <Container>
-    <React.Fragment>
-      {lodash.range(1, 20).map((_, index) => (
-        <Post
-          {...fakePostProps}
-          id={`${index + 1}`}
-          key={index}
-          imgUrl={`https://fakeql.com/placeholder/320/320/${randomStr()}.svg`}
-          imgAltText={faker.lorem.words(lodash.random(2, 5))}
-          title={faker.lorem.words(lodash.random(3, 20))}
-          tldr={faker.lorem.words(lodash.random(20, 100))}
-        />
-      ))}
-    </React.Fragment>
-  </Container>
-);
-
-// >>> HELPERS >>>
-const randomStr = () =>
-  Math.random()
-    .toString(36)
-    .substring(2);
-
-const fakePostProps = Object.freeze({
-  imgAltText: "Example image alt text",
-  imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
-  loading: false,
-  routeHandler: () => null,
-  title: "an example title",
-  tldr:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-});
 
 const exampleMarkdown = `
 #### Headers
@@ -225,3 +170,59 @@ foo();
 </div>
 \`\`\`
 `;
+
+// >>> STORIES >>>
+const themes: TThemeName[] = ["light", "dark"];
+themes.forEach((theme) => {
+  storiesOf(`Theme/${theme}`, module)
+    .add("Markdown", () => (
+      <Theme theme={theme}>
+        <Markdown>{exampleMarkdown}</Markdown>
+      </Theme>
+    ))
+    .add("Posts", () => (
+      <Theme theme={theme}>
+        <TempPosts />
+      </Theme>
+    ))
+    .add("NavBar", () => (
+      <Theme theme={theme}>
+        <NavBar
+          items={[
+            { path: "#", text: "one" },
+            { path: "#", text: "two" },
+            { path: "#", text: "three" },
+          ]}
+          routeHandler={action("Tab clicked")}
+        />
+      </Theme>
+    ))
+    .add("SubmitPost", () => {
+      return (
+        <Theme theme={theme}>
+          <div style={{ padding: "20px" }}>
+            <SubmitPost {...dummyProps} />
+          </div>
+        </Theme>
+      );
+    });
+});
+
+// >>> TEMP COMPONENTS >>>
+const TempPosts = () => (
+  <Container>
+    <React.Fragment>
+      {lodash.range(1, 20).map((_, index) => (
+        <Post
+          {...fakePostProps}
+          id={`${index + 1}`}
+          key={index}
+          imgUrl={`https://fakeql.com/placeholder/320/320/${randomStr()}.svg`}
+          imgAltText={faker.lorem.words(lodash.random(2, 5))}
+          title={faker.lorem.words(lodash.random(3, 20))}
+          tldr={faker.lorem.words(lodash.random(20, 100))}
+        />
+      ))}
+    </React.Fragment>
+  </Container>
+);

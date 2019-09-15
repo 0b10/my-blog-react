@@ -1,6 +1,13 @@
 import React from "react";
 import { Typography, makeStyles } from "@material-ui/core";
 
+const withTitleStyles = makeStyles(theme => ({
+  root: {
+    textAlign: "center",
+    marginBottom: theme.spacing(4)
+  }
+}));
+
 export default (props: ITitleProps) => {
   const titleClasses = withTitleStyles();
   return (
@@ -9,13 +16,6 @@ export default (props: ITitleProps) => {
     </Typography>
   );
 };
-
-const withTitleStyles = makeStyles(theme => ({
-  root: {
-    textAlign: "center",
-    marginBottom: theme.spacing(4)
-  }
-}));
 
 interface ITitleProps {
   children: string;

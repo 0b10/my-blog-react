@@ -11,9 +11,73 @@ import { IPostContentQueryVariables } from "../../../gql-strings";
 import { mockApolloClient } from "../helpers";
 import { IPostContentComponentProps, withPostContentQuery } from "../../withPostContentQuery";
 
+// >>> FAKES >>>
+const FakePostContent = (props: IPostContentComponentProps) => (
+  <div>
+    <div data-testid="fake-modified-at">{props.modifiedAt}</div>
+    <div data-testid="fake-created-at">{props.createdAt}</div>
+    <div data-testid="fake-content">{props.children}</div>
+    <div data-testid="fake-title">{props.title}</div>
+  </div>
+);
+
+const resolvers = {
+  Query: {
+    postContent: (_: any, { id }: IPostContentQueryVariables) => {
+      switch (id) {
+        case "1":
+          return {
+            __typename: "PostContent",
+            content: "fake post content",
+            createdAt: "2000-01-01",
+            id: "1",
+            modifiedAt: "2000-01-01",
+            post: {
+              __typename: "Post",
+              id: "1",
+              imgAltText: "fake image alt text",
+              imgUrl: "fake-image-url",
+              title: "A fake title",
+              tldr: "Fake TLDR data",
+            },
+          };
+        case "2":
+          return {
+            __typename: "PostContent",
+            content: "# fake markdown header",
+            createdAt: "2000-01-01",
+            id: "1",
+            modifiedAt: "2000-01-02",
+            post: {
+              __typename: "Post",
+              id: "1",
+              imgAltText: "fake image alt text",
+              imgUrl: "fake-image-url",
+              title: "A fake title",
+              tldr: "Fake TLDR data",
+            },
+          };
+        default:
+          return null;
+      }
+    },
+  },
+};
+
+// >>> HELPERS >>>
+const renderPostContent = (postId: string) =>
+  render(
+    <ApolloProvider client={mockApolloClient(resolvers)}>
+      <PostContentQuery postId={postId}></PostContentQuery>
+    </ApolloProvider>
+  );
+
+// >>> INIT >>>
+const PostContentQuery = withPostContentQuery(FakePostContent);
+
 // >>> TESTS >>>
-describe("Unit Tests: GraphQL #unit #graphql", () => {
-  describe("PostContentQuery", () => {
+describe("unit tests: GraphQL #unit #graphql", () => {
+  describe("component: PostContentQuery", () => {
     // ~~~ Content ~~~
     describe("content", () => {
       it("should be injected to and received by the PostContentComponent", async () => {
@@ -46,67 +110,3 @@ describe("Unit Tests: GraphQL #unit #graphql", () => {
     });
   });
 });
-
-// >>> HELPERS >>>
-const renderPostContent = (postId: string) =>
-  render(
-    <ApolloProvider client={mockApolloClient(resolvers)}>
-      <PostContentQuery postId={postId}></PostContentQuery>
-    </ApolloProvider>
-  );
-
-// >>> FAKES >>>
-const FakePostContent = (props: IPostContentComponentProps) => (
-  <div>
-    <div data-testid="fake-modified-at">{props.modifiedAt}</div>
-    <div data-testid="fake-created-at">{props.createdAt}</div>
-    <div data-testid="fake-content">{props.children}</div>
-    <div data-testid="fake-title">{props.title}</div>
-  </div>
-);
-
-const resolvers = {
-  Query: {
-    postContent: (_: any, { id }: IPostContentQueryVariables) => {
-      switch (id) {
-        case "1":
-          return {
-            __typename: "PostContent",
-            content: "fake post content",
-            createdAt: "2000-01-01",
-            id: "1",
-            modifiedAt: "2000-01-01",
-            post: {
-              __typename: "Post",
-              id: "1",
-              imgAltText: "fake image alt text",
-              imgUrl: "fake-image-url",
-              title: "A fake title",
-              tldr: "Fake TLDR data"
-            }
-          };
-        case "2":
-          return {
-            __typename: "PostContent",
-            content: "# fake markdown header",
-            createdAt: "2000-01-01",
-            id: "1",
-            modifiedAt: "2000-01-02",
-            post: {
-              __typename: "Post",
-              id: "1",
-              imgAltText: "fake image alt text",
-              imgUrl: "fake-image-url",
-              title: "A fake title",
-              tldr: "Fake TLDR data"
-            }
-          };
-        default:
-          return null;
-      }
-    }
-  }
-};
-
-// >>> INIT >>>
-const PostContentQuery = withPostContentQuery(FakePostContent);

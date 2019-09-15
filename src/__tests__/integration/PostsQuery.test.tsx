@@ -2,12 +2,12 @@ import React from "react";
 
 import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { render, fireEvent } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 
-import { Posts } from "../../views";
-import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
-import { withPostsQuery } from "../../graphql";
 import { IPostData } from "../../graphql/components/withPostsQuery";
+import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
+import { Posts } from "../../views";
+import { withPostsQuery } from "../../graphql";
 
 // >>> FIXTURES >>>
 const resolvers = {
@@ -19,7 +19,7 @@ const resolvers = {
         imgAltText: "fake image alt text 1",
         imgUrl: "fake-image-url-1",
         title: "A fake title 1",
-        tldr: "Fake TLDR data 1"
+        tldr: "Fake TLDR data 1",
       },
       {
         __typename: "Post",
@@ -27,7 +27,7 @@ const resolvers = {
         imgAltText: "fake image alt text 2",
         imgUrl: "fake-image-url-2",
         title: "A fake title 2",
-        tldr: "Fake TLDR data 2"
+        tldr: "Fake TLDR data 2",
       },
       {
         __typename: "Post",
@@ -35,16 +35,27 @@ const resolvers = {
         imgAltText: "fake image alt text 3",
         imgUrl: "fake-image-url-3",
         title: "A fake title 3",
-        tldr: "Fake TLDR data 3"
-      }
-    ]
-  }
+        tldr: "Fake TLDR data 3",
+      },
+    ],
+  },
 };
 
 const numPosts = resolvers.Query.posts().length;
 
+// >>> HELPERS >>>
+const renderPostsQuery = (routeHandler = () => null) =>
+  render(
+    <ApolloProvider client={mockApolloClient(resolvers)}>
+      <PostsQuery routeHandler={routeHandler} />
+    </ApolloProvider>
+  );
+
+// >>> INIT >>>
+const PostsQuery = withPostsQuery(Posts);
+
 // >>> TESTS >>>
-describe("Integration Tests: PostsQuery", () => {
+describe("integration tests: PostsQuery", () => {
   it(`should render ${numPosts} posts`, async () => {
     const result = renderPostsQuery();
     expect(await result.findAllByTestId("post")).toHaveLength(numPosts);
@@ -85,7 +96,7 @@ describe("Integration Tests: PostsQuery", () => {
         fireEvent.click(post);
         fireEvent.click(await result.getByText(`Fake TLDR data ${id}`));
 
-        expect(routeHandlerSpy.mock.calls.length).toBe(1);
+        expect(routeHandlerSpy.mock.calls).toHaveLength(1);
         expect(routeHandlerSpy.mock.calls[0][0]).toBe(id);
       });
 
@@ -99,14 +110,3 @@ describe("Integration Tests: PostsQuery", () => {
     });
   });
 });
-
-// >>> HELPERS >>>
-const renderPostsQuery = (routeHandler = () => null) =>
-  render(
-    <ApolloProvider client={mockApolloClient(resolvers)}>
-      <PostsQuery routeHandler={routeHandler} />
-    </ApolloProvider>
-  );
-
-// >>> INIT >>>
-const PostsQuery = withPostsQuery(Posts);

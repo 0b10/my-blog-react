@@ -7,11 +7,11 @@ import {
   renderSubmitPost,
   repeatChars,
   testids,
-  validationValues
+  validationValues,
 } from "../helpers";
 import { ISubmitPostInputFields } from "views/SubmitPost/Form";
 
-describe("Integration Tests: SubmitPost", () => {
+describe("integration tests: SubmitPost", () => {
   describe("validation error message", () => {
     const { body: bodyTestid, title: titleTestid, tldr: tldrTestid } = testids.validation.message;
 
@@ -31,33 +31,33 @@ describe("Integration Tests: SubmitPost", () => {
       body: {
         field: "body",
         inputValues: {
-          min: repeatChars("body", "min", -1)
+          min: repeatChars("body", "min", -1),
         },
         label: labels.reBody,
         message: validationValues.body.min.message,
         requiredMessage: validationValues.body.required.message,
-        testid: bodyTestid
+        testid: bodyTestid,
       },
       title: {
         field: "title",
         inputValues: {
-          min: repeatChars("title", "min", -1)
+          min: repeatChars("title", "min", -1),
         },
         label: labels.reTitle,
         message: validationValues.title.min.message,
         requiredMessage: validationValues.title.required.message,
-        testid: titleTestid
+        testid: titleTestid,
       },
       tldr: {
         field: "tldr",
         inputValues: {
-          min: repeatChars("tldr", "min", -1)
+          min: repeatChars("tldr", "min", -1),
         },
         label: labels.reTldr,
         message: validationValues.tldr.min.message,
         requiredMessage: validationValues.tldr.required.message,
-        testid: tldrTestid
-      }
+        testid: tldrTestid,
+      },
     });
 
     Object.values(testCases).forEach(

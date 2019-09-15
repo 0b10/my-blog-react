@@ -5,7 +5,7 @@ import { fireEvent } from "@testing-library/react";
 import { labels, renderSubmitPost, testids } from "../helpers";
 import { ISubmitPostInputFields } from "../../Form";
 
-describe("Integration Tests: SubmitPost", () => {
+describe("integration tests: SubmitPost", () => {
   describe("input fields", () => {
     describe("onChange [#event]", () => {
       const { body: bodyTestid, title: titleTestid, tldr: tldrTestid } = testids.preview;
@@ -22,20 +22,20 @@ describe("Integration Tests: SubmitPost", () => {
           field: "title",
           previewTestid: titleTestid,
           reLabel: labels.reTitle,
-          value: "test title"
+          value: "test title",
         },
         tldr: {
           field: "tldr",
           previewTestid: tldrTestid,
           reLabel: labels.reTldr,
-          value: "test tldr"
+          value: "test tldr",
         },
         body: {
           field: "body",
           previewTestid: bodyTestid,
           reLabel: labels.reBody,
-          value: "test body"
-        }
+          value: "test body",
+        },
       });
 
       Object.values(testCases).forEach(({ reLabel, value, previewTestid, field }: ITestData) => {

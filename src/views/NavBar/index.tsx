@@ -2,6 +2,21 @@ import React, { useState } from "react";
 
 import { AppBar, makeStyles, Tab, Tabs } from "@material-ui/core";
 
+// >>> STYLES >>>
+const useTabsStyles = makeStyles({
+  root: {
+    height: "60px",
+    paddingTop: "8px",
+  },
+});
+
+const useTabStyles = makeStyles({
+  root: {
+    height: "100%",
+  },
+});
+
+// >>> COMPONENTS >>>
 export const NavBar = ({ items, routeHandler }: INavBarProps) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const tabsClasses = useTabsStyles();
@@ -26,19 +41,7 @@ export const NavBar = ({ items, routeHandler }: INavBarProps) => {
   );
 };
 
-const useTabsStyles = makeStyles({
-  root: {
-    height: "60px",
-    paddingTop: "8px"
-  }
-});
-
-const useTabStyles = makeStyles({
-  root: {
-    height: "100%"
-  }
-});
-
+// >>> INTERFACES >>>
 export interface INavBarProps {
   items: INavItems[];
   routeHandler: TRouteHandler;

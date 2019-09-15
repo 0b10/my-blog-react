@@ -1,5 +1,6 @@
 /**
  * Just some props to fill gaps. Don't use for testing against,
+ *
  * @example <Post {...dummyProps} testThisProp="foo" />
  */
 export const dummyProps = Object.freeze({
@@ -9,5 +10,5 @@ export const dummyProps = Object.freeze({
   loading: false,
   routeHandler: () => null,
   title: "Dummy Title",
-  tldr: "dummy tldr"
+  tldr: "dummy tldr",
 });

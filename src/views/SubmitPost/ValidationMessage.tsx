@@ -5,6 +5,13 @@ import { ErrorMessage } from "formik";
 
 import { ISubmitPostInputFields } from "./Form";
 
+const useTypographyStyles = makeStyles({
+  root: {
+    fontWeight: "bold",
+    boxSizing: "border-box",
+  },
+});
+
 export const ValidationMessage = ({ name, testid }: IValidationMessageProps) => {
   const typographyClasses = useTypographyStyles();
   return (
@@ -21,14 +28,6 @@ export const ValidationMessage = ({ name, testid }: IValidationMessageProps) => 
     </Box>
   );
 };
-
-// >>> STYLES >>>
-const useTypographyStyles = makeStyles(({ spacing }) => ({
-  root: {
-    fontWeight: "bold",
-    boxSizing: "border-box"
-  }
-}));
 
 interface IValidationMessageProps {
   name: keyof ISubmitPostInputFields<never>;

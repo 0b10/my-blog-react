@@ -3,15 +3,15 @@ import "@testing-library/jest-dom/extend-expect";
 import { renderNavBar } from "./helpers";
 import { fireEvent } from "@testing-library/dom";
 
-describe("Unit Tests: NavBar", () => {
+describe("unit tests: NavBar", () => {
   // ~~~ render ~~~
   it("should render three items, when given three [#render]", async () => {
     const result = renderNavBar({
       items: [
         { path: "#", text: "test item" },
         { path: "#", text: "test item" },
-        { path: "#", text: "test item" }
-      ]
+        { path: "#", text: "test item" },
+      ],
     });
 
     expect(await result.findAllByText("test item")).toHaveLength(3);
@@ -24,7 +24,7 @@ describe("Unit Tests: NavBar", () => {
       const items = [
         { path: "/path0", text: "test item 0" },
         { path: "/path1", text: "test item 1" },
-        { path: "/path2", text: "test item 2" }
+        { path: "/path2", text: "test item 2" },
       ];
 
       const text = (index: number) => items[index].text;
@@ -33,7 +33,7 @@ describe("Unit Tests: NavBar", () => {
 
       const result = renderNavBar({
         items,
-        routeHandler: routeHandlerSpy
+        routeHandler: routeHandlerSpy,
       });
       const itemElements = await result.findAllByText(/^test item/);
 
@@ -50,14 +50,14 @@ describe("Unit Tests: NavBar", () => {
       const items = [
         { path: "/path0", text: "test item 0" },
         { path: "/path1", text: "test item 1" },
-        { path: "/path2", text: "test item 2" }
+        { path: "/path2", text: "test item 2" },
       ];
 
       const calls = (index: number) => routeHandlerSpy.mock.calls[index].length;
 
       const result = renderNavBar({
         items,
-        routeHandler: routeHandlerSpy
+        routeHandler: routeHandlerSpy,
       });
       const itemElements = await result.findAllByText(/^test item/);
 

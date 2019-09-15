@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
@@ -6,23 +7,6 @@ import faker from "faker";
 import Background from "./Background";
 import Dates from "./Dates";
 import Markdown from "./Markdown";
-
-// >>> STORIES >>>
-storiesOf("PostContent", module).add("Markdown", () => <Markdown>{exampleMarkdown}</Markdown>);
-
-storiesOf("PostContent/Date", module)
-  .add("'Created at' only", () => (
-    <Background>
-      <Dates createdAt="2019-01-01" modifiedAt="2019-01-01"></Dates>
-      <Markdown>{"# Markdown Title"}</Markdown>
-    </Background>
-  ))
-  .add("Both 'Created at' and 'Modified at'", () => (
-    <Background>
-      <Dates createdAt="2019-01-01" modifiedAt="2019-01-02"></Dates>
-      <Markdown>{"# Markdown Title"}</Markdown>
-    </Background>
-  ));
 
 // >>> HELPERS >>>
 const exampleMarkdown = `
@@ -145,3 +129,20 @@ foo();
 
 
 `;
+
+// >>> STORIES >>>
+storiesOf("PostContent", module).add("Markdown", () => <Markdown>{exampleMarkdown}</Markdown>);
+
+storiesOf("PostContent/Date", module)
+  .add("'Created at' only", () => (
+    <Background>
+      <Dates createdAt="2019-01-01" modifiedAt="2019-01-01"></Dates>
+      <Markdown>{"# Markdown Title"}</Markdown>
+    </Background>
+  ))
+  .add("Both 'Created at' and 'Modified at'", () => (
+    <Background>
+      <Dates createdAt="2019-01-01" modifiedAt="2019-01-02"></Dates>
+      <Markdown>{"# Markdown Title"}</Markdown>
+    </Background>
+  ));

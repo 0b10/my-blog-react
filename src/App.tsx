@@ -12,7 +12,7 @@ const PostsQuery = withPostsQuery(Posts);
 
 // >>> RENDERER WRAPPERS >>>
 const PostsQueryRenderer = ({ history }: RouteComponentProps<any, StaticContext, any>) => (
-  <PostsQuery routeHandler={id => history.push(`/post/${id}`)} />
+  <PostsQuery routeHandler={(id) => history.push(`/post/${id}`)} />
 );
 
 const PostContentQueryRenderer = ({ match }: RouteComponentProps<any, StaticContext, any>) => (

@@ -1,6 +1,13 @@
 import React from "react";
 import { makeStyles, Paper } from "@material-ui/core";
 
+const useBackgroundStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.spacing(6),
+    height: "100%",
+  },
+}));
+
 export default (props: IPostContentBackgroundProps) => {
   const backgroundClasses = useBackgroundStyles();
   return (
@@ -9,13 +16,6 @@ export default (props: IPostContentBackgroundProps) => {
     </Paper>
   );
 };
-
-const useBackgroundStyles = makeStyles(theme => ({
-  root: {
-    padding: theme.spacing(6),
-    height: "100%"
-  }
-}));
 
 export interface IPostContentBackgroundProps {
   children: JSX.Element | Array<JSX.Element | null> | null;

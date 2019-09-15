@@ -1,0 +1,74 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/all",
+    "plugin:jest/style",
+    "plugin:jsdoc/recommended",
+    "plugin:promise/recommended",
+    "plugin:react/recommended",
+    "plugin:security/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "graphql",
+    "jest",
+    "jsdoc",
+    "json-format",
+    "optimize-regex",
+    "promise",
+    "react-hooks",
+    "react",
+    "security"
+  ],
+  "overrides": [
+    {
+      "files": ["**/__tests__/*", "**/*.test.*"],
+      "rules": {
+        "security/detect-object-injection": "off" // Not a concern for testing, no user input
+      }
+    }
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "jest/no-disabled-tests": "warn",
+    "jest/prefer-expect-assertions": "off",
+    "jsdoc/no-undefined-types": "off", // Annoying warnings
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react/display-name": "off",
+    "graphql/capitalized-type-name": "error",
+    "graphql/named-operations": "error", // enforced query names - for debugging
+    "graphql/no-deprecated-fields": "warn",
+    "graphql/required-fields": [
+      "error",
+      {
+        "requiredFields": ["__typename", "id"] // __typename doesn't seem to be enfoced
+      }
+    ],
+    "graphql/template-strings": [
+      "error",
+      {
+        "env": "apollo",
+        "validators": "all"
+      }
+    ],
+    "optimize-regex/optimize-regex": "warn",
+    "security/detect-object-injection": "error"
+  },
+  "settings": {
+    "json/sort-package-json": "standard",
+    "json/json-with-comments-files": ["**/tsconfig.json", ".vscode/**", "node_modules/**"],
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}

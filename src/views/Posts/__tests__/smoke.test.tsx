@@ -1,31 +1,21 @@
 import React from "react";
 
 import "@testing-library/jest-dom/extend-expect";
-import { act, render, RenderResult } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { dummyProps } from "./helpers";
-import Post from "../Post";
 import Container from "../Container";
+import Post from "../Post";
 
-describe("Smoke Tests: Post", () => {
+describe("smoke tests: Post", () => {
   it("should render", () => {
-    let result: RenderResult;
-
-    act(() => {
-      result = render(<Post {...dummyProps} />);
-    });
-
-    expect(result!.getByTestId("post")).toBeVisible();
+    const result = render(<Post {...dummyProps} />);
+    expect(result.getByTestId("post")).toBeVisible();
   });
 
   it("should export a ready-to-use, factory created Post", () => {
-    let result: RenderResult;
-
-    act(() => {
-      result = render(<Post {...dummyProps} />);
-    });
-
-    expect(result!.getByTestId("post")).toBeVisible();
+    const result = render(<Post {...dummyProps} />);
+    expect(result.getByTestId("post")).toBeVisible();
   });
 
   it("exported pre-built Post(s) should not be the same object", () => {
@@ -35,16 +25,12 @@ describe("Smoke Tests: Post", () => {
 
 describe("#smoke tests: Container", () => {
   it("should render", () => {
-    let result: RenderResult;
+    const result = render(
+      <Container>
+        <Post {...dummyProps} />
+      </Container>
+    );
 
-    act(() => {
-      result = render(
-        <Container>
-          <Post {...dummyProps} />
-        </Container>
-      );
-    });
-
-    expect(result!.getByTestId("post")).toBeVisible();
+    expect(result.getByTestId("post")).toBeVisible();
   });
 });

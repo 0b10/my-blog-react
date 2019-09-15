@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 
 import { action } from "@storybook/addon-actions";
@@ -8,6 +9,24 @@ import lodash from "lodash";
 import Post from "./Post";
 import Container from "./Container";
 
+// >>> HELPERS >>>
+const randomStr = () =>
+  Math.random()
+    .toString(36)
+    .substring(2);
+
+const fakePostProps = Object.freeze({
+  id: "1",
+  imgAltText: "Example image alt text",
+  imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
+  loading: false,
+  routeHandler: () => null,
+  title: "an example title",
+  tldr:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+});
+
+// >>> STORIES >>>
 storiesOf("Post", module)
   .add("default", () => (
     <Container>
@@ -54,20 +73,3 @@ storiesOf("Container", module).add("Multiple Posts", () => (
     </React.Fragment>
   </Container>
 ));
-
-// >>> HELPERS >>>
-const randomStr = () =>
-  Math.random()
-    .toString(36)
-    .substring(2);
-
-const fakePostProps = Object.freeze({
-  id: "1",
-  imgAltText: "Example image alt text",
-  imgUrl: "https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg",
-  loading: false,
-  routeHandler: () => null,
-  title: "an example title",
-  tldr:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-});

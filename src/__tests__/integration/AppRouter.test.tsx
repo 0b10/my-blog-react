@@ -9,7 +9,7 @@ import { AppRouter } from "App";
 import {
   IPostContentQueryResults,
   IPostContentQueryVariables,
-  IPostQueryResults
+  IPostQueryResults,
 } from "../../graphql/gql-strings";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 
@@ -23,7 +23,7 @@ const postsData: IPostQueryResults[] = [
     imgAltText: "fake image alt text 1",
     imgUrl: "fake-image-url-1",
     title: "A fake title 1",
-    tldr: "Fake TLDR data 1"
+    tldr: "Fake TLDR data 1",
   },
   {
     __typename: "Post",
@@ -31,8 +31,8 @@ const postsData: IPostQueryResults[] = [
     imgAltText: "fake image alt text 2",
     imgUrl: "fake-image-url-2",
     title: "A fake title 2",
-    tldr: "Fake TLDR data 2"
-  }
+    tldr: "Fake TLDR data 2",
+  },
 ];
 
 const resolvers = {
@@ -46,7 +46,7 @@ const resolvers = {
             createdAt: "2000-01-01",
             id: "1",
             modifiedAt: "2000-01-01",
-            post: postsData[0]
+            post: postsData[0],
           };
         case "2":
           return {
@@ -55,14 +55,14 @@ const resolvers = {
             createdAt: "2000-01-01",
             id: "2",
             modifiedAt: "2000-01-02",
-            post: postsData[1]
+            post: postsData[1],
           };
         default:
           throw new Error(`Invalid post id for mock Apollo resolver: ${id}`);
       }
     },
-    posts: () => postsData
-  }
+    posts: () => postsData,
+  },
 };
 
 // >>> HELPERS >>>
@@ -79,11 +79,11 @@ const renderAppRouter = (route: string) =>
   );
 
 // >>> TESTS >>>
-describe("Integration Tests: AppRouter", () => {
+describe("integration tests: AppRouter", () => {
   // Only test for some of the content. More rigorous tests are performed in the other
   //  integration tests.
 
-  describe("PostContentQuery", () => {
+  describe("component: PostContentQuery", () => {
     [post("1"), post("2")].forEach(({ id, content }) => {
       describe(`for /post/${id}`, () => {
         it(`should render the correct content data: "${content}"`, async () => {
@@ -100,7 +100,7 @@ describe("Integration Tests: AppRouter", () => {
     });
   });
 
-  describe("PostsQuery", () => {
+  describe("component: PostsQuery", () => {
     posts().forEach(({ id, title }, index) => {
       describe(`for post number ${id}`, () => {
         it(`should render the correct title: "${title}"`, async () => {
@@ -145,28 +145,24 @@ describe("Integration Tests: AppRouter", () => {
     });
   });
 
-  describe("NavBar", () => {
+  describe("component: NavBar", () => {
     const testCases = [
-      { itemText: "home", numElements: posts().length, startAt: "/post/1", testid: "post" }
+      { itemText: "home", numElements: posts().length, startAt: "/post/1", testid: "post" },
     ];
     testCases.forEach(({ itemText, numElements, testid, startAt }) => {
       describe(`when "${itemText}" is clicked`, () => {
         it(`should display ${numElements} x ${testid}`, async () => {
           const result = renderAppRouter(startAt);
-          try {
-            // Start elsewhere
-            const posts = await result.findAllByTestId(testid); // Check it's actually elsewhere
+          expect(() => {
+            // check first that the test starts from another route
+            result.getByTestId(testid);
+          }).toThrow(); // eslint-disable-line jest/require-tothrow-message
 
-            expect(`to not find any elements with data-testid=${testid}`).toBe(
-              `found ${posts.length} elements`
-            );
-          } catch {
-            // Click the item
-            fireEvent.click(await result.findByText(itemText));
-            const posts = await result.findAllByTestId(testid);
+          // Click the item
+          fireEvent.click(await result.findByText(itemText));
+          const posts = await result.findAllByTestId(testid);
 
-            expect(posts).toHaveLength(numElements);
-          }
+          expect(posts).toHaveLength(numElements);
         });
       });
     });

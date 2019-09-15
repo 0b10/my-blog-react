@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 
 import _ from "lodash";
@@ -21,7 +22,11 @@ const LineNumbers = () => (
     {_.range(1, 500).map((lineNum: number) => {
       let backgroundColor: string;
       lineNum % 2 === 0 ? (backgroundColor = "#DDD") : (backgroundColor = "white");
-      return <div style={{ backgroundColor }}>{lineNum}</div>;
+      return (
+        <div style={{ backgroundColor }} key={lineNum}>
+          {lineNum}
+        </div>
+      );
     })}
   </div>
 );

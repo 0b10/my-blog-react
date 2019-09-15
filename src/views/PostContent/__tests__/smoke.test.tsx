@@ -9,8 +9,8 @@ import Background from "../Background";
 import Dates from "../Dates";
 import Markdown from "../Markdown";
 
-describe("Smoke Tests: PostContent", () => {
-  describe("Markdown", () => {
+describe("smoke tests: PostContent", () => {
+  describe("component: Markdown", () => {
     it("should render and be visible [#smoke,#Markdown]", async () => {
       const { findByText } = render(<Markdown>Test text</Markdown>);
 
@@ -18,7 +18,7 @@ describe("Smoke Tests: PostContent", () => {
     });
   });
 
-  describe("Dates", () => {
+  describe("component: Dates", () => {
     it("should render and be visible [#smoke,#Dates]", async () => {
       const result = render(<Dates {...dummyDatesProps}>Test text</Dates>);
 
@@ -26,7 +26,7 @@ describe("Smoke Tests: PostContent", () => {
     });
   });
 
-  describe("Background", () => {
+  describe("component: Background", () => {
     it("should render and be visible [#smoke,#Background]", async () => {
       const result = render(
         <Background>

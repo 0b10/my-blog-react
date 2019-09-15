@@ -5,7 +5,7 @@ import { fireEvent, within } from "@testing-library/react";
 import { labels, renderSubmitPost, testids } from "../helpers";
 import { ISubmitPostInputFields } from "../../Form";
 
-describe("Integration Tests: SubmitPost", () => {
+describe("integration tests: SubmitPost", () => {
   describe("onReset [#event,#form]", () => {
     interface IOnResetTestData {
       readonly input: string;
@@ -17,18 +17,18 @@ describe("Integration Tests: SubmitPost", () => {
       title: {
         input: "test title",
         labelRegex: labels.reTitle,
-        name: "title"
+        name: "title",
       },
       tldr: {
         input: "test tldr",
         labelRegex: labels.reTldr,
-        name: "tldr"
+        name: "tldr",
       },
       body: {
         input: "test body",
         labelRegex: labels.reBody,
-        name: "body"
-      }
+        name: "body",
+      },
     });
 
     Object.values(testCases).forEach(({ name, input, labelRegex }: IOnResetTestData) => {

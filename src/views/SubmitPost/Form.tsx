@@ -6,9 +6,40 @@ import { ObjectSchema, Shape } from "yup";
 
 import { ValidationMessage } from "./ValidationMessage";
 
+// >>> STYLES >>>
+const useInputStyles = makeStyles(({ palette }) => ({
+  // ! Don't touch "! this", I don't fully understand how they work. They give focused input borders
+  // !  a custom colour: https://github.com/mui-org/material-ui/issues/13347#issuecomment-435661221
+  cssLabel: {
+    // ! this
+    "&$cssFocused": {
+      color: palette.secondary.main,
+    },
+  },
+  cssOutlinedInput: {
+    // ! this
+    "&$cssFocused $notchedOutline": {
+      borderColor: palette.secondary.main,
+    },
+  },
+  cssFocused: {}, // ! this - appears to be required
+  notchedOutline: {}, // ! and this - appears to be required
+  inputMultiline: {
+    resize: "vertical",
+  },
+}));
+
+const useTextFieldStyles = makeStyles(({ palette }) => ({
+  root: {
+    backgroundColor: palette.background.paper,
+  },
+}));
+
+// >>> HELPERS >>>
 const getInputValue = (ref: React.RefObject<HTMLInputElement>) =>
   ref && ref.current && ref.current.value ? ref.current.value : "";
 
+// >>> COMPONENTS >>>
 export const Form = React.memo(
   ({
     onBodyChange,
@@ -16,7 +47,7 @@ export const Form = React.memo(
     onSubmit,
     onTitleChange,
     onTldrChange,
-    validationSchema
+    validationSchema,
   }: IFormProps) => {
     const bodyRef = useRef<HTMLInputElement>(null);
     const titleRef = useRef<HTMLInputElement>(null);
@@ -44,7 +75,7 @@ export const Form = React.memo(
         initialValues={{ body: "", title: "", tldr: "" }}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
-        render={props => (
+        render={(props) => (
           <div data-testid="submit-post-form">
             <form
               onSubmit={props.handleSubmit}
@@ -62,7 +93,7 @@ export const Form = React.memo(
                     label="Title"
                     name="title"
                     onBlur={props.handleBlur}
-                    onChange={e => {
+                    onChange={(e) => {
                       props.handleChange(e);
                       handleChange("title");
                     }}
@@ -79,7 +110,7 @@ export const Form = React.memo(
                     name="body"
                     rows={20}
                     onBlur={props.handleBlur}
-                    onChange={e => {
+                    onChange={(e) => {
                       props.handleChange(e);
                       handleChange("body");
                     }}
@@ -96,7 +127,7 @@ export const Form = React.memo(
                     name="tldr"
                     rows={2}
                     onBlur={props.handleBlur}
-                    onChange={e => {
+                    onChange={(e) => {
                       props.handleChange(e);
                       handleChange("tldr");
                     }}
@@ -137,16 +168,16 @@ const InputField = React.memo(
         InputLabelProps={{
           classes: {
             root: inputClasses.cssLabel,
-            focused: inputClasses.cssFocused
-          }
+            focused: inputClasses.cssFocused,
+          },
         }}
         InputProps={{
           classes: {
             root: inputClasses.cssOutlinedInput,
             focused: inputClasses.cssFocused,
             notchedOutline: inputClasses.notchedOutline,
-            inputMultiline: inputClasses.inputMultiline
-          }
+            inputMultiline: inputClasses.inputMultiline,
+          },
         }}
         label={label}
         margin="none"
@@ -161,35 +192,6 @@ const InputField = React.memo(
     );
   }
 );
-
-// >>> STYLES >>>
-const useInputStyles = makeStyles(({ palette }) => ({
-  // ! Don't touch "! this", I don't fully understand how they work. They give focused input borders
-  // !  a custom colour: https://github.com/mui-org/material-ui/issues/13347#issuecomment-435661221
-  cssLabel: {
-    // ! this
-    "&$cssFocused": {
-      color: palette.secondary.main
-    }
-  },
-  cssOutlinedInput: {
-    // ! this
-    "&$cssFocused $notchedOutline": {
-      borderColor: palette.secondary.main
-    }
-  },
-  cssFocused: {}, // ! this - appears to be required
-  notchedOutline: {}, // ! and this - appears to be required
-  inputMultiline: {
-    resize: "vertical"
-  }
-}));
-
-const useTextFieldStyles = makeStyles(({ palette }) => ({
-  root: {
-    backgroundColor: palette.background.paper
-  }
-}));
 
 // >>> INTERFACES >>>
 interface IFormProps {

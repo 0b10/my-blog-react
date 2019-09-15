@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
@@ -19,8 +20,8 @@ const dummyProps = {
     tldr: string()
       .min(5, "Must be 5 or more chars")
       .max(7, "Must be 7 or less chars")
-      .required("Required")
-  })
+      .required("Required"),
+  }),
 };
 
 const FakePreview = ({ children, title, tldr }: IPreviewComponentProps) => (
@@ -60,7 +61,7 @@ const Divider = () => (
     <hr
       style={{
         margin: "40px",
-        border: "1px solid rgba(100, 100, 100, 0.5)"
+        border: "1px solid rgba(100, 100, 100, 0.5)",
       }}
     />
   </div>

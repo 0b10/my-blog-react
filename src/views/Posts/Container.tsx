@@ -1,6 +1,12 @@
 import React from "react";
 import { Grid, makeStyles } from "@material-ui/core";
 
+const useGridStyles = makeStyles(({ spacing }) => ({
+  container: {
+    marginTop: spacing(2),
+  },
+}));
+
 export default (props: IPostsContainerProps) => {
   const gridClasses = useGridStyles();
   return (
@@ -9,12 +15,6 @@ export default (props: IPostsContainerProps) => {
     </Grid>
   );
 };
-
-const useGridStyles = makeStyles(({ spacing }) => ({
-  container: {
-    marginTop: spacing(2)
-  }
-}));
 
 interface IPostsContainerProps {
   children: React.ReactElement | React.ReactElement[];

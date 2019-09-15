@@ -7,7 +7,8 @@ import Background from "../Background";
 import Title from "../Title";
 import Markdown from "../Markdown";
 
-describe("Unit Tests: Markdown", () => {
+// FIXME: move to integration tests, this uses several components
+describe("unit tests: Markdown", () => {
   // *  Test that the expected component/element is rendered. These component/elements are marked with a test id
 
   it("should parse implicit line breaks", async () => {
@@ -36,33 +37,33 @@ describe("Unit Tests: Markdown", () => {
     {
       elementName: "<img />",
       markdown: "![alt](https://example.com/img.jpg)",
-      testid: "markdown-img"
+      testid: "markdown-img",
     },
     {
       elementName: "<thead>",
       markdown: "\none | two\n--- | ---\nfoo | bar",
-      testid: "markdown-thead"
+      testid: "markdown-thead",
     },
     {
       elementName: "<table>",
       markdown: "\none | two\n--- | ---\nfoo | bar",
-      testid: "markdown-table"
+      testid: "markdown-table",
     },
     { elementName: "<code />", markdown: "```javascript\n  code();\n```", testid: "markdown-code" },
     { elementName: "inline code", markdown: "`code()`", testid: "markdown-inline-code" },
     {
       elementName: "<ul>",
       markdown: "\n* one\n* two\n* three\n",
-      testid: "markdown-unordered-list"
+      testid: "markdown-unordered-list",
     },
     {
       elementName: "<ol>",
       markdown: "\n1. one\n2. two\n3. three\n",
-      testid: "markdown-ordered-list"
-    }
+      testid: "markdown-ordered-list",
+    },
     // ~~~ Find Single Elements ~~~
   ].forEach(({ elementName, markdown, testid }: ITestMarkdownComponent) => {
-    describe(elementName, () => {
+    describe(`${elementName}`, () => {
       it(`should be rendered when given: "${markdown} [#Markdown,#unit]"`, async () => {
         const result = render(<Markdown>{markdown}</Markdown>);
 
@@ -75,11 +76,11 @@ describe("Unit Tests: Markdown", () => {
     {
       elementName: "<td>",
       markdown: "\none | two\n--- | ---\nfoo | bar",
-      testid: "markdown-td"
-    }
+      testid: "markdown-td",
+    },
     // ~~~ Find Multiple Elements ~~~
   ].forEach(({ elementName, markdown, testid }: ITestMarkdownComponent) => {
-    describe(elementName, () => {
+    describe(`${elementName}`, () => {
       it(`should be rendered when given: "${markdown} [#Markdown,#unit]"`, async () => {
         const result = render(<Markdown>{markdown}</Markdown>);
 
@@ -89,7 +90,7 @@ describe("Unit Tests: Markdown", () => {
   });
 });
 
-describe("Unit Test: Background", () => {
+describe("unit tests: Background", () => {
   it("should render and be visible [#unit,#Background]", async () => {
     const result = render(
       <Background>
@@ -101,7 +102,7 @@ describe("Unit Test: Background", () => {
   });
 });
 
-describe("Unit Test: Title", () => {
+describe("unit tests: Title", () => {
   it("should render and be visible [#unit,#Title]", async () => {
     const result = render(<Title>fake title</Title>);
 

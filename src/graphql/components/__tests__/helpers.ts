@@ -17,9 +17,13 @@ export const mockApolloClient = (resolvers: IResolvers, enableCache = false) => 
     typeDefs: schema,
     resolvers,
     resolverValidationOptions: {
-      requireResolversForResolveType: false
-    }
+      requireResolversForResolveType: false,
+    },
   });
   const mockSchemaLink = new SchemaLink({ schema: executableSchema });
   return apolloClientFactory(undefined, enableCache, mockSchemaLink);
 };
+
+export const postsDummyProps = Object.freeze({
+  routeHandler: () => null,
+});

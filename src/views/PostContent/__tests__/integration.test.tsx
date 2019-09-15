@@ -6,12 +6,12 @@ import { render } from "@testing-library/react";
 import { dummyPostContentProps } from "./helpers";
 import { PostContent } from "../index";
 
-describe("Integration Tests: PostContent", () => {
+describe("integration tests: PostContent", () => {
   describe("dates", () => {
     it("should display the 'Created at' date only, when both dates are the same", async () => {
       const testDates = {
         createdAt: "2019-01-01",
-        modifiedAt: "2019-01-01"
+        modifiedAt: "2019-01-01",
       };
 
       const result = render(<PostContent {...dummyPostContentProps} {...testDates} />);
@@ -22,7 +22,7 @@ describe("Integration Tests: PostContent", () => {
     it("should display both 'Created at' and 'Modified at' dates, when both dates are the different", async () => {
       const testDates = {
         createdAt: "2019-01-01",
-        modifiedAt: "2019-01-02"
+        modifiedAt: "2019-01-02",
       };
 
       const result = render(<PostContent {...dummyPostContentProps} {...testDates} />);

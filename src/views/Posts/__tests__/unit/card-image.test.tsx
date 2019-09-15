@@ -1,36 +1,27 @@
 import React from "react";
 
 import "@testing-library/jest-dom/extend-expect";
-import { act, render, RenderResult } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { dummyProps } from "../helpers";
 import Post from "../../Post";
 
-describe("Unit Tests: Post", () => {
+describe("unit tests: Post", () => {
   describe("card image", () => {
     it("should be visible", () => {
-      let result: RenderResult;
+      const result = render(
+        <Post
+          {...dummyProps}
+          imgUrl="https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg"
+        />
+      );
 
-      act(() => {
-        result = render(
-          <Post
-            {...dummyProps}
-            imgUrl="https://fakeql.com/placeholder/320/320/e7d621158ec24ef6dsf3sf43459.svg"
-          />
-        );
-      });
-
-      expect(result!.getByTestId("post-img-url")).toBeVisible();
+      expect(result.getByTestId("post-img-url")).toBeVisible();
     });
 
     it("should contain image #alt-text", () => {
-      let result: RenderResult;
-
-      act(() => {
-        result = render(<Post {...dummyProps} imgAltText="image-alt-text" />);
-      });
-
-      expect(result!.getByTestId("post-img-url")).toHaveAttribute("alt", "image-alt-text");
+      const result = render(<Post {...dummyProps} imgAltText="image-alt-text" />);
+      expect(result.getByTestId("post-img-url")).toHaveAttribute("alt", "image-alt-text");
     });
   });
 });
