@@ -209,7 +209,7 @@ interface IInputFieldProps {
   inputRef: React.RefObject<HTMLInputElement>;
   label: string;
   name: keyof ISubmitPostInputFields<never>;
-  onBlur: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement> | React.FocusEvent<HTMLTextAreaElement>) => void;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;

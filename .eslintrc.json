@@ -30,7 +30,7 @@
     {
       "files": ["**/__tests__/*", "**/*.test.*"],
       "rules": {
-        "security/detect-object-injection": "off" // Not a concern for testing, no user input
+        "security/detect-object-injection": "off"
       }
     }
   ],
@@ -40,17 +40,17 @@
     "@typescript-eslint/no-explicit-any": "off",
     "jest/no-disabled-tests": "warn",
     "jest/prefer-expect-assertions": "off",
-    "jsdoc/no-undefined-types": "off", // Annoying warnings
+    "jsdoc/no-undefined-types": "off",
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react/display-name": "off",
     "graphql/capitalized-type-name": "error",
-    "graphql/named-operations": "error", // enforced query names - for debugging
+    "graphql/named-operations": "error",
     "graphql/no-deprecated-fields": "warn",
     "graphql/required-fields": [
       "error",
       {
-        "requiredFields": ["__typename", "id"] // __typename doesn't seem to be enfoced
+        "requiredFields": ["__typename", "id"]
       }
     ],
     "graphql/template-strings": [

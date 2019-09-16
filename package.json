@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "react-scripts build",
+    "build": "craco build",
     "build-storybook": "build-storybook -s public",
     "lint": "eslint '**/*.{js,json,ts,tsx}'",
-    "start": "react-scripts start",
+    "start": "craco start",
     "storybook": "start-storybook -p 9009 -s public",
-    "test": "NODE_ENV=test react-scripts test --testPathIgnorePatterns='^<rootDir>/.*helpers.*$'"
+    "test": "NODE_ENV=test craco test --testPathIgnorePatterns='^<rootDir>/.*helpers.*$'"
   },
   "browserslist": {
     "development": [
@@ -47,6 +47,7 @@
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "@craco/craco": "^5.5.0",
     "@storybook/addon-actions": "^5.1.11",
     "@storybook/addon-info": "^5.1.11",
     "@storybook/addon-links": "^5.1.11",
