@@ -8,7 +8,7 @@
     "lint": "eslint '**/*.{js,json,ts,tsx}'",
     "start": "craco start",
     "storybook": "start-storybook -p 9009 -s public",
-    "test": "NODE_ENV=test craco test --testPathIgnorePatterns='^<rootDir>/.*helpers.*$'"
+    "test": "NODE_ENV=test craco test --env jest-environment-jsdom-fifteen --testPathIgnorePatterns='^<rootDir>/.*helpers.*$'"
   },
   "browserslist": {
     "development": [
@@ -81,6 +81,7 @@
     "eslint-plugin-security": "^1.4.0",
     "faker": "^4.1.0",
     "graphql-cli": "^3.0.14",
+    "jest-environment-jsdom-fifteen": "^1.0.0",
     "react": "^16.9.0",
     "react-docgen-typescript-loader": "^3.1.1",
     "react-dom": "^16.9.0",

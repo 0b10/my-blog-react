@@ -34,10 +34,8 @@ describe("integration tests: SubmitPost", () => {
     Object.values(testCases).forEach(({ name, input, labelRegex }: IOnResetTestData) => {
       describe(`for the ${name} field`, () => {
         // TODO: [#test] also test that the error message fields are also reset
-        it.skip("should not render in the preview field", async () => {
-          // BUG: jsdom 15.1.1 required: jsdom/jsdom:#2387 and sharegate/craco#108
-          // ! override jest config : testEnvironment with craco, using
-          // !  jest-environment-jsdom-fifteen when issues are fixed
+        it("should not render in the preview field", async () => {
+          // ! BUG(FIXED) jsdom 15.1.1 required: jsdom/jsdom:#2387 and sharegate/craco#108
           const reInput = RegExp(`^${input}$`);
           const result = renderSubmitPost();
 
