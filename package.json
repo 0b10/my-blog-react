@@ -67,7 +67,6 @@
     "@types/yup": "^0.26.23",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
-    "awesome-typescript-loader": "^5.2.1",
     "eslint": "^6.3.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-config-react": "^1.1.7",
@@ -86,6 +85,7 @@
     "react-docgen-typescript-loader": "^3.1.1",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.0",
+    "ts-loader": "^6.1.0",
     "typescript": "3.5.3"
   }
 }

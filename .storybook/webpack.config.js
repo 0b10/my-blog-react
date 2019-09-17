@@ -1,7 +1,7 @@
 const assert = require("assert");
 const fs = require("fs");
 
-const eslintrc = JSON.parse(fs.readFileSync(".eslintrc.json", { flag: "r" }));
+// const eslintrc = JSON.parse(fs.readFileSync(".eslintrc.json", { flag: "r" }));
 
 /**
  * Filter out rules that contain the targetted loaders
@@ -88,32 +88,35 @@ const filterLoaders = (re, config) => {
 };
 
 module.exports = ({ config: oldConfig }) => {
-  const config = filterLoaders(/eslint-loader/, oldConfig);
+  const config = filterLoaders(/eslint-loader/, oldConfig); // Use pre-commit hook instead
   target: "node",
     config.module.rules.push(
       {
         test: /\.(ts|tsx)$/,
         use: [
           {
-            loader: require.resolve("awesome-typescript-loader"),
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true, // Use pre-commit hook instead
+            },
           },
           {
             loader: require.resolve("react-docgen-typescript-loader"),
           },
         ],
-      },
-      {
-        // Use a custom eslint config, and ignore React's
-        enforce: "pre",
-        test: /\.(ts|tsx|json|js)$/,
-        exclude: /(node_modules)/,
-        loader: "eslint-loader",
-        options: {
-          ...eslintrc,
-          failOnWarning: false,
-          failOnError: false,
-        },
       }
+      // {
+      //   // Use a custom eslint config, and ignore React's
+      //   enforce: "pre",
+      //   test: /\.(ts|tsx|json|js)$/,
+      //   exclude: /(node_modules)/,
+      //   loader: "eslint-loader",
+      //   options: {
+      //     ...eslintrc,
+      //     failOnWarning: false,
+      //     failOnError: false,
+      //   },
+      // }
     );
   config.resolve.extensions.push(".ts", ".tsx");
   return config;
