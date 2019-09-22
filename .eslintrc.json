@@ -41,6 +41,7 @@
     "jest/no-disabled-tests": "warn",
     "jest/prefer-expect-assertions": "off",
     "jsdoc/no-undefined-types": "off",
+    "no-console": "warn",
     "react-hooks/exhaustive-deps": "warn",
     "react-hooks/rules-of-hooks": "error",
     "react/display-name": "off",

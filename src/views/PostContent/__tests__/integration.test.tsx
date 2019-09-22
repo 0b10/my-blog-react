@@ -48,4 +48,30 @@ describe("integration tests: PostContent", () => {
       expect(await result.findByTestId("markdown-header-level-1")).toBeVisible();
     });
   });
+
+  describe("header image", () => {
+    it("should be displayed", async () => {
+      const alt = "fake image alt text";
+
+      const result = render(
+        <PostContent {...dummyPostContentProps} headerImageProps={{ src: "fake-img-url", alt }}>
+          dummy text
+        </PostContent>
+      );
+
+      expect(result.getByAltText(alt)).toBeVisible();
+    });
+
+    it("should have src set correctly", async () => {
+      const alt = "fake image alt text";
+
+      const result = render(
+        <PostContent {...dummyPostContentProps} headerImageProps={{ src: "fake-img-url", alt }}>
+          dummy text
+        </PostContent>
+      );
+
+      expect(result.getByAltText(alt)).toHaveAttribute("src", "fake-img-url");
+    });
+  });
 });

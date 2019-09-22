@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 
 import { renderSubmitPost, testids } from "../helpers";
-import { TInitialWidth } from "../../";
+import { TInitialWidth } from "../../types";
 
 describe("integration tests: SubmitPost", () => {
   describe("responsiveness. [#breakpoints,#render,#responsive]", () => {

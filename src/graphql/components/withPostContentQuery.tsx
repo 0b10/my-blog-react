@@ -7,7 +7,7 @@ export const withPostContentQuery = (
 ) => {
   return (props: IPostContentQueryProps) => {
     const { error, loading, data } = useQuery(POST_CONTENT_QUERY, {
-      variables: { id: props.postId }
+      variables: { id: props.postId },
     });
 
     if (error) {
@@ -30,6 +30,7 @@ export const withPostContentQuery = (
     return (
       <PostContentComponent
         createdAt={createdAt}
+        headerImageProps={{ src: post.imgUrl, alt: post.imgAltText }}
         modifiedAt={modifiedAt}
         title={post.title}
         tldr={post.tldr}
@@ -46,6 +47,12 @@ export interface IPostContentComponentProps {
   modifiedAt: string;
   title: string;
   tldr: string;
+  headerImageProps: IHeaderImageProps;
+}
+
+export interface IHeaderImageProps {
+  alt: string;
+  src: string;
 }
 
 interface IPostContentQueryProps {

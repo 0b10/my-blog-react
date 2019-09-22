@@ -11,16 +11,17 @@ const apolloLinkFactory = (uri: string) =>
     onError(({ graphQLErrors, networkError }) => {
       if (graphQLErrors)
         graphQLErrors.map(({ message, locations, path }) =>
+          // eslint-disable-next-line no-console
           console.error(
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
           )
         );
-      if (networkError) console.error(`[Network error]: ${networkError}`);
+      if (networkError) console.error(`[Network error]: ${networkError}`); // eslint-disable-line no-console
     }),
     new HttpLink({
       uri,
-      credentials: "same-origin"
-    })
+      credentials: "same-origin",
+    }),
   ]);
 
 export default (uri?: string, enableCache = true, mockSchemaLink: false | SchemaLink = false) => {
@@ -32,16 +33,16 @@ export default (uri?: string, enableCache = true, mockSchemaLink: false | Schema
   const defaultOptions: DefaultOptions = {
     watchQuery: {
       fetchPolicy: enableCache ? "cache-first" : "no-cache",
-      errorPolicy: "ignore"
+      errorPolicy: "ignore",
     },
     query: {
       fetchPolicy: enableCache ? "cache-first" : "no-cache",
-      errorPolicy: "all"
+      errorPolicy: "all",
     },
     mutate: {
       fetchPolicy: enableCache ? "cache-first" : "no-cache",
-      errorPolicy: "all"
-    }
+      errorPolicy: "all",
+    },
   };
 
   return new ApolloClient({
@@ -53,10 +54,10 @@ export default (uri?: string, enableCache = true, mockSchemaLink: false | Schema
           // BUG: args is null when going from postContentQuery to postQuery
           posts: (_, args, { getCacheKey }) => {
             return args.ids.map((id: string) => getCacheKey({ __typename: "Post", id }));
-          }
-        }
-      }
+          },
+        },
+      },
     }),
-    defaultOptions
+    defaultOptions,
   });
 };

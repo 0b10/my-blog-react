@@ -2,7 +2,7 @@
 import React from "react";
 
 import { action } from "@storybook/addon-actions";
-import { object, string } from "yup";
+import { mixed, object, string } from "yup";
 import { storiesOf } from "@storybook/react";
 import faker from "faker";
 import lodash from "lodash";
@@ -41,6 +41,20 @@ const dummyProps = {
       .min(3, "Must be 3 or more chars")
       .max(5, "Must be 5 or less chars")
       .required("Required"),
+    headerImageAlt: string()
+      .min(5, "Must be 5 or more chars")
+      .max(10, "Must be 10 or less chars")
+      .required("You must include a description"),
+    headerImage: mixed()
+      .required("You must attach an image")
+      .test("format", "The image must be a jpeg", (value) => {
+        // This test only cares about the string value, if it exists - everything else should pass
+        if (typeof value === "object" && value.length > 0 && value[0].type !== "image/jpeg") {
+          return false;
+        } else {
+          return true;
+        }
+      }),
     body: string()
       .min(4, "Must be 4 or more chars")
       .max(6, "Must be 6 or less chars")

@@ -1,6 +1,7 @@
 import "@testing-library/jest-dom/extend-expect";
 
-import { testids, labels, renderSubmitPost } from "./helpers";
+import { FileAttachmentButtons } from "../Form";
+import { testids, labels, renderSubmitPost, elementText } from "./helpers";
 
 describe("smoke tests: SubmitPost", () => {
   // ~~~ Containers ~~~
@@ -23,6 +24,32 @@ describe("smoke tests: SubmitPost", () => {
       it(`should render the component with the label: "${label}". [#render]`, () => {
         const result = renderSubmitPost();
         expect(result.getByLabelText(reLabel)).toBeVisible();
+      });
+    });
+  });
+
+  describe("updload buttons", () => {
+    type Fixtures = Readonly<{
+      field: keyof FileAttachmentButtons<void>;
+      reElementText: RegExp;
+    }>;
+
+    const fixtures: FileAttachmentButtons<Fixtures> = Object.freeze({
+      headerImage: {
+        // ! The button text is hidden at xs breakpoint, so requires initialWidth="xl" prop
+        field: "headerImage",
+        reElementText: elementText.reAttachHeaderImage,
+      },
+    });
+
+    Object.values(fixtures).forEach(({ field, reElementText }: Fixtures) => {
+      describe(`the attach ${field} button`, () => {
+        it("should render, and be visible", async () => {
+          const result = renderSubmitPost();
+          const button = result.getByText(reElementText);
+
+          expect(button).toBeVisible();
+        });
       });
     });
   });

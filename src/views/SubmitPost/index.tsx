@@ -2,7 +2,8 @@ import React, { useCallback, useState } from "react";
 
 import { Box, Grid, Hidden } from "@material-ui/core";
 
-import { Form, TValidationSchema } from "./Form";
+import { Form } from "./Form";
+import { IHeaderImageProps, IPreviewComponentProps, ISubmitPostProps } from "./types";
 
 // TODO: [#test]- onSubmit
 
@@ -11,11 +12,16 @@ export const withPostPreview = (PreviewComponent: React.FC<IPreviewComponentProp
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
     const [tldr, setTldr] = useState();
+    const [headerImageProps, setHeaderImageProps] = useState<IHeaderImageProps>({
+      src: "",
+      alt: "",
+    });
 
     const handleReset = useCallback(() => {
       setBody("");
       setTitle("");
       setTldr("");
+      setHeaderImageProps({ src: "", alt: "" });
     }, [setBody, setTitle, setTldr]);
 
     return (
@@ -24,7 +30,12 @@ export const withPostPreview = (PreviewComponent: React.FC<IPreviewComponentProp
           <Grid item xs={12} md={6}>
             <Box mr={1}>
               <Form
+                initialWidth={initialWidth}
                 onBodyChange={setBody}
+                onHeaderImageAltChange={(newState) =>
+                  setHeaderImageProps((prevState) => ({ ...prevState, ...newState }))
+                }
+                onHeaderImageChange={setHeaderImageProps}
                 onReset={handleReset}
                 onSubmit={onSubmit}
                 onTitleChange={setTitle}
@@ -36,7 +47,7 @@ export const withPostPreview = (PreviewComponent: React.FC<IPreviewComponentProp
           <Grid item xs={12} md={6}>
             <Hidden smDown initialWidth={initialWidth}>
               <Box ml={1} height="100%">
-                <PreviewComponent title={title} tldr={tldr}>
+                <PreviewComponent headerImageProps={headerImageProps} title={title} tldr={tldr}>
                   {body}
                 </PreviewComponent>
               </Box>
@@ -47,19 +58,3 @@ export const withPostPreview = (PreviewComponent: React.FC<IPreviewComponentProp
     );
   });
 };
-
-// >>> INTERFACES >>>
-export type TInitialWidth = "xs" | "sm" | "md" | "lg" | "xl" | undefined;
-
-export interface ISubmitPostProps {
-  // for testing. Set width for Hidden component
-  initialWidth?: TInitialWidth;
-  onSubmit: (...args: any[]) => any;
-  validationSchema: TValidationSchema;
-}
-
-export interface IPreviewComponentProps {
-  children: string;
-  title: string;
-  tldr: string;
-}
