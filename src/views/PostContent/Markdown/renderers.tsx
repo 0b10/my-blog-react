@@ -23,16 +23,16 @@ import {
 } from "./styles";
 
 import {
-  ICodeRendererProps,
-  IHeadingRendererProps,
-  IImgRendererProps,
-  ILinkRendererProps,
-  IListRendererProps,
-  IRendererProps,
-} from "./interfaces";
+  CodeRendererProps,
+  HeadingRendererProps,
+  ImgRendererProps,
+  LinkRendererProps,
+  ListRendererProps,
+  RendererProps,
+} from "./types";
 
 // ~~~ Code ~~~
-export function CodeRenderer(props: ICodeRendererProps) {
+export function CodeRenderer(props: CodeRendererProps) {
   const codeMountClasses = useCodeMountStyles();
   const theme = useTheme();
   return props.value ? ( // value can be undefined, when activated with ``` and no value.
@@ -58,7 +58,7 @@ export function CodeRenderer(props: ICodeRendererProps) {
 }
 
 // ~~~ Paragraph ~~
-export const ParagraphRenderer = (props: IRendererProps) => {
+export const ParagraphRenderer = (props: RendererProps) => {
   return (
     <Typography variant="body1" data-testid="markdown-paragraph">
       {props.children}
@@ -67,7 +67,7 @@ export const ParagraphRenderer = (props: IRendererProps) => {
 };
 
 // ~~~ Headers ~~~
-export function HeadingRenderer(props: IHeadingRendererProps) {
+export function HeadingRenderer(props: HeadingRendererProps) {
   const headerClasses = useHeaderStyles();
   const level = props.level + 1; // h1 is for post title
   const headerTestId = `markdown-header-level-${props.level}`;
@@ -91,7 +91,7 @@ export function HeadingRenderer(props: IHeadingRendererProps) {
 }
 
 // ~~~ <hr /> ~~~
-export function HorizontalRuleRenderer(props: IRendererProps) {
+export function HorizontalRuleRenderer(props: RendererProps) {
   const dividerClasses = useDividerStyles();
   return (
     <Grid container direction="row" justify="center">
@@ -105,7 +105,7 @@ export function HorizontalRuleRenderer(props: IRendererProps) {
 }
 
 // ~~~ Links ~~~
-export function LinkRenderer(props: ILinkRendererProps) {
+export function LinkRenderer(props: LinkRendererProps) {
   return (
     <strong>
       <Link href={props.href} data-testid="markdown-link">
@@ -116,7 +116,7 @@ export function LinkRenderer(props: ILinkRendererProps) {
 }
 
 // ~~~ Quote ~~~
-export function BlockQuoteRenderer(props: IRendererProps) {
+export function BlockQuoteRenderer(props: RendererProps) {
   const blockQuoteClasses = useBlockQuoteStyles();
   const blockQuoteTextClass = useBlockQuoteTextStyles();
   return (
@@ -139,7 +139,7 @@ export function BlockQuoteRenderer(props: IRendererProps) {
 // ~~~ <img /> ~~~
 // FIXME: hide image when it's too large for the screen
 // ! "display: block" allows the box-shadow to be displayed
-export function ImageRenderer(props: IImgRendererProps) {
+export function ImageRenderer(props: ImgRendererProps) {
   const imgWrapperClasses = useImageWrapperStyles();
   const imgClasses = useImgStyles();
   return (
@@ -159,7 +159,7 @@ export function ImageRenderer(props: IImgRendererProps) {
 }
 
 // ~~~ Table ~~~
-export function TableHeadRenderer(props: IRendererProps) {
+export function TableHeadRenderer(props: RendererProps) {
   const tableHeaderClasses = useTableHeaderStyles();
   return (
     <thead className={tableHeaderClasses.root} data-testid="markdown-thead">
@@ -168,7 +168,7 @@ export function TableHeadRenderer(props: IRendererProps) {
   );
 }
 
-export function TableCellRenderer(props: IRendererProps) {
+export function TableCellRenderer(props: RendererProps) {
   const tableCellClasses = useTableCellStyles();
   return (
     <td className={tableCellClasses.root} data-testid="markdown-td">
@@ -177,7 +177,7 @@ export function TableCellRenderer(props: IRendererProps) {
   );
 }
 
-export function TableRenderer(props: IRendererProps) {
+export function TableRenderer(props: RendererProps) {
   const tableClasses = useTableStyles();
   return (
     <Grid container direction="row" justify="center">
@@ -192,7 +192,7 @@ export function TableRenderer(props: IRendererProps) {
   );
 }
 
-export function InlineCodeRenderer(props: IRendererProps) {
+export function InlineCodeRenderer(props: RendererProps) {
   const styleClasses = useInlineCodeStyles();
   return (
     <span className={styleClasses.text} data-testid="markdown-inline-code">
@@ -202,7 +202,7 @@ export function InlineCodeRenderer(props: IRendererProps) {
 }
 
 // ~~~ Lists ~~~
-export function ListRenderer(props: IListRendererProps) {
+export function ListRenderer(props: ListRendererProps) {
   return (
     <Typography component="div" variant="body1">
       {props.ordered ? (

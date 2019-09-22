@@ -3,8 +3,8 @@ import { useQuery } from "@apollo/react-hooks";
 
 import { POSTS_QUERY } from "../gql-strings";
 
-export const withPostsQuery = (PostsComponent: React.FC<IPostsComponentProps>) => {
-  return (props: IPostsQueryProps) => {
+export const withPostsQuery = (PostsComponent: React.FC<PostsComponentProps>) => {
+  return (props: PostsQueryProps) => {
     const { error, loading, data } = useQuery(POSTS_QUERY);
 
     if (loading) {
@@ -19,16 +19,16 @@ export const withPostsQuery = (PostsComponent: React.FC<IPostsComponentProps>) =
   };
 };
 
-export interface IPostsComponentProps {
-  posts: IPostData[];
+export interface PostsComponentProps {
+  posts: PostData[];
   routeHandler: (id: string) => void;
 }
 
-interface IPostsQueryProps {
+interface PostsQueryProps {
   routeHandler: (id: string) => void;
 }
 
-export interface IPostData {
+export interface PostData {
   __typename: string;
   id: string;
   imgAltText: string;

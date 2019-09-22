@@ -7,6 +7,7 @@
     "build-storybook": "build-storybook -s public",
     "lint": "eslint '**/*.{js,json,ts,tsx}'",
     "lint:compile": "tsc && eslint '**/*.{js,json,ts,tsx}'",
+    "lint:fix": "eslint --fix '**/*.{js,json,ts,tsx}'",
     "start": "craco start",
     "storybook": "start-storybook -p 9009 -s public",
     "test": "NODE_ENV=test craco test --env jest-environment-jsdom-fifteen --testPathIgnorePatterns='^<rootDir>/.*helpers.*$'"

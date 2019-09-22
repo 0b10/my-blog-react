@@ -1,17 +1,17 @@
 import { FormikProps } from "formik";
 import { ObjectSchema, Shape } from "yup";
 
-import { IHeaderImageProps, TInitialWidth } from "../types";
+import { HeaderImageProps, InitialWidth } from "../types";
 
 // >>> COMPONENT PROPS >>>
 /**
  * The input props for the Form component
  */
 export interface FormProps {
-  initialWidth?: TInitialWidth;
+  initialWidth?: InitialWidth;
   onBodyChange: (val: string) => void;
   onHeaderImageAltChange: (attributes: Readonly<{ alt: string }>) => void;
-  onHeaderImageChange: (props: IHeaderImageProps) => void;
+  onHeaderImageChange: (props: HeaderImageProps) => void;
   onReset: () => void;
   onSubmit: (...args: any[]) => any; // FIXME: narrow type
   onTitleChange: (val: string) => void;
@@ -48,7 +48,7 @@ export interface FileAttachmentProps {
   formik: FormikProps<any>; // a formik object injected into the render() method
   id: string; // attached to attached to <input />, make it unique per document
   imageAttached: boolean; // displays a tick if true
-  initialWidth?: TInitialWidth; // for testing, set xl to make visible at all times
+  initialWidth?: InitialWidth; // for testing, set xl to make visible at all times
   name: keyof FileAttachmentButtons<void>; // Used for formik validation
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   successColor: string; // The color of the tick
@@ -66,6 +66,16 @@ export interface TextFieldGroupProps {
   label: "Title" | "TL;DR" | "Body"; // The display text
   name: "title" | "tldr" | "body"; // for formik validation
   rows?: number; // number of textfield rows
+}
+
+export interface ValidationMessageProps {
+  children?: any;
+  name?: keyof TextFields<void> | keyof FileAttachmentButtons<void>;
+  testid:
+    | "body-validation-message"
+    | "title-validation-message"
+    | "tldr-validation-message"
+    | "header-image-validation-message";
 }
 
 export type ValidationSchema = ObjectSchema<Shape<object, ValidatedFields<string>>>;

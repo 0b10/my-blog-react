@@ -2,10 +2,8 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { POST_CONTENT_QUERY } from "../gql-strings";
 
-export const withPostContentQuery = (
-  PostContentComponent: React.FC<IPostContentComponentProps>
-) => {
-  return (props: IPostContentQueryProps) => {
+export const withPostContentQuery = (PostContentComponent: React.FC<PostContentComponentProps>) => {
+  return (props: PostContentQueryProps) => {
     const { error, loading, data } = useQuery(POST_CONTENT_QUERY, {
       variables: { id: props.postId },
     });
@@ -41,20 +39,20 @@ export const withPostContentQuery = (
   };
 };
 
-export interface IPostContentComponentProps {
+export interface PostContentComponentProps {
   children: string;
   createdAt: string;
   modifiedAt: string;
   title: string;
   tldr: string;
-  headerImageProps: IHeaderImageProps;
+  headerImageProps: HeaderImageProps;
 }
 
-export interface IHeaderImageProps {
+export interface HeaderImageProps {
   alt: string;
   src: string;
 }
 
-interface IPostContentQueryProps {
+interface PostContentQueryProps {
   postId: string;
 }

@@ -62,7 +62,7 @@ describe("unit tests: Markdown", () => {
       testid: "markdown-ordered-list",
     },
     // ~~~ Find Single Elements ~~~
-  ].forEach(({ elementName, markdown, testid }: ITestMarkdownComponent) => {
+  ].forEach(({ elementName, markdown, testid }: TestMarkdownComponent) => {
     describe(`${elementName}`, () => {
       it(`should be rendered when given: "${markdown} [#Markdown,#unit]"`, async () => {
         const result = render(<Markdown>{markdown}</Markdown>);
@@ -79,7 +79,7 @@ describe("unit tests: Markdown", () => {
       testid: "markdown-td",
     },
     // ~~~ Find Multiple Elements ~~~
-  ].forEach(({ elementName, markdown, testid }: ITestMarkdownComponent) => {
+  ].forEach(({ elementName, markdown, testid }: TestMarkdownComponent) => {
     describe(`${elementName}`, () => {
       it(`should be rendered when given: "${markdown} [#Markdown,#unit]"`, async () => {
         const result = render(<Markdown>{markdown}</Markdown>);
@@ -110,7 +110,7 @@ describe("unit tests: Title", () => {
   });
 });
 
-interface ITestMarkdownComponent {
+interface TestMarkdownComponent {
   elementName: string;
   markdown: string;
   testid: string;

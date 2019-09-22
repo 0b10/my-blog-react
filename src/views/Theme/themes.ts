@@ -89,7 +89,7 @@ const light: ThemeOptions = {
 
 // >>> EXPORTS >>>
 // TODO: [#test,#theme]
-export const getTheme = (name: TThemeName) => {
+export const getTheme = (name: ThemeName) => {
   let theme: any;
   switch (name) {
     case "light":
@@ -105,4 +105,4 @@ export const getTheme = (name: TThemeName) => {
 };
 
 // >>> TYPES >>>
-export type TThemeName = "dark" | "light";
+export type ThemeName = "dark" | "light";

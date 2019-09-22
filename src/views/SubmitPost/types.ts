@@ -1,22 +1,22 @@
 import { ValidationSchema } from "./Form";
 
-export type TInitialWidth = "xs" | "sm" | "md" | "lg" | "xl" | undefined;
+export type InitialWidth = "xs" | "sm" | "md" | "lg" | "xl" | undefined;
 
-export interface ISubmitPostProps {
+export interface SubmitPostProps {
   // for testing. Set width for Hidden component
-  initialWidth?: TInitialWidth;
+  initialWidth?: InitialWidth;
   onSubmit: (...args: any[]) => any;
   validationSchema: ValidationSchema;
 }
 
-export interface IPreviewComponentProps {
+export interface PreviewComponentProps {
   children: string;
-  headerImageProps: IHeaderImageProps;
+  headerImageProps: HeaderImageProps;
   title: string;
   tldr: string;
 }
 
-export interface IHeaderImageProps {
+export interface HeaderImageProps {
   alt: string;
   src?: string;
 }

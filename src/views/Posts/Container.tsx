@@ -7,7 +7,7 @@ const useGridStyles = makeStyles(({ spacing }) => ({
   },
 }));
 
-export default (props: IPostsContainerProps) => {
+export default (props: PostsContainerProps) => {
   const gridClasses = useGridStyles();
   return (
     <Grid classes={gridClasses} container spacing={4}>
@@ -16,6 +16,6 @@ export default (props: IPostsContainerProps) => {
   );
 };
 
-interface IPostsContainerProps {
+interface PostsContainerProps {
   children: React.ReactElement | React.ReactElement[];
 }

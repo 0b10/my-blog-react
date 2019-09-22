@@ -8,7 +8,7 @@ const useBackgroundStyles = makeStyles((theme) => ({
   },
 }));
 
-export default (props: IPostContentBackgroundProps) => {
+export default (props: BackgroundProps) => {
   const backgroundClasses = useBackgroundStyles();
   return (
     <Paper classes={backgroundClasses} data-testid="post-content-background">
@@ -17,6 +17,6 @@ export default (props: IPostContentBackgroundProps) => {
   );
 };
 
-export interface IPostContentBackgroundProps {
+export interface BackgroundProps {
   children: JSX.Element | Array<JSX.Element | null> | null;
 }

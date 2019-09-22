@@ -1,33 +1,33 @@
-export interface IMarkdownProps {
+export interface MarkdownProps {
   children: string;
 }
 
-export interface IRendererProps {
+export interface RendererProps {
   children: string;
 }
 
-export interface IHeadingRendererProps {
+export interface HeadingRendererProps {
   children: string;
   level: number;
 }
 
-export interface ILinkRendererProps {
+export interface LinkRendererProps {
   children: string;
   href: string;
 }
 
-export interface IImgRendererProps {
+export interface ImgRendererProps {
   children: string;
   src: string;
   alt: string;
 }
 
-export interface ICodeRendererProps {
+export interface CodeRendererProps {
   value: string;
   language: string;
 }
 
-export interface IListRendererProps {
+export interface ListRendererProps {
   children: JSX.Element | JSX.Element[];
   ordered?: boolean;
 }

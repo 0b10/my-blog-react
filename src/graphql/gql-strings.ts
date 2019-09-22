@@ -34,20 +34,20 @@ export const POST_CONTENT_QUERY = gql`
 `;
 
 // >>> INTERFACES >>>
-export interface IPostContentQueryVariables {
+export interface PostContentQueryVariables {
   id: string;
 }
 
-export interface IPostContentQueryResults {
+export interface PostContentQueryResults {
   __typename: "PostContent";
   content: string;
   createdAt: string;
   id: string;
   modifiedAt: string;
-  post: IPostQueryResults;
+  post: PostQueryResults;
 }
 
-export interface IPostQueryResults {
+export interface PostQueryResults {
   __typename: "Post";
   id: string;
   imgAltText: string;

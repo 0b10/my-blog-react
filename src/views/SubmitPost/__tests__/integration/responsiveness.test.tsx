@@ -1,12 +1,12 @@
 import "@testing-library/jest-dom/extend-expect";
 
 import { renderSubmitPost, testids } from "../helpers";
-import { TInitialWidth } from "../../types";
+import { InitialWidth } from "../../types";
 
 describe("integration tests: SubmitPost", () => {
   describe("responsiveness. [#breakpoints,#render,#responsive]", () => {
     // ~~~ Visible ~~~
-    const visibleBP: TInitialWidth[] = ["md", "lg", "xl"];
+    const visibleBP: InitialWidth[] = ["md", "lg", "xl"];
 
     visibleBP.forEach((breakpoint) => {
       describe(`when the breakpoint is set to "${breakpoint}"`, () => {
@@ -20,7 +20,7 @@ describe("integration tests: SubmitPost", () => {
     });
 
     // ~~~ Not Visible ~~~
-    const notVisibleBP: TInitialWidth[] = ["xs", "sm"];
+    const notVisibleBP: InitialWidth[] = ["xs", "sm"];
 
     notVisibleBP.forEach((breakpoint) => {
       describe(`when the breakpoint is set to "${breakpoint}"`, () => {

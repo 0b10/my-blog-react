@@ -2,7 +2,7 @@ import React from "react";
 
 import { render } from "@testing-library/react";
 
-import { IPreviewComponentProps, TInitialWidth } from "../types";
+import { PreviewComponentProps, InitialWidth } from "../types";
 import { mixed, string, object } from "yup";
 import { ValidatedTextFields, ValidationSchema } from "../Form";
 import { withPostPreview } from "../";
@@ -63,12 +63,7 @@ export const testids = {
   },
 };
 
-export const FakePreview = ({
-  children,
-  title,
-  tldr,
-  headerImageProps,
-}: IPreviewComponentProps) => {
+export const FakePreview = ({ children, title, tldr, headerImageProps }: PreviewComponentProps) => {
   // ! Any file preview element MUST NOT be rendered until its prop is truthy - e.g. headerImage.
   return (
     <div data-testid={testids.preview.wrapper}>
@@ -187,7 +182,7 @@ export const defaultValidationSchema: ValidationSchema = object().shape({
 });
 
 export const renderSubmitPost = (
-  initialWidth: TInitialWidth = "xl",
+  initialWidth: InitialWidth = "xl",
   validationSchema: ValidationSchema = defaultValidationSchema,
   onSubmit = () => null
 ) => {

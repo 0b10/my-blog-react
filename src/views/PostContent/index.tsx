@@ -1,6 +1,6 @@
 import React from "react";
 
-import { HeaderImage, IHeaderImageProps } from "./HeaderImage";
+import { HeaderImage, HeaderImageProps } from "./HeaderImage";
 import Background from "./Background";
 import Dates from "./Dates";
 import Markdown from "./Markdown";
@@ -13,7 +13,7 @@ export const PostContent = ({
   modifiedAt,
   title,
   tldr,
-}: IPostContentProps) => (
+}: PostContentProps) => (
   <Background data-testid="post-content-background">
     <HeaderImage {...headerImageProps} />
     {createdAt && modifiedAt ? <Dates createdAt={createdAt} modifiedAt={modifiedAt} /> : null}
@@ -23,10 +23,10 @@ export const PostContent = ({
   </Background>
 );
 
-export interface IPostContentProps {
+export interface PostContentProps {
   children: string;
   createdAt?: string;
-  headerImageProps: IHeaderImageProps;
+  headerImageProps: HeaderImageProps;
   modifiedAt?: string;
   title: string;
   tldr: string;

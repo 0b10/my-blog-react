@@ -20,7 +20,7 @@ import {
   TableRenderer,
 } from "./renderers";
 
-import { IMarkdownProps } from "./interfaces";
+import { MarkdownProps } from "./types";
 
 export default (() => {
   const markdownRenderers = {
@@ -40,7 +40,7 @@ export default (() => {
     thematicBreak: HorizontalRuleRenderer,
   };
 
-  return (props: IMarkdownProps) => {
+  return (props: MarkdownProps) => {
     return props.children ? (
       <ReactMarkdown renderers={markdownRenderers} escapeHtml={true} plugins={[breaks]}>
         {props.children}

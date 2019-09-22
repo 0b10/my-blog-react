@@ -1,9 +1,9 @@
 import React from "react";
 
 import Container from "./Container";
-import Post, { IPostData, IPostExtraProps } from "./Post";
+import Post, { PostData, PostExtraProps } from "./Post";
 
-export const Posts = (props: IPostsProps) => (
+export const Posts = (props: PostsProps) => (
   <Container>
     {props.posts.map((postData, index) => (
       <Post {...postData} routeHandler={props.routeHandler} key={index} />
@@ -11,6 +11,6 @@ export const Posts = (props: IPostsProps) => (
   </Container>
 );
 
-interface IPostsProps extends IPostExtraProps {
-  posts: IPostData[];
+interface PostsProps extends PostExtraProps {
+  posts: PostData[];
 }

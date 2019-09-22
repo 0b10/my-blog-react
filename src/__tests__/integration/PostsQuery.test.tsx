@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { fireEvent, render } from "@testing-library/react";
 
-import { IPostData } from "../../graphql/components/withPostsQuery";
+import { PostData } from "../../graphql/components/withPostsQuery";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 import { Posts } from "../../views";
 import { withPostsQuery } from "../../graphql";
@@ -61,7 +61,7 @@ describe("integration tests: PostsQuery", () => {
     expect(await result.findAllByTestId("post")).toHaveLength(numPosts);
   });
 
-  resolvers.Query.posts().forEach(({ id, imgAltText, imgUrl, title, tldr }: IPostData, index) => {
+  resolvers.Query.posts().forEach(({ id, imgAltText, imgUrl, title, tldr }: PostData, index) => {
     describe(`the post with id === ${id}`, () => {
       // +++ imgAltText +++
       it(`should have the correct imgAltText value: ${imgUrl}`, async () => {

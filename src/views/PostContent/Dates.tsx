@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Typography } from "@material-ui/core";
 
-export default React.memo((props: IPostContentDatesProps) => {
+export default React.memo((props: DatesProps) => {
   let datesString = `Created at: ${props.createdAt}`;
   if (props.modifiedAt !== props.createdAt) {
     datesString = datesString + `; Modified at: ${props.modifiedAt}`;
@@ -24,7 +24,7 @@ export default React.memo((props: IPostContentDatesProps) => {
   );
 });
 
-export interface IPostContentDatesProps {
+export interface DatesProps {
   createdAt: string;
   modifiedAt: string;
 }

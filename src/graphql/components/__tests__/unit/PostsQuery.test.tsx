@@ -9,9 +9,9 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { IPostData } from "../../withPostsQuery";
+import { PostData } from "../../withPostsQuery";
 import { mockApolloClient, postsDummyProps } from "../helpers";
-import { IPostsComponentProps, withPostsQuery } from "../../withPostsQuery";
+import { PostsComponentProps, withPostsQuery } from "../../withPostsQuery";
 
 // >>> FIXTURES >>>
 const resolvers = {
@@ -68,7 +68,7 @@ describe("unit tests: GraphQL #unit", () => {
     ["tldr", "title"].forEach((field: string) => {
       describe(`each ${field}`, () => {
         posts()
-          .map((post: IPostData) => post[field])
+          .map((post: PostData) => post[field])
           .forEach((fieldValue: string) => {
             it(`should be received and injected with the value: "${fieldValue}"`, async () => {
               const result = render(
@@ -85,7 +85,7 @@ describe("unit tests: GraphQL #unit", () => {
 
     describe(`each imgAltText`, () => {
       posts()
-        .map((post: IPostData) => post.imgAltText)
+        .map((post: PostData) => post.imgAltText)
         .forEach((imgAltText: string) => {
           it(`should be received and injected with the value: "${imgAltText}"`, async () => {
             const result = render(
@@ -101,7 +101,7 @@ describe("unit tests: GraphQL #unit", () => {
 
     describe(`each imgUrl`, () => {
       posts()
-        .map((post: IPostData) => post.imgUrl)
+        .map((post: PostData) => post.imgUrl)
         .forEach((imgUrl: string) => {
           it(`should be received and injected with the value: "${imgUrl}"`, async () => {
             const result = render(
@@ -117,7 +117,7 @@ describe("unit tests: GraphQL #unit", () => {
 
     describe(`each post id`, () => {
       posts()
-        .map((post: IPostData) => post.id)
+        .map((post: PostData) => post.id)
         .forEach((id) => {
           it(`should be received and injected with the value: "${id}"`, async () => {
             const reId = RegExp(`^${id}$`);
@@ -136,7 +136,7 @@ describe("unit tests: GraphQL #unit", () => {
 });
 
 // >>> FAKES >>>
-const FakePosts = (props: IPostsComponentProps) => (
+const FakePosts = (props: PostsComponentProps) => (
   <div>
     {props.posts.map((post, index) => (
       <div data-testid="post" key={index}>

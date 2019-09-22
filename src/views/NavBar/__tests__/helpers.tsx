@@ -2,14 +2,14 @@ import React from "react";
 
 import { render } from "@testing-library/react";
 
-import { INavBarProps, NavBar } from "../";
+import { NavBarProps, NavBar } from "../";
 
 // >>> DUMMY PROPS >>>
 /**
  * Default props for NavBar. This is implicitly used in renderNavBar, so you shouldn't need to
  *  directly use this.
  */
-export const dummyNavBarProps: INavBarProps = {
+export const dummyNavBarProps: NavBarProps = {
   items: [
     { path: "/one", text: "one" },
     { path: "/two", text: "two" },

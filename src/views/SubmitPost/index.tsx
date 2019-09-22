@@ -3,16 +3,16 @@ import React, { useCallback, useState } from "react";
 import { Box, Grid, Hidden } from "@material-ui/core";
 
 import { Form } from "./Form";
-import { IHeaderImageProps, IPreviewComponentProps, ISubmitPostProps } from "./types";
+import { HeaderImageProps, PreviewComponentProps, SubmitPostProps } from "./types";
 
 // TODO: [#test]- onSubmit
 
-export const withPostPreview = (PreviewComponent: React.FC<IPreviewComponentProps>) => {
-  return React.memo(({ initialWidth, onSubmit, validationSchema }: ISubmitPostProps) => {
+export const withPostPreview = (PreviewComponent: React.FC<PreviewComponentProps>) => {
+  return React.memo(({ initialWidth, onSubmit, validationSchema }: SubmitPostProps) => {
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
     const [tldr, setTldr] = useState();
-    const [headerImageProps, setHeaderImageProps] = useState<IHeaderImageProps>({
+    const [headerImageProps, setHeaderImageProps] = useState<HeaderImageProps>({
       src: "",
       alt: "",
     });

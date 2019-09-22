@@ -17,7 +17,7 @@ const useTabStyles = makeStyles({
 });
 
 // >>> COMPONENTS >>>
-export const NavBar = ({ items, routeHandler }: INavBarProps) => {
+export const NavBar = ({ items, routeHandler }: NavBarProps) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const tabsClasses = useTabsStyles();
   const tabClasses = useTabStyles();
@@ -42,18 +42,18 @@ export const NavBar = ({ items, routeHandler }: INavBarProps) => {
 };
 
 // >>> INTERFACES >>>
-export interface INavBarProps {
-  items: INavItems[];
-  routeHandler: TRouteHandler;
+export interface NavBarProps {
+  items: NavItems[];
+  routeHandler: RouteHandler;
 }
 
-export interface INavItems {
+export interface NavItems {
   path: string;
   text: string;
 }
 
-export interface INavItemProps extends INavItems {
-  routeHandler: TRouteHandler;
+export interface NavItemProps extends NavItems {
+  routeHandler: RouteHandler;
 }
 
-export type TRouteHandler = (path: string) => void;
+export type RouteHandler = (path: string) => void;

@@ -7,12 +7,12 @@ import "@testing-library/jest-dom/extend-expect";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
-import { IPostContentQueryVariables } from "../../../gql-strings";
+import { PostContentQueryVariables } from "../../../gql-strings";
 import { mockApolloClient } from "../helpers";
-import { IPostContentComponentProps, withPostContentQuery } from "../../withPostContentQuery";
+import { PostContentComponentProps, withPostContentQuery } from "../../withPostContentQuery";
 
 // >>> FAKES >>>
-const FakePostContent = (props: IPostContentComponentProps) => (
+const FakePostContent = (props: PostContentComponentProps) => (
   <div>
     <div data-testid="fake-modified-at">{props.modifiedAt}</div>
     <div data-testid="fake-created-at">{props.createdAt}</div>
@@ -23,7 +23,7 @@ const FakePostContent = (props: IPostContentComponentProps) => (
 
 const resolvers = {
   Query: {
-    postContent: (_: any, { id }: IPostContentQueryVariables) => {
+    postContent: (_: any, { id }: PostContentQueryVariables) => {
       switch (id) {
         case "1":
           return {

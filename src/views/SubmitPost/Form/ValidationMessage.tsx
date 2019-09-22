@@ -3,7 +3,7 @@ import React from "react";
 import { Box, makeStyles, Typography } from "@material-ui/core";
 import { ErrorMessage } from "formik";
 
-import { TextFields, FileAttachmentButtons } from ".";
+import { ValidationMessageProps } from "./types";
 
 const useTypographyStyles = makeStyles({
   root: {
@@ -12,7 +12,7 @@ const useTypographyStyles = makeStyles({
   },
 });
 
-export const ValidationMessage = ({ name, testid, children }: IValidationMessageProps) => {
+export const ValidationMessage = ({ name, testid, children }: ValidationMessageProps) => {
   const typographyClasses = useTypographyStyles();
   return (
     <Box style={{ boxSizing: "border-box" }} p={1} height={60} data-testid={testid}>
@@ -36,13 +36,3 @@ export const ValidationMessage = ({ name, testid, children }: IValidationMessage
     </Box>
   );
 };
-
-interface IValidationMessageProps {
-  children?: any;
-  name?: keyof TextFields<void> | keyof FileAttachmentButtons<void>;
-  testid:
-    | "body-validation-message"
-    | "title-validation-message"
-    | "tldr-validation-message"
-    | "header-image-validation-message";
-}

@@ -161,7 +161,7 @@ export default (() => (props: IPostProps) => {
   );
 })();
 
-const TLDRButtons = (props: ITLDRButtonsProps) => {
+const TLDRButtons = (props: TLDRButtonsProps) => {
   const cardActionsClasses = useCardActionsStyles();
   return (
     <div style={TLDRButtonsWrapperStyles}>
@@ -195,7 +195,7 @@ const TLDRButtons = (props: ITLDRButtonsProps) => {
 };
 
 // >>> INTERFACES >>>
-export interface IPostData {
+export interface PostData {
   imgAltText: string;
   imgUrl: string;
   loading?: boolean;
@@ -204,13 +204,13 @@ export interface IPostData {
   tldr: string;
 }
 
-export interface IPostExtraProps {
+export interface PostExtraProps {
   routeHandler: (id: string) => void;
 }
 
-type IPostProps = IPostExtraProps & IPostData;
+type IPostProps = PostExtraProps & PostData;
 
-interface ITLDRButtonsProps {
+interface TLDRButtonsProps {
   id: string;
   routeHandler: (id: string) => void;
   setShowTldr: (show: boolean) => void;

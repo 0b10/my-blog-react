@@ -5,7 +5,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { render } from "@testing-library/react";
 
 import { PostContent } from "../../views/PostContent";
-import { IPostContentQueryVariables } from "../../graphql/gql-strings";
+import { PostContentQueryVariables } from "../../graphql/gql-strings";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 import { withPostContentQuery } from "graphql/components/withPostContentQuery";
 
@@ -15,7 +15,7 @@ const PostContentQuery = withPostContentQuery(PostContent);
 // >>> FIXTURES >>>
 const resolvers = {
   Query: {
-    postContent: (_: any, { id }: IPostContentQueryVariables) => {
+    postContent: (_: any, { id }: PostContentQueryVariables) => {
       switch (id) {
         case "1":
           return {

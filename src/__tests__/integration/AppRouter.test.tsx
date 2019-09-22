@@ -7,16 +7,16 @@ import { render, fireEvent } from "@testing-library/react";
 
 import { AppRouter } from "App";
 import {
-  IPostContentQueryResults,
-  IPostContentQueryVariables,
-  IPostQueryResults,
+  PostContentQueryResults,
+  PostContentQueryVariables,
+  PostQueryResults,
 } from "../../graphql/gql-strings";
 import { mockApolloClient } from "../../graphql/components/__tests__/helpers";
 
 // >>> FIXTURES >>>
 // ! these object properties (e.g. id) should match that of postContent in the resolvers - these are
 // !  nested graph results
-const postsData: IPostQueryResults[] = [
+const postsData: PostQueryResults[] = [
   {
     __typename: "Post",
     id: "1",
@@ -37,7 +37,7 @@ const postsData: IPostQueryResults[] = [
 
 const resolvers = {
   Query: {
-    postContent: (_: any, { id }: IPostContentQueryVariables): IPostContentQueryResults => {
+    postContent: (_: any, { id }: PostContentQueryVariables): PostContentQueryResults => {
       switch (id) {
         case "1":
           return {

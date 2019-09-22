@@ -4,8 +4,8 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { mixed, object, string } from "yup";
 
-import { IPreviewComponentProps } from "./types";
-import { withPostPreview } from './'
+import { PreviewComponentProps } from "./types";
+import { withPostPreview } from "./";
 
 const dummyProps = {
   onSubmit: () => null,
@@ -38,7 +38,7 @@ const dummyProps = {
   }),
 };
 
-const FakePreview = ({ children, headerImageProps, title, tldr }: IPreviewComponentProps) => (
+const FakePreview = ({ children, headerImageProps, title, tldr }: PreviewComponentProps) => (
   <React.Fragment>
     <img
       {...headerImageProps}

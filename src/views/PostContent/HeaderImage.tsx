@@ -6,11 +6,11 @@ const imgStyles: React.CSSProperties = {
   width: "100%",
 };
 
-export const HeaderImage = ({ src, alt }: IHeaderImageProps) => {
+export const HeaderImage = ({ src, alt }: HeaderImageProps) => {
   return src ? <img src={src} alt={alt} style={imgStyles} /> : null;
 };
 
-export interface IHeaderImageProps {
+export interface HeaderImageProps {
   src?: string;
   alt?: string;
 }

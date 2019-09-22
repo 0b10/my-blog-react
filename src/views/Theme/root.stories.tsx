@@ -10,7 +10,7 @@ import lodash from "lodash";
 import { NavBar } from "../NavBar";
 import { PostContent } from "../PostContent";
 import { Theme } from "./";
-import { TThemeName } from "./themes";
+import { ThemeName } from "./themes";
 import { withPostPreview } from "../SubmitPost";
 import Container from "../Posts/Container";
 import Markdown from "../PostContent/Markdown";
@@ -186,7 +186,7 @@ foo();
 `;
 
 // >>> STORIES >>>
-const themes: TThemeName[] = ["light", "dark"];
+const themes: ThemeName[] = ["light", "dark"];
 themes.forEach((theme) => {
   storiesOf(`Theme/${theme}`, module)
     .add("Markdown", () => (
