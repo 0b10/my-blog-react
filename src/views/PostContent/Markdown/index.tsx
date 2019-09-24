@@ -19,32 +19,28 @@ import {
   TableHeadRenderer,
   TableRenderer,
 } from "./renderers";
-
 import { MarkdownProps } from "./types";
 
-export default (() => {
-  const markdownRenderers = {
-    blockquote: BlockQuoteRenderer,
-    code: CodeRenderer,
-    heading: HeadingRenderer,
-    image: ImageRenderer,
-    imageReference: ImageRenderer,
-    inlineCode: InlineCodeRenderer,
-    link: LinkRenderer,
-    linkReference: LinkRenderer,
-    list: ListRenderer,
-    paragraph: ParagraphRenderer,
-    table: TableRenderer,
-    tableCell: TableCellRenderer,
-    tableHead: TableHeadRenderer,
-    thematicBreak: HorizontalRuleRenderer,
-  };
+const markdownRenderers = {
+  blockquote: BlockQuoteRenderer,
+  code: CodeRenderer,
+  heading: HeadingRenderer,
+  image: ImageRenderer,
+  imageReference: ImageRenderer,
+  inlineCode: InlineCodeRenderer,
+  link: LinkRenderer,
+  linkReference: LinkRenderer,
+  list: ListRenderer,
+  paragraph: ParagraphRenderer,
+  table: TableRenderer,
+  tableCell: TableCellRenderer,
+  tableHead: TableHeadRenderer,
+  thematicBreak: HorizontalRuleRenderer,
+};
 
-  return (props: MarkdownProps) => {
-    return props.children ? (
-      <ReactMarkdown renderers={markdownRenderers} escapeHtml={true} plugins={[breaks]}>
-        {props.children}
-      </ReactMarkdown>
-    ) : null;
-  };
-})();
+export const Markdown = (props: MarkdownProps) =>
+  props.children ? (
+    <ReactMarkdown renderers={markdownRenderers} escapeHtml={true} plugins={[breaks]}>
+      {props.children}
+    </ReactMarkdown>
+  ) : null;

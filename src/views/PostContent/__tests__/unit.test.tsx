@@ -3,9 +3,9 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
+import { Markdown } from "../Markdown";
 import Background from "../Background";
 import Title from "../Title";
-import Markdown from "../Markdown";
 
 // FIXME: move to integration tests, this uses several components
 describe("unit tests: Markdown", () => {

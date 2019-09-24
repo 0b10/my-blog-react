@@ -113,7 +113,7 @@ const useTLDRPaddingStyles = makeStyles((theme) => ({
 }));
 
 // >>> COMPONENTS >>>
-export default (() => (props: IPostProps) => {
+export const Post = (props: IPostProps) => {
   const cardHeaderClasses = useCardHeaderStyles();
   const collapseClasses = useCollapseStyles();
   const tldrClasses = useTLDRStyles();
@@ -159,7 +159,10 @@ export default (() => (props: IPostProps) => {
       </Card>
     </Grid>
   );
-})();
+};
+
+// Post.displayName = "Post";
+// export default Post;
 
 const TLDRButtons = (props: TLDRButtonsProps) => {
   const cardActionsClasses = useCardActionsStyles();

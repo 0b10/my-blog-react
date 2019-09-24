@@ -1,11 +1,13 @@
 /* eslint-disable no-undef */
 import React from "react";
 
-import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { jsxDecorator } from "storybook-addon-jsx";
 import { mixed, object, string } from "yup";
+import { storiesOf } from "@storybook/react";
 
 import { PreviewComponentProps } from "./types";
-import { withPostPreview } from "./";
+import { withPostPreview } from ".";
 
 const dummyProps = {
   onSubmit: () => null,
@@ -38,6 +40,8 @@ const dummyProps = {
   }),
 };
 
+const submitPostNotes = `The preview component here is a stub, and does not represent the final product.`;
+
 const FakePreview = ({ children, headerImageProps, title, tldr }: PreviewComponentProps) => (
   <React.Fragment>
     <img
@@ -52,37 +56,9 @@ const FakePreview = ({ children, headerImageProps, title, tldr }: PreviewCompone
 const SubmitPost = withPostPreview(FakePreview);
 
 storiesOf("SubmitPost", module)
-  .add("default", () => {
-    return (
-      <div style={{ padding: "20px" }}>
-        <p>The preview component here is a stub, and does not represent the final product.</p>
-        <Divider />
-        <SubmitPost {...dummyProps} />
-      </div>
-    );
-  })
-  .add("invalid title", () => {
-    return (
-      <div style={{ padding: "20px" }}>
-        <p>Type anything into any of the fields.</p>
-        <p>
-          Note that the validator in this story returns a validation message for all fields. Because
-          the logic validates all fields simultaneously, a message will appear in all fields -
-          obviously if the field was valid, a message would not appear.
-        </p>
-        <Divider />
-        <SubmitPost {...dummyProps} />
-      </div>
-    );
+  .addDecorator(jsxDecorator)
+  .add("default", () => <SubmitPost {...dummyProps} onSubmit={action("Submitting post...")} />, {
+    notes: submitPostNotes,
+    // BUG: storybookjs/addon-jsx#89 - function body is not hidden when displayName is used
+    jsx: { showFunctions: false, displayName: "SubmitPost" },
   });
-
-const Divider = () => (
-  <div>
-    <hr
-      style={{
-        margin: "40px",
-        border: "1px solid rgba(100, 100, 100, 0.5)",
-      }}
-    />
-  </div>
-);

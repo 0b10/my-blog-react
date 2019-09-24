@@ -4,10 +4,10 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
 import { dummyDatesProps, dummyPostContentProps } from "./helpers";
+import { Markdown } from "../Markdown";
 import { PostContent } from "..";
 import Background from "../Background";
 import Dates from "../Dates";
-import Markdown from "../Markdown";
 
 describe("smoke tests: PostContent", () => {
   describe("component: Markdown", () => {

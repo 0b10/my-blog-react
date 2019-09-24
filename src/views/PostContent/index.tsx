@@ -1,9 +1,9 @@
 import React from "react";
 
 import { HeaderImage, HeaderImageProps } from "./HeaderImage";
+import { Markdown } from "./Markdown";
 import Background from "./Background";
 import Dates from "./Dates";
-import Markdown from "./Markdown";
 import Title from "./Title";
 
 export const PostContent = ({

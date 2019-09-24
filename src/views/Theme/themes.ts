@@ -99,10 +99,13 @@ export const getTheme = (name: ThemeName) => {
       theme = dark;
       break;
     default:
-      throw new ThemeError(`Invalid theme name: ${name}`);
+      throw new ThemeError(`Invalid theme name: "${name}"`);
   }
-  responsiveFontSizes(createMuiTheme(theme)); // avoid using [key]
+  return responsiveFontSizes(createMuiTheme(theme)); // avoid using [key]
 };
 
 // >>> TYPES >>>
 export type ThemeName = "dark" | "light";
+
+// Use this to guide tests
+export type ThemeNames<T> = Record<ThemeName, T>;

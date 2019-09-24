@@ -4,8 +4,8 @@ import "@testing-library/jest-dom/extend-expect";
 import { render } from "@testing-library/react";
 
 import { dummyProps } from "./helpers";
-import Container from "../Container";
-import Post from "../Post";
+import { Container } from "../Container";
+import { Post } from "../Post";
 
 describe("smoke tests: Post", () => {
   it("should render", () => {

@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { act, fireEvent, render } from "@testing-library/react";
 
 import { dummyProps } from "../helpers";
-import Post from "../../Post";
+import { Post } from "../../Post";
 
 describe("unit tests: Post", () => {
   describe("tl;dr", () => {

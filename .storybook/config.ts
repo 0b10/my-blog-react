@@ -1,4 +1,10 @@
-import { configure } from "@storybook/react";
+import { addParameters, configure } from "@storybook/react";
+
+addParameters({
+  options: {
+    panelPosition: "right",
+  },
+});
 
 const req = require.context("../src/", true, /\.stories\.tsx$/);
 

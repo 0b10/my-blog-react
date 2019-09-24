@@ -1,7 +1,7 @@
 import React from "react";
 
-import Container from "./Container";
-import Post, { PostData, PostExtraProps } from "./Post";
+import { Container } from "./Container";
+import { Post, PostData, PostExtraProps } from "./Post";
 
 export const Posts = (props: PostsProps) => (
   <Container>

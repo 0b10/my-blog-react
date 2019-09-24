@@ -4,17 +4,18 @@ import React from "react";
 import { action } from "@storybook/addon-actions";
 import { mixed, object, string } from "yup";
 import { storiesOf } from "@storybook/react";
+import { text } from "@storybook/addon-knobs";
 import faker from "faker";
 import lodash from "lodash";
 
+import { Container } from "../Posts/Container";
+import { Markdown } from "../PostContent/Markdown";
 import { NavBar } from "../NavBar";
+import { Post } from "../Posts/Post";
 import { PostContent } from "../PostContent";
-import { Theme } from "./";
+import { Theme } from ".";
 import { ThemeName } from "./themes";
 import { withPostPreview } from "../SubmitPost";
-import Container from "../Posts/Container";
-import Markdown from "../PostContent/Markdown";
-import Post from "../Posts/Post";
 
 // >>> HELPERS >>>
 const SubmitPost = withPostPreview(PostContent);
@@ -187,11 +188,12 @@ foo();
 
 // >>> STORIES >>>
 const themes: ThemeName[] = ["light", "dark"];
+
 themes.forEach((theme) => {
   storiesOf(`Theme/${theme}`, module)
     .add("Markdown", () => (
       <Theme theme={theme}>
-        <Markdown>{exampleMarkdown}</Markdown>
+        <Markdown>{text("markdown", exampleMarkdown)}</Markdown>
       </Theme>
     ))
     .add("Posts", () => (
@@ -225,18 +227,16 @@ themes.forEach((theme) => {
 // >>> TEMP COMPONENTS >>>
 const TempPosts = () => (
   <Container>
-    <React.Fragment>
-      {lodash.range(1, 20).map((_, index) => (
-        <Post
-          {...fakePostProps}
-          id={`${index + 1}`}
-          key={index}
-          imgUrl={`https://fakeql.com/placeholder/320/320/${randomStr()}.svg`}
-          imgAltText={faker.lorem.words(lodash.random(2, 5))}
-          title={faker.lorem.words(lodash.random(3, 20))}
-          tldr={faker.lorem.words(lodash.random(20, 100))}
-        />
-      ))}
-    </React.Fragment>
+    {lodash.range(1, 20).map((_, index) => (
+      <Post
+        {...fakePostProps}
+        id={`${index + 1}`}
+        key={index}
+        imgUrl={`https://fakeql.com/placeholder/320/320/${randomStr()}.svg`}
+        imgAltText={faker.lorem.words(lodash.random(2, 5))}
+        title={faker.lorem.words(lodash.random(3, 20))}
+        tldr={faker.lorem.words(lodash.random(20, 100))}
+      />
+    ))}
   </Container>
 );

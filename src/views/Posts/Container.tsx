@@ -7,7 +7,7 @@ const useGridStyles = makeStyles(({ spacing }) => ({
   },
 }));
 
-export default (props: PostsContainerProps) => {
+export const Container = (props: PostsContainerProps) => {
   const gridClasses = useGridStyles();
   return (
     <Grid classes={gridClasses} container spacing={4}>
